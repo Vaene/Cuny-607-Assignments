@@ -1,0 +1,6 @@
+# Database Configuration for Movie Ratings Project
+MYSQL_ROOT_PASSWORD=moviepass123
+MYSQL_DATABASE=movie_ratings
+MYSQL_USER=movie_user
+MYSQL_PASSWORD=userpass123
+DB_PORT=3306

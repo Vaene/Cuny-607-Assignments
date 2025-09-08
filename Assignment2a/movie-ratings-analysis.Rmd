@@ -1,0 +1,257 @@
+---
+title: "Family Movie Ratings Analysis"
+author: "Your Name"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: flatly
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, fig.width = 10, fig.height = 6)
+
+# Source setup utilities
+source("setup.R")
+
+# Wait for database to be ready
+wait_for_movie_db()
+
+# Connect to database
+con <- connect_to_movie_db()
+```
+
+# Introduction
+
+This analysis examines movie ratings from our family for 6 recent popular movies. The participants are:
+
+- **Randy** (45, Father)
+- **Elle** (42, Mother) 
+- **Ariah** (9, Daughter)
+- **Alexandra** (6, Daughter)
+- **Don** (82, Grandfather)
+
+The movies rated include both required films (Barbie and KPop Demon Hunters) plus 4 additional recent popular movies suitable for a wide age range.
+
+# Data Loading
+
+## Load Raw Data from Database
+
+```{r load-data}
+# Get all ratings with participant and movie details
+ratings_data <- get_ratings_with_names(con)
+
+# Display the dataset
+knitr::kable(ratings_data, 
+             caption = "Complete Movie Ratings Dataset",
+             col.names = c("Name", "Age", "Relationship", "Movie", "Year", "Genre", "Rating", "Notes"))
+```
+
+## Summary Statistics
+
+```{r summary-stats}
+# Get movie averages
+movie_averages <- get_movie_averages(con)
+
+knitr::kable(movie_averages,
+             caption = "Movie Rating Averages",
+             col.names = c("Movie Title", "Number of Ratings", "Average Rating", "Min Rating", "Max Rating"))
+
+# Overall statistics
+cat("Dataset Summary:
+")
+cat("Total ratings collected:", nrow(ratings_data), "
+")
+cat("Number of movies:", length(unique(ratings_data$movie_title)), "
+") 
+cat("Number of participants:", length(unique(ratings_data$person_name)), "
+")
+cat("Average rating across all movies:", round(mean(ratings_data$rating), 2), "
+")
+```
+
+# Data Analysis
+
+## Rating Distribution by Movie
+
+```{r rating-distribution}
+library(ggplot2)
+
+# Create bar chart of average ratings by movie
+movie_avg_plot <- movie_averages %>%
+  ggplot(aes(x = reorder(title, avg_rating), y = avg_rating, fill = title)) +
+  geom_col(show.legend = FALSE) +
+  geom_text(aes(label = avg_rating), hjust = -0.1) +
+  coord_flip() +
+  labs(title = "Average Movie Ratings",
+       subtitle = "Family ratings on scale of 1-5",
+       x = "Movie",
+       y = "Average Rating") +
+  theme_minimal() +
+  scale_y_continuous(limits = c(0, 5.5))
+
+print(movie_avg_plot)
+```
+
+## Ratings by Age Group
+
+```{r age-analysis}
+# Create age groups for analysis
+ratings_with_age_groups <- ratings_data %>%
+  mutate(age_group = case_when(
+    age <= 10 ~ "Children (6-9)",
+    age <= 50 ~ "Adults (42-45)", 
+    age > 50 ~ "Senior (82+)"
+  ))
+
+# Average rating by age group
+age_group_summary <- ratings_with_age_groups %>%
+  group_by(age_group) %>%
+  summarise(
+    avg_rating = round(mean(rating), 2),
+    count = n(),
+    .groups = 'drop'
+  )
+
+knitr::kable(age_group_summary,
+             caption = "Average Ratings by Age Group")
+
+# Plot ratings by age group and movie
+age_movie_plot <- ratings_with_age_groups %>%
+  ggplot(aes(x = movie_title, y = rating, fill = age_group)) +
+  geom_boxplot(alpha = 0.7) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(title = "Movie Ratings by Age Group",
+       x = "Movie",
+       y = "Rating (1-5)",
+       fill = "Age Group")
+
+print(age_movie_plot)
+```
+
+## Individual Rating Patterns
+
+```{r individual-patterns}
+# Heatmap of individual ratings
+individual_plot <- ratings_data %>%
+  ggplot(aes(x = movie_title, y = person_name, fill = rating)) +
+  geom_tile(color = "white") +
+  geom_text(aes(label = rating), color = "white", fontface = "bold") +
+  scale_fill_gradient2(low = "red", mid = "yellow", high = "green", 
+                      midpoint = 3, limits = c(1,5)) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(title = "Individual Movie Ratings Heatmap",
+       x = "Movie",
+       y = "Family Member",
+       fill = "Rating")
+
+print(individual_plot)
+```
+
+## Genre Preferences
+
+```{r genre-analysis}
+# Average rating by genre
+genre_summary <- ratings_data %>%
+  group_by(genre) %>%
+  summarise(
+    avg_rating = round(mean(rating), 2),
+    count = n(),
+    .groups = 'drop'
+  ) %>%
+  arrange(desc(avg_rating))
+
+knitr::kable(genre_summary,
+             caption = "Average Ratings by Genre")
+```
+
+# Key Findings
+
+```{r findings}
+# Find highest and lowest rated movies
+best_movie <- movie_averages$title[which.max(movie_averages$avg_rating)]
+worst_movie <- movie_averages$title[which.min(movie_averages$avg_rating)]
+
+# Find most generous and harsh raters
+person_averages <- ratings_data %>%
+  group_by(person_name, age) %>%
+  summarise(avg_rating = round(mean(rating), 2), .groups = 'drop') %>%
+  arrange(desc(avg_rating))
+
+most_generous <- person_averages$person_name[1]
+most_critical <- person_averages$person_name[nrow(person_averages)]
+
+cat("Key Findings:
+")
+cat("• Highest rated movie:", best_movie, 
+    "(", max(movie_averages$avg_rating), "average )
+")
+cat("• Lowest rated movie:", worst_movie, 
+    "(", min(movie_averages$avg_rating), "average )
+")
+cat("• Most generous rater:", most_generous, 
+    "(", max(person_averages$avg_rating), "average )
+") 
+cat("• Most critical rater:", most_critical, 
+    "(", min(person_averages$avg_rating), "average )
+")
+```
+
+## Required Movies Analysis
+
+```{r required-movies}
+# Focus on the two required movies
+required_movies <- ratings_data %>%
+  filter(movie_title %in% c("Barbie", "KPop Demon Hunters"))
+
+knitr::kable(required_movies %>% select(person_name, age, movie_title, rating, notes),
+             caption = "Ratings for Required Movies (Barbie & KPop Demon Hunters)")
+
+# Compare the required movies
+required_comparison <- required_movies %>%
+  group_by(movie_title) %>%
+  summarise(
+    avg_rating = round(mean(rating), 2),
+    ratings_range = paste(min(rating), "to", max(rating)),
+    .groups = 'drop'
+  )
+
+knitr::kable(required_comparison,
+             caption = "Required Movies Comparison")
+```
+
+# Database Connection Details
+
+```{r db-info}
+# Show database structure
+tables <- dbListTables(con)
+cat("Database tables:", paste(tables, collapse = ", "), "
+")
+
+for(table in tables) {
+  cat(paste("
+", table, "table structure:
+"))
+  fields <- dbListFields(con, table)
+  cat(paste("  Fields:", paste(fields, collapse = ", "), "
+"))
+}
+```
+
+```{r cleanup, include=FALSE}
+# Clean up connection
+dbDisconnect(con)
+```
+
+# Methodology Notes
+
+- **Data Collection**: Family members rated movies on a scale of 1-5
+- **Storage**: Ratings stored in MariaDB database with normalized schema
+- **Analysis**: Loaded into R dataframes using RMariaDB package
+- **Reproducibility**: Complete Docker setup ensures consistent environment
+
+---
+*Analysis completed on `r Sys.Date()` using R and MariaDB*
