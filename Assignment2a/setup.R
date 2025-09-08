@@ -1,69 +1,71 @@
-# setup.R - Database connection utilities for Movie Ratings Project
+# setup.R - Database connection utilities for Movie Ratings Project (DDEV Version)
 
-# Set CRAN mirror first
+# Set CRAN mirror
 options(repos = c(CRAN = "https://cran.rstudio.com/"))
 
 # Install required packages if not already installed
-required_packages <- c("RMariaDB", "DBI", "dplyr", "ggplot2", "here", "knitr")
+required_packages <- c("RMariaDB", "DBI", "dplyr", "ggplot2", "knitr")
 new_packages <- required_packages[!(required_packages %in% installed.packages()[,"Package"])]
 if(length(new_packages)) {
   cat("Installing missing packages:", paste(new_packages, collapse = ", "), "\n")
   install.packages(new_packages, repos = "https://cran.rstudio.com/")
 }
 
-# Load libraries with error handling
+# Load libraries
 library(RMariaDB)
 library(DBI)
 library(dplyr)
 library(ggplot2)
-library(here)
 
-# Database connection function
+# DDEV Database connection function
 connect_to_movie_db <- function() {
-  # Connection parameters
-  host <- "localhost"
-  port <- 3306
-  user <- "movie_user"
-  password <- "userpass123"
-  dbname <- "movie_ratings"
-
+  # DDEV database connection parameters (use the actual mapped port)
+  host <- "127.0.0.1"
+  port <- 49457  # <-- Change this from 3306 to 49457
+  user <- "db"
+  password <- "db"
+  dbname <- "db"
+  
   # Create connection with error handling
   tryCatch({
-    con <- dbConnect(
-      MariaDB(),
-      host = host,
-      port = port,
-      user = user,
-      password = password,
-      dbname = dbname
-    )
-
-    cat("Successfully connected to movie ratings database!\n")
+    con <- dbConnect(MariaDB(), host = host, port = port, user = user, 
+                     password = password, dbname = dbname)
+    cat("✅ Successfully connected to DDEV movie ratings database!\n")
     return(con)
-
   }, error = function(e) {
-    cat("Error connecting to database:", e$message, "\n")
-    cat("Make sure Docker container is running and database is ready.\n")
+    cat("❌ Error connecting to database:", e$message, "\n")
+    cat("Make sure DDEV is running with: ddev start\n")
     stop("Database connection failed")
   })
 }
 
-# Wait for database to be ready
-wait_for_movie_db <- function(max_attempts = 60) {
-  cat("Waiting for movie database to be ready...\n")
+# Test database connection and tables
+test_db_connection <- function() {
+  cat("Testing database connection...\n")
+  con <- connect_to_movie_db()
 
-  for (i in 1:max_attempts) {
-    tryCatch({
-      con <- connect_to_movie_db()
-      dbDisconnect(con)
-      cat("Database is ready!\n")
-      return(TRUE)
-    }, error = function(e) {
-      cat("Waiting for database... (attempt", i, "of", max_attempts, ")\n")
-      Sys.sleep(3)
-    })
+  # Check for our tables
+  tables <- dbListTables(con)
+  expected_tables <- c("people", "movies", "ratings")
+
+  missing_tables <- expected_tables[!(expected_tables %in% tables)]
+
+  if(length(missing_tables) == 0) {
+    cat("✅ All required tables found:", paste(tables, collapse = ", "), "\n")
+
+    # Quick data check
+    people_count <- dbGetQuery(con, "SELECT COUNT(*) as count FROM people")$count
+    movies_count <- dbGetQuery(con, "SELECT COUNT(*) as count FROM movies")$count  
+    ratings_count <- dbGetQuery(con, "SELECT COUNT(*) as count FROM ratings")$count
+
+    cat("📊 Data summary: ", people_count, "people,", movies_count, "movies,", ratings_count, "ratings\n")
+
+    dbDisconnect(con)
+    return(TRUE)
+  } else {
+    dbDisconnect(con)
+    stop("❌ Missing tables: ", paste(missing_tables, collapse = ", "), "\nRun: ddev import-db --src=.ddev/mysql/movie_ratings.sql")
   }
-  stop("Database failed to start after ", max_attempts, " attempts")
 }
 
 # Helper function to get all ratings with names
@@ -105,4 +107,4 @@ get_movie_averages <- function(con) {
   return(dbGetQuery(con, query))
 }
 
-cat("Setup complete! Use connect_to_movie_db() to connect to the database.\n")
+cat("✅ DDEV setup complete! Use ddev start, then connect with connect_to_movie_db()\n")

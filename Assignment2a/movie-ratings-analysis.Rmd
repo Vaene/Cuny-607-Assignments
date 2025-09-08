@@ -17,8 +17,8 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, fig.width =
 # Source setup utilities
 source("setup.R")
 
-# Wait for database to be ready
-wait_for_movie_db()
+# Test database connection and setup
+test_db_connection()
 
 # Connect to database
 con <- connect_to_movie_db()
@@ -28,13 +28,13 @@ con <- connect_to_movie_db()
 
 This analysis examines movie ratings from our family for 6 recent popular movies. The participants are:
 
-- **Randy** (56, Father)
+- **Randy** (56 Father)
 - **Elle** (42, Mother) 
 - **Ariah** (9, Daughter)
 - **Alexandra** (6, Daughter)
 - **Don** (82, Grandfather)
 
-The movies rated include both required films (Barbie and KPop Demon Hunters) plus 4 additional recent popular movies suitable for a wide age range.
+The movies rated include both focus films (Barbie and KPop Demon Hunters) plus 4 additional recent popular movies suitable for a wide age range.
 
 # Data Loading
 
@@ -61,16 +61,11 @@ knitr::kable(movie_averages,
              col.names = c("Movie Title", "Number of Ratings", "Average Rating", "Min Rating", "Max Rating"))
 
 # Overall statistics
-cat("Dataset Summary:
-")
-cat("Total ratings collected:", nrow(ratings_data), "
-")
-cat("Number of movies:", length(unique(ratings_data$movie_title)), "
-") 
-cat("Number of participants:", length(unique(ratings_data$person_name)), "
-")
-cat("Average rating across all movies:", round(mean(ratings_data$rating), 2), "
-")
+cat("Dataset Summary:\n")
+cat("Total ratings collected:", nrow(ratings_data), "\n")
+cat("Number of movies:", length(unique(ratings_data$movie_title)), "\n") 
+cat("Number of participants:", length(unique(ratings_data$person_name)), "\n")
+cat("Average rating across all movies:", round(mean(ratings_data$rating), 2), "\n")
 ```
 
 # Data Analysis
@@ -78,8 +73,6 @@ cat("Average rating across all movies:", round(mean(ratings_data$rating), 2), "
 ## Rating Distribution by Movie
 
 ```{r rating-distribution}
-library(ggplot2)
-
 # Create bar chart of average ratings by movie
 movie_avg_plot <- movie_averages %>%
   ggplot(aes(x = reorder(title, avg_rating), y = avg_rating, fill = title)) +
@@ -153,21 +146,27 @@ individual_plot <- ratings_data %>%
 print(individual_plot)
 ```
 
-## Genre Preferences
+## Focus Movies Analysis
 
-```{r genre-analysis}
-# Average rating by genre
-genre_summary <- ratings_data %>%
-  group_by(genre) %>%
+```{r focus-movies}
+# Focus on the two focus movies
+focus_movies <- ratings_data %>%
+  filter(movie_title %in% c("Barbie", "KPop Demon Hunters"))
+
+knitr::kable(focus_movies %>% select(person_name, age, movie_title, rating, notes),
+             caption = "Ratings for focus Movies (Barbie & KPop Demon Hunters)")
+
+# Compare the focus movies
+focus_comparison <- focus_movies %>%
+  group_by(movie_title) %>%
   summarise(
     avg_rating = round(mean(rating), 2),
-    count = n(),
+    ratings_range = paste(min(rating), "to", max(rating)),
     .groups = 'drop'
-  ) %>%
-  arrange(desc(avg_rating))
+  )
 
-knitr::kable(genre_summary,
-             caption = "Average Ratings by Genre")
+knitr::kable(focus_comparison,
+             caption = "focus Movies Comparison")
 ```
 
 # Key Findings
@@ -186,61 +185,30 @@ person_averages <- ratings_data %>%
 most_generous <- person_averages$person_name[1]
 most_critical <- person_averages$person_name[nrow(person_averages)]
 
-cat("Key Findings:
-")
+cat("Key Findings:\n")
 cat("• Highest rated movie:", best_movie, 
-    "(", max(movie_averages$avg_rating), "average )
-")
+    "(", max(movie_averages$avg_rating), "average )\n")
 cat("• Lowest rated movie:", worst_movie, 
-    "(", min(movie_averages$avg_rating), "average )
-")
+    "(", min(movie_averages$avg_rating), "average )\n")
 cat("• Most generous rater:", most_generous, 
-    "(", max(person_averages$avg_rating), "average )
-") 
+    "(", max(person_averages$avg_rating), "average )\n") 
 cat("• Most critical rater:", most_critical, 
-    "(", min(person_averages$avg_rating), "average )
-")
+    "(", min(person_averages$avg_rating), "average )\n")
 ```
 
-## Required Movies Analysis
+# Technical Details
 
-```{r required-movies}
-# Focus on the two required movies
-required_movies <- ratings_data %>%
-  filter(movie_title %in% c("Barbie", "KPop Demon Hunters"))
-
-knitr::kable(required_movies %>% select(person_name, age, movie_title, rating, notes),
-             caption = "Ratings for Required Movies (Barbie & KPop Demon Hunters)")
-
-# Compare the required movies
-required_comparison <- required_movies %>%
-  group_by(movie_title) %>%
-  summarise(
-    avg_rating = round(mean(rating), 2),
-    ratings_range = paste(min(rating), "to", max(rating)),
-    .groups = 'drop'
-  )
-
-knitr::kable(required_comparison,
-             caption = "Required Movies Comparison")
-```
-
-# Database Connection Details
-
-```{r db-info}
+```{r tech-details}
 # Show database structure
 tables <- dbListTables(con)
-cat("Database tables:", paste(tables, collapse = ", "), "
-")
+cat("DDEV Database tables:", paste(tables, collapse = ", "), "\n")
 
-for(table in tables) {
-  cat(paste("
-", table, "table structure:
-"))
-  fields <- dbListFields(con, table)
-  cat(paste("  Fields:", paste(fields, collapse = ", "), "
-"))
-}
+# Show connection info
+cat("\nDatabase connection details:\n")
+cat("Host: 127.0.0.1\n")
+cat("Port: 3306\n")
+cat("Database: db\n")
+cat("User: db\n")
 ```
 
 ```{r cleanup, include=FALSE}
@@ -251,9 +219,9 @@ dbDisconnect(con)
 # Methodology Notes
 
 - **Data Collection**: Family members rated movies on a scale of 1-5
-- **Storage**: Ratings stored in MariaDB database with normalized schema
+- **Storage**: Ratings stored in MariaDB database via DDEV
 - **Analysis**: Loaded into R dataframes using RMariaDB package
-- **Reproducibility**: Complete Docker setup ensures consistent environment
+- **Reproducibility**: Complete DDEV setup ensures consistent environment across platforms
 
 ---
-*Analysis completed on `r Sys.Date()` using R and MariaDB*
+*Analysis completed on `r Sys.Date()` using R, MariaDB, and DDEV*

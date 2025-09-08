@@ -1,128 +1,155 @@
-# Family Movie Ratings Analysis 🎬
+# Family Movie Ratings Analysis with DDEV 🎬
 
-A reproducible data analysis project that collects and analyzes movie ratings from family members using MariaDB and R.
+A reproducible data analysis project using DDEV, MariaDB, and R to analyze family movie ratings.
 
-## 📋 Assignment Details
+## 📋 Project Overview
 
-**Participants:**
-- Randy (45, Father)
+**Assignment:** Collect ratings for 6 recent movies from 5+ people, store in SQL database, analyze with R.
+
+**Family Participants:**
+- Randy (56, Father) 
 - Elle (42, Mother)
 - Ariah (9, Daughter)
 - Alexandra (6, Daughter)
 - Don (82, Grandfather)
 
-**Movies Rated:**
-1. **Barbie** (2023) - Required
-2. **KPop Demon Hunters** (2023) - Required  
+**Movies Analyzed:**
+1. **Barbie** (2023) - Required ✅
+2. **KPop Demon Hunters** (2025) - Required ✅
 3. Spider-Man: Across the Spider-Verse (2023)
-4. The Little Mermaid (2023)
+4. The Little Mermaid (2023) 
 5. Guardians of the Galaxy Vol. 3 (2023)
 6. Elemental (2023)
 
-## 🚀 Quick Start
+## 🚀 Quick Start with DDEV
 
 ### Prerequisites
-- Docker and Docker Compose installed
+- [DDEV installed](https://ddev.readthedocs.io/en/stable/#installation)
 - R and RStudio installed
+- Docker Desktop running
 
-### Setup Instructions
+### Setup (3 easy steps!)
 
-1. **Download/clone this project**
-2. **Start the database:**
-   - **Mac/Linux**: `./start-database.sh`
-   - **Windows**: Double-click `start-database.bat`
-   - **Manual**: `docker-compose up -d`
-
-3. **Run the analysis:**
-   - Open `movie-ratings-analysis.Rmd` in RStudio
-   - Click "Knit" to generate the full analysis report
-
-4. **When finished:**
+1. **Start DDEV:**
    ```bash
-   docker-compose down
+   cd movie-ratings-project
+   ddev start
    ```
+
+2. **Import database:**
+   ```bash
+   ddev import-db --src=.ddev/mysql/movie_ratings.sql
+   ```
+
+3. **Run analysis:**
+   - Open `movie-ratings-analysis.Rmd` in RStudio
+   - Click "Knit" to generate the full report
+
+### Stop when done:
+```bash
+ddev stop
+```
 
 ## 📁 Project Structure
 
 ```
 movie-ratings-project/
-├── docker-compose.yml           # Database configuration
-├── .env                         # Environment variables
-├── movie-ratings-analysis.Rmd   # Main analysis (KNIT THIS!)
-├── setup.R                      # R database utilities
-├── start-database.sh           # Mac/Linux startup script
-├── start-database.bat          # Windows startup script
-├── init/
-│   ├── 01-create-tables.sql    # Database schema
-│   └── 02-sample-ratings.sql   # Sample ratings data
-└── README.md                   # This file
+├── .ddev/
+│   ├── config.yaml                    # DDEV configuration
+│   └── mysql/
+│       └── movie_ratings.sql          # Database schema + data
+├── movie-ratings-analysis.Rmd         # ⭐ MAIN ANALYSIS FILE ⭐
+├── setup.R                            # R database connection utilities
+└── README.md                          # This file
 ```
 
-## 🎯 What This Project Demonstrates
+## 🎯 Why DDEV?
 
-- ✅ **SQL Database Design**: Normalized schema with people, movies, and ratings tables
-- ✅ **Data Collection**: Structured family movie rating survey
-- ✅ **R Analysis**: Statistical analysis and visualization using dplyr and ggplot2
-- ✅ **Database Integration**: Loading data from MariaDB into R dataframes
-- ✅ **Reproducibility**: Complete Docker setup for any platform
-- ✅ **Documentation**: Comprehensive R Markdown report
+✅ **Simpler setup** - No complex Docker Compose files
+✅ **Reliable database startup** - DDEV handles initialization perfectly  
+✅ **Standard configuration** - Same setup works everywhere
+✅ **Better performance** - Optimized for local development
+✅ **Easy management** - `ddev start`, `ddev stop`, `ddev restart`
 
 ## 📊 Analysis Features
 
-The R Markdown analysis includes:
-- Complete dataset overview and summary statistics
-- Movie ranking by average rating
-- Age group analysis (Children vs Adults vs Seniors)
-- Individual rating patterns visualization
-- Genre preference analysis
-- Detailed comparison of required movies (Barbie vs KPop Demon Hunters)
+The R Markdown report includes:
+- Complete dataset overview with family ratings
+- Statistical summaries and movie rankings
+- Visualizations: bar charts, heatmaps, age group analysis
+- Comparison of required movies (Barbie vs KPop Demon Hunters)
+- Individual rating patterns and preferences
+- Professional charts using ggplot2
 
-## 🔧 Technical Details
+## 🔧 Database Details
 
-**Database:**
-- MariaDB running in Docker container
-- Port: 3306
-- Database: `movie_ratings` 
-- Username: `movie_user`
-- Password: `userpass123`
+**DDEV Connection Info:**
+- Host: `127.0.0.1` 
+- Port: `3306`
+- Database: `db`
+- Username: `db`
+- Password: `db`
 
-**R Packages Used:**
-- RMariaDB (database connection)
-- DBI (database interface)
-- dplyr (data manipulation)
-- ggplot2 (visualization)
-- knitr (report generation)
+**Tables:**
+- `people` - Family member details
+- `movies` - Movie information  
+- `ratings` - Individual movie ratings with notes
 
-## 🐛 Troubleshooting
+## 🛠️ Troubleshooting
 
-**Database won't start:**
-- Ensure Docker Desktop is running
-- Check port 3306 isn't in use: `lsof -i :3306`
-- View logs: `docker-compose logs mariadb`
+**DDEV won't start:**
+```bash
+ddev poweroff  # Stop all DDEV projects
+ddev start     # Try again
+```
 
-**R connection errors:**
-- Wait for database to fully start (about 30 seconds)
-- Verify container is running: `docker ps`
-- Try restarting: `docker-compose restart`
+**Database not ready:**
+```bash
+ddev restart
+ddev import-db --src=movie_ratings.sql
+```
 
-**Package installation issues:**
-- Ensure you have internet connection
-- Update R to latest version
-- Install packages manually if needed
+**R package issues:**
+```r
+# In R console:
+options(repos = c(CRAN = "https://cran.rstudio.com/"))
+install.packages(c("RMariaDB", "DBI", "dplyr", "ggplot2"))
+```
 
-## 🎓 Assignment Requirements Met
+**Check DDEV status:**
+```bash
+ddev describe    # Show project info
+ddev logs        # Check for errors
+```
 
-- ✅ Six recent popular movies selected
-- ✅ At least 5 people surveyed (we have 5 family members)
+## ✅ Assignment Requirements Met
+
+- ✅ 6 recent popular movies selected
+- ✅ 5+ people surveyed (family of 5)
 - ✅ 1-5 rating scale implemented
-- ✅ Data stored in SQL database (MariaDB)
-- ✅ Data loaded into R dataframes
+- ✅ Data stored in SQL database (MariaDB via DDEV)
+- ✅ Data loaded into R dataframes  
 - ✅ Complete code provided (SQL + R Markdown)
-- ✅ GitHub repository ready
+- ✅ Fully reproducible setup
+- ✅ Professional analysis with visualizations
 
-## 👥 Contributors
+## 🎬 Sample Commands
 
-Created for Data Analysis class assignment - demonstrating reproducible research practices with SQL databases and R.
+```bash
+# Setup
+ddev start
+ddev import-db --src=.ddev/mysql/movie_ratings.sql
+
+# Check database
+ddev mysql -e "SELECT COUNT(*) FROM ratings;"
+
+# Access database directly  
+ddev mysql
+
+# Stop when done
+ddev stop
+```
 
 ---
-*🎬 Happy analyzing! Remember to knit the R Markdown file to see the complete analysis.*
+
+**🎯 Ready to analyze!** Just run `ddev start`, import the database, and knit the R Markdown file for your complete movie ratings analysis report.
