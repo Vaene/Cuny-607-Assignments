@@ -1,0 +1,442 @@
+---
+title: "Family Movie Ratings Analysis 3a: Back To The Future"
+author: "Randy Howk"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    toc: true
+  html_document:
+    toc: true
+    toc_float: true
+    theme: flatly
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, fig.width = 10, fig.height = 6)
+
+# Source setup utilities
+source("setup.R")
+
+# Test database connection and setup
+test_db_connection()
+
+# Connect to database
+con <- connect_to_movie_db()
+```
+
+# Introduction
+
+This analysis examines movie ratings from our family for 6 recent popular movies. The participants are:
+
+- **Randy** (56 Father)
+- **Elle** (42, Mother) 
+- **Ariah** (9, Daughter)
+- **Alexandra** (6, Daughter)
+- **Don** (82, Grandfather)
+
+The movies rated include both focus films (Barbie and KPop Demon Hunters) plus 4 additional recent popular movies suitable for a wide age range. In addition, we will attempt to use Global Baseline Estimates about the shows and the viewers.
+
+# Data Loading
+
+## Load Raw Data from Database
+
+```{r load-data}
+# Get all ratings with participant and movie details
+ratings_data <- get_ratings_with_names(con)
+
+# Display the dataset
+knitr::kable(ratings_data, 
+             caption = "Complete Movie Ratings Dataset",
+             col.names = c("Name", "Age", "Relationship", "Movie", "Year", "Genre", "Rating", "Notes"))
+```
+
+## Summary Statistics
+
+```{r summary-stats}
+# Get movie averages
+movie_averages <- get_movie_averages(con)
+
+knitr::kable(movie_averages,
+             caption = "Movie Rating Averages",
+             col.names = c("Movie Title", "Number of Ratings", "Average Rating", "Min Rating", "Max Rating"))
+
+# Overall statistics
+cat("Dataset Summary:\n")
+cat("Total ratings collected:", nrow(ratings_data), "\n")
+cat("Number of movies:", length(unique(ratings_data$movie_title)), "\n") 
+cat("Number of participants:", length(unique(ratings_data$person_name)), "\n")
+cat("Average rating across all movies:", round(mean(ratings_data$rating), 2), "\n")
+```
+
+# Data Analysis
+
+## Rating Distribution by Movie
+
+```{r rating-distribution}
+# Create bar chart of average ratings by movie
+movie_avg_plot <- movie_averages %>%
+  ggplot(aes(x = reorder(title, avg_rating), y = avg_rating, fill = title)) +
+  geom_col(show.legend = FALSE) +
+  geom_text(aes(label = avg_rating), hjust = -0.1) +
+  coord_flip() +
+  labs(title = "Average Movie Ratings",
+       subtitle = "Family ratings on scale of 1-5",
+       x = "Movie",
+       y = "Average Rating") +
+  theme_minimal() +
+  scale_y_continuous(limits = c(0, 5.5))
+
+print(movie_avg_plot)
+```
+
+## Ratings by Age Group
+
+```{r age-analysis}
+# Create age groups for analysis
+ratings_with_age_groups <- ratings_data %>%
+  mutate(age_group = case_when(
+    age <= 10 ~ "Children (6-9)",
+    age <= 50 ~ "Adults (42-45)", 
+    age > 50 ~ "Senior (82+)"
+  ))
+
+# Average rating by age group
+age_group_summary <- ratings_with_age_groups %>%
+  group_by(age_group) %>%
+  summarise(
+    avg_rating = round(mean(rating), 2),
+    count = n(),
+    .groups = 'drop'
+  )
+
+knitr::kable(age_group_summary,
+             caption = "Average Ratings by Age Group")
+
+# Plot ratings by age group and movie
+age_movie_plot <- ratings_with_age_groups %>%
+  ggplot(aes(x = movie_title, y = rating, fill = age_group)) +
+  geom_boxplot(alpha = 0.7) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(title = "Movie Ratings by Age Group",
+       x = "Movie",
+       y = "Rating (1-5)",
+       fill = "Age Group")
+
+print(age_movie_plot)
+```
+
+## Individual Rating Patterns
+
+```{r individual-patterns}
+# Heatmap of individual ratings
+individual_plot <- ratings_data %>%
+  ggplot(aes(x = movie_title, y = person_name, fill = rating)) +
+  geom_tile(color = "white") +
+  geom_text(aes(label = rating), color = "white", fontface = "bold") +
+  scale_fill_gradient2(low = "red", mid = "yellow", high = "green", 
+                      midpoint = 3, limits = c(1,5)) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(title = "Individual Movie Ratings Heatmap",
+       x = "Movie",
+       y = "Family Member",
+       fill = "Rating")
+
+print(individual_plot)
+```
+
+## Focus Movies Analysis
+
+```{r focus-movies}
+# Focus on the two focus movies
+focus_movies <- ratings_data %>%
+  filter(movie_title %in% c("Barbie", "KPop Demon Hunters"))
+
+knitr::kable(focus_movies %>% select(person_name, age, movie_title, rating, notes),
+             caption = "Ratings for focus Movies (Barbie & KPop Demon Hunters)")
+
+# Compare the focus movies
+focus_comparison <- focus_movies %>%
+  group_by(movie_title) %>%
+  summarise(
+    avg_rating = round(mean(rating), 2),
+    ratings_range = paste(min(rating), "to", max(rating)),
+    .groups = 'drop'
+  )
+
+knitr::kable(focus_comparison,
+             caption = "focus Movies Comparison")
+```
+
+# Key Findings
+
+```{r findings}
+# Find highest and lowest rated movies
+best_movie <- movie_averages$title[which.max(movie_averages$avg_rating)]
+worst_movie <- movie_averages$title[which.min(movie_averages$avg_rating)]
+
+# Find most generous and harsh raters
+person_averages <- ratings_data %>%
+  group_by(person_name, age) %>%
+  summarise(avg_rating = round(mean(rating), 2), .groups = 'drop') %>%
+  arrange(desc(avg_rating))
+
+most_generous <- person_averages$person_name[1]
+most_critical <- person_averages$person_name[nrow(person_averages)]
+
+cat("Key Findings:\n")
+cat("• Highest rated movie:", best_movie, 
+    "(", max(movie_averages$avg_rating), "average )\n")
+cat("• Lowest rated movie:", worst_movie, 
+    "(", min(movie_averages$avg_rating), "average )\n")
+cat("• Most generous rater:", most_generous, 
+    "(", max(person_averages$avg_rating), "average )\n") 
+cat("• Most critical rater:", most_critical, 
+    "(", min(person_averages$avg_rating), "average )\n")
+```
+
+# Global Baseline Estimate Recommendation System
+
+## Overview
+
+The Global Baseline Estimate is a non-personalized recommendation algorithm that predicts ratings based on:
+- The overall average rating across all movies and users
+- How each user tends to rate compared to the average (user bias)
+- How each movie tends to be rated compared to the average (movie bias)
+
+## Implementation
+
+```{r global-baseline-setup}
+# Function to implement Global Baseline Estimate
+calculate_global_baseline <- function(ratings_data) {
+  # Calculate overall mean rating
+  mean_all_ratings <- mean(ratings_data$rating, na.rm = TRUE)
+  
+  # Calculate user statistics and biases
+  user_stats <- ratings_data %>%
+    group_by(person_name) %>%
+    summarise(
+      user_avg = mean(rating, na.rm = TRUE),
+      n_ratings = n(),
+      .groups = 'drop'
+    ) %>%
+    mutate(user_bias = user_avg - mean_all_ratings)
+  
+  # Calculate movie statistics and biases
+  movie_stats <- ratings_data %>%
+    group_by(movie_title) %>%
+    summarise(
+      movie_avg = mean(rating, na.rm = TRUE),
+      n_ratings = n(),
+      .groups = 'drop'
+    ) %>%
+    mutate(movie_bias = movie_avg - mean_all_ratings)
+  
+  return(list(
+    mean_all = mean_all_ratings,
+    user_stats = user_stats,
+    movie_stats = movie_stats
+  ))
+}
+
+# Function to predict a rating
+predict_rating <- function(user, movie, baseline_model) {
+  user_bias <- baseline_model$user_stats %>%
+    filter(person_name == user) %>%
+    pull(user_bias)
+  
+  movie_bias <- baseline_model$movie_stats %>%
+    filter(movie_title == movie) %>%
+    pull(movie_bias)
+  
+  # Handle missing values
+  if (length(user_bias) == 0) user_bias <- 0
+  if (length(movie_bias) == 0) movie_bias <- 0
+  
+  # Calculate prediction
+  predicted <- baseline_model$mean_all + user_bias + movie_bias
+  
+  # Constrain to 1-5 scale
+  return(max(1, min(5, predicted)))
+}
+```
+
+# Model Training
+
+```{r global-model-training}
+# Train the model
+baseline_model <- calculate_global_baseline(ratings_data)
+
+# Display overall statistics
+cat("Global Mean Rating:", round(baseline_model$mean_all, 2), "\n\n")
+
+# Display user biases
+knitr::kable(baseline_model$user_stats %>% 
+               arrange(desc(user_bias)) %>%
+               mutate(across(where(is.numeric), ~round(., 2))),
+             caption = "User Rating Patterns and Biases")
+
+# Display movie biases
+knitr::kable(baseline_model$movie_stats %>% 
+               arrange(desc(movie_bias)) %>%
+               mutate(across(where(is.numeric), ~round(., 2))),
+             caption = "Movie Rating Patterns and Biases")
+```
+
+# Generating Predictions
+
+```{r generating-predictions}
+# Create all possible user-movie combinations
+all_combinations <- expand.grid(
+  person_name = unique(ratings_data$person_name),
+  movie_title = unique(ratings_data$movie_title),
+  stringsAsFactors = FALSE
+)
+
+# Add predictions
+predictions <- all_combinations %>%
+  mutate(
+    predicted_rating = mapply(predict_rating, person_name, movie_title, 
+                             MoreArgs = list(baseline_model = baseline_model))
+  ) %>%
+  left_join(ratings_data %>% select(person_name, movie_title, actual_rating = rating),
+            by = c("person_name", "movie_title"))
+
+# Show sample predictions
+sample_predictions <- predictions %>%
+  filter(!is.na(actual_rating)) %>%
+  sample_n(min(10, n())) %>%
+  mutate(
+    error = actual_rating - predicted_rating,
+    abs_error = abs(error)
+  ) %>%
+  arrange(person_name, movie_title)
+
+knitr::kable(sample_predictions %>%
+               mutate(across(where(is.numeric), ~round(., 2))),
+             caption = "Sample Predictions vs Actual Ratings")
+```
+
+# Model Performance
+
+```{r model-performance}
+# Calculate performance metrics on known ratings
+known_ratings <- predictions %>%
+  filter(!is.na(actual_rating))
+
+mae <- mean(abs(known_ratings$actual_rating - known_ratings$predicted_rating))
+rmse <- sqrt(mean((known_ratings$actual_rating - known_ratings$predicted_rating)^2))
+
+cat("Model Performance Metrics:\n")
+cat("- Mean Absolute Error (MAE):", round(mae, 3), "\n")
+cat("- Root Mean Square Error (RMSE):", round(rmse, 3), "\n")
+cat("- Number of predictions evaluated:", nrow(known_ratings), "\n")
+
+# Visualize prediction accuracy
+accuracy_plot <- known_ratings %>%
+  ggplot(aes(x = actual_rating, y = predicted_rating)) +
+  geom_point(alpha = 0.6, size = 3) +
+  geom_abline(intercept = 0, slope = 1, linetype = "dashed", color = "red") +
+  scale_x_continuous(breaks = 1:5, limits = c(0.5, 5.5)) +
+  scale_y_continuous(breaks = 1:5, limits = c(0.5, 5.5)) +
+  labs(title = "Prediction Accuracy: Actual vs Predicted Ratings",
+       x = "Actual Rating",
+       y = "Predicted Rating") +
+  theme_minimal() +
+  coord_equal()
+
+print(accuracy_plot)
+```
+
+# Recommendations
+
+```{r recoommendations}
+# Generate recommendations for each user
+recommendations <- predictions %>%
+  filter(is.na(actual_rating)) %>%
+  group_by(person_name) %>%
+  arrange(desc(predicted_rating)) %>%
+  slice_head(n = 2) %>%
+  select(person_name, movie_title, predicted_rating) %>%
+  mutate(predicted_rating = round(predicted_rating, 2))
+
+knitr::kable(recommendations,
+             caption = "Top 2 Movie Recommendations for Each Family Member")
+
+# Focus on specific example (similar to Excel spreadsheet)
+# Let's predict what Don would rate Barbie
+example_user <- "Don"
+example_movie <- "Barbie"
+
+if (example_user %in% ratings_data$person_name && 
+    example_movie %in% ratings_data$movie_title) {
+  
+  user_bias <- baseline_model$user_stats %>%
+    filter(person_name == example_user) %>%
+    pull(user_bias)
+  
+  movie_bias <- baseline_model$movie_stats %>%
+    filter(movie_title == example_movie) %>%
+    pull(movie_bias)
+  
+  predicted <- predict_rating(example_user, example_movie, baseline_model)
+  
+  cat("\n### Example Prediction Detail\n")
+  cat("Predicting", example_user, "'s rating for", example_movie, "\n")
+  cat("- Global mean rating:", round(baseline_model$mean_all, 2), "\n")
+  cat("- ", example_user, "'s bias (tendency to rate higher/lower):", round(user_bias, 2), "\n")
+  cat("- ", example_movie, "'s bias (tends to be rated higher/lower):", round(movie_bias, 2), "\n")
+  cat("- Predicted rating:", round(baseline_model$mean_all, 2), "+", 
+      round(user_bias, 2), "+", round(movie_bias, 2), "=", round(predicted, 2), "\n")
+}
+```
+
+# Recommendation-insights
+
+```{r recommendation-insights}
+# Analyze which movies are most recommended
+most_recommended <- predictions %>%
+  filter(is.na(actual_rating)) %>%
+  group_by(movie_title) %>%
+  summarise(
+    avg_predicted = mean(predicted_rating),
+    times_recommended = sum(predicted_rating >= 4),
+    .groups = 'drop'
+  ) %>%
+  arrange(desc(avg_predicted))
+
+knitr::kable(most_recommended %>%
+               mutate(avg_predicted = round(avg_predicted, 2)),
+             caption = "Movies Most Likely to be Enjoyed by Family Members Who Haven't Seen Them")
+```
+
+# Technical Details
+
+```{r tech-details}
+# Show database structure
+tables <- dbListTables(con)
+cat("DDEV Database tables:", paste(tables, collapse = ", "), "\n")
+
+# Show connection info
+cat("\nDatabase connection details:\n")
+cat("Host: 127.0.0.1\n")
+cat("Port: 3306\n")
+cat("Database: db\n")
+cat("User: db\n")
+```
+
+```{r cleanup, include=FALSE}
+# Clean up connection
+dbDisconnect(con)
+```
+
+# Methodology Notes
+
+- **Data Collection**: Family members rated movies on a scale of 1-5
+- **Storage**: Ratings stored in MariaDB database via DDEV
+- **Analysis**: Loaded into R dataframes using RMariaDB package
+- **Reproducibility**: Complete DDEV setup ensures consistent environment across platforms
+
+---
+*Analysis completed on `r Sys.Date()` using R, MariaDB, and DDEV*
