@@ -21,7 +21,7 @@ library(ggplot2)
 connect_to_movie_db <- function() {
   # DDEV database connection parameters (use the actual mapped port)
   host <- "127.0.0.1"
-  port <- 49457  # <-- Change this from 3306 to 49457
+  port <- 65409   # <-- Change this from 3306 to 49457
   user <- "db"
   password <- "db"
   dbname <- "db"
