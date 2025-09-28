@@ -1,0 +1,23 @@
+#!/bin/bash
+
+## Description: Import SQL file to PostgreSQL database
+## Usage: import-sql [filename]
+## Example: "ddev import-sql airline_delays.sql"
+
+set -eu -o pipefail
+
+DB_NAME=${POSTGRES_DB:-db}
+SQL_FILE=${1:-airline_delays.sql}
+
+if [ ! -f "$SQL_FILE" ]; then
+    echo "Error: SQL file '$SQL_FILE' not found!"
+    echo "Make sure the file exists in your project directory."
+    exit 1
+fi
+
+echo "Importing $SQL_FILE to PostgreSQL database '$DB_NAME'..."
+
+# Import the SQL file
+psql -h db -U db -d "$DB_NAME" -f "$SQL_FILE"
+
+echo "SQL import completed successfully!"

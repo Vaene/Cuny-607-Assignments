@@ -1,0 +1,12 @@
+#!/bin/bash
+
+## Description: Connect to PostgreSQL database
+## Usage: db-connect
+## Example: "ddev db-connect"
+
+set -eu -o pipefail
+
+DB_NAME=${POSTGRES_DB:-db}
+
+echo "Connecting to PostgreSQL database '$DB_NAME'..."
+psql -h db -U db -d "$DB_NAME"
