@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.9.20)  28 SEP 2025 11:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.9.20)  28 SEP 2025 13:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -615,49 +615,53 @@ Package pdftex.def Info: airline_delays_analysis_files/figure-latex/flight-volum
 
 
 [7 <./airline_delays_analysis_files/figure-latex/delay-rates-1.pdf>]
-<airline_delays_analysis_files/figure-latex/overall-performance-1.pdf, id=93, 433.62pt x 289.08pt>
-File: airline_delays_analysis_files/figure-latex/overall-performance-1.pdf Graphic file (type pdf)
-<use airline_delays_analysis_files/figure-latex/overall-performance-1.pdf>
-Package pdftex.def Info: airline_delays_analysis_files/figure-latex/overall-performance-1.pdf  used on input line 626.
+
+[8 <./airline_delays_analysis_files/figure-latex/flight-volume-1.pdf>]
+<airline_delays_analysis_files/figure-latex/overall-performance-chart-1.pdf, id=105, 433.62pt x 289.08pt>
+File: airline_delays_analysis_files/figure-latex/overall-performance-chart-1.pdf Graphic file (type pdf)
+<use airline_delays_analysis_files/figure-latex/overall-performance-chart-1.pdf>
+Package pdftex.def Info: airline_delays_analysis_files/figure-latex/overall-performance-chart-1.pdf  used on input line 668.
 (pdftex.def)             Requested size: 469.75502pt x 313.1854pt.
 
 
-[8 <./airline_delays_analysis_files/figure-latex/flight-volume-1.pdf>]
+[9]
 
-[9 <./airline_delays_analysis_files/figure-latex/overall-performance-1.pdf>]
-Overfull \hbox (262.8304pt too wide) in alignment at lines 696--707
+[10 <./airline_delays_analysis_files/figure-latex/overall-performance-chart-1.pdf>]
+
+[11]
+
+[12]
+Overfull \hbox (262.8304pt too wide) in alignment at lines 922--933
  [] [] [] [] [] [] [] 
  []
 
 
 
-[10]
+[13] [14]
 
-[11]
-
-[12]
-Overfull \hbox (131.0794pt too wide) in alignment at lines 922--939
+[15]
+Overfull \hbox (131.0794pt too wide) in alignment at lines 1148--1165
  [] [] [] [] [] [] [] [] [] 
  []
 
 
 
-[13]
-Overfull \hbox (55.24345pt too wide) in paragraph at lines 989--989
+[16]
+Overfull \hbox (55.24345pt too wide) in paragraph at lines 1215--1215
 []\T1/lmtt/m/n/10 ## Alaska Airlines performs better overall with a delay rate of 12.99% compared to AM West's 10.13%.[] 
  []
 
 
 
-[14]
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1092.
+[17]
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1318.
 (/Users/randyhowk/Library/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 
-[15]
+[18]
 
-[16] (./airline_delays_analysis.aux)
+[19] (./airline_delays_analysis.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
@@ -667,18 +671,18 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 13591 strings out of 469778
- 212104 string characters out of 5481060
- 637152 words of memory out of 5000000
- 41668 multiletter control sequences out of 15000+600000
+ 13601 strings out of 469778
+ 212303 string characters out of 5481060
+ 637375 words of memory out of 5000000
+ 41672 multiletter control sequences out of 15000+600000
  674912 words of font info for 86 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 89i,8n,93p,595b,627s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 89i,8n,93p,595b,587s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </Users/randyhowk/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/randyhowk/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/randyhowk/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/randyhowk/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/randyhowk/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/randyhowk/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></Users/randyhowk/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></Users/randyhowk/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on airline_delays_analysis.pdf (16 pages, 271639 bytes).
+Output written on airline_delays_analysis.pdf (19 pages, 277923 bytes).
 PDF statistics:
- 253 PDF objects out of 1000 (max. 8388607)
- 207 compressed objects within 3 object streams
- 59 named destinations out of 1000 (max. 500000)
+ 273 PDF objects out of 1000 (max. 8388607)
+ 224 compressed objects within 3 object streams
+ 65 named destinations out of 1000 (max. 500000)
  112 words of extra memory for PDF output out of 10000 (max. 10000000)
 

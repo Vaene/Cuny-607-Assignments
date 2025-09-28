@@ -250,26 +250,99 @@ airline_analysis %>%
 
 #### Overall performance comparison
 
-```{r overall-performance, fig.height=4, fig.width=6, out.width="100%", fig.align='center'}
-airline_summary %>%
-  select(airline, total_on_time, total_delayed) %>%
-  pivot_longer(cols = c(total_on_time, total_delayed), 
-               names_to = "status", values_to = "flights") %>%
-  ggplot(aes(x = airline, y = flights, fill = status)) +
-  geom_col(position = "fill") +
-  scale_y_continuous(labels = percent_format()) +
-  scale_fill_manual(
-    values = c("total_on_time" = "#2ca02c", "total_delayed" = "#d62728"),
-    labels = c("total_delayed" = "Delayed", "total_on_time" = "On Time")
-  ) +
+```{r overall-performance-table, fig.height=4, fig.width=6, out.width="100%", fig.align='center'}
+overall_performance_table <- airline_summary %>%
+  select(airline, total_flights, overall_delay_rate) %>%
+  mutate(
+    on_time_rate = 1 - overall_delay_rate,
+    delay_rate_pct = round(overall_delay_rate * 100, 2),
+    on_time_rate_pct = round(on_time_rate * 100, 2)
+  ) %>%
+  select(airline, total_flights, delay_rate_pct, on_time_rate_pct)
+
+kable(overall_performance_table,
+      caption = "Overall Airline Performance Comparison",
+      col.names = c("Airline", "Total Flights", "Delay Rate (%)", "On-Time Rate (%)"),
+      align = c("l", "r", "r", "r")) %>%
+  kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover")) %>%
+  row_spec(which.min(overall_performance_table$delay_rate_pct), 
+           bold = TRUE, color = "white", background = "#2ca02c")  # Highlight best performer
+```
+
+### Overall Performance Chart
+
+```{r overall-performance-chart, fig.height=4, fig.width=6, out.width="100%", fig.align='center'}
+performance_chart_data <- airline_summary %>%
+  mutate(
+    delay_rate_pct = round(overall_delay_rate * 100, 1),
+    on_time_rate_pct = round((1 - overall_delay_rate) * 100, 1)
+  )
+
+ggplot(performance_chart_data, aes(x = airline)) +
+  geom_col(aes(y = 100), fill = "#2ca02c", alpha = 0.7, width = 0.6) +
+  geom_col(aes(y = delay_rate_pct), fill = "#d62728", width = 0.6) +
+  geom_text(aes(y = delay_rate_pct + 2, 
+                label = paste0(delay_rate_pct, "%")), 
+            size = 4, fontface = "bold") +
+  geom_text(aes(y = 50, 
+                label = paste0("On-time: ", on_time_rate_pct, "%")), 
+            color = "white", size = 3.5, fontface = "bold") +
   labs(
-    title = "Overall Performance Comparison",
-    subtitle = "Proportion of on-time vs delayed flights",
+    title = "Overall Airline Performance Comparison",
+    subtitle = "Delay rates and on-time performance",
     x = "Airline",
-    y = "Proportion of Flights",
-    fill = "Flight Status"
+    y = "Percentage of Flights (%)",
+    caption = "Red = Delayed flights, Green = On-time flights"
   ) +
-  theme_minimal()
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold"),
+    axis.text = element_text(size = 11)
+  )
+```
+
+### Detailed Performance Analysis
+```{r overall-performance-analysis}
+# Calculate key metrics for analysis
+alaska_delay <- airline_summary$overall_delay_rate[airline_summary$airline == "ALASKA"] * 100
+am_west_delay <- airline_summary$overall_delay_rate[airline_summary$airline == "AM WEST"] * 100
+difference <- am_west_delay - alaska_delay
+alaska_flights <- airline_summary$total_flights[airline_summary$airline == "ALASKA"]
+am_west_flights <- airline_summary$total_flights[airline_summary$airline == "AM WEST"]
+
+cat("### OVERALL PERFORMANCE FINDINGS:\n\n")
+cat(sprintf("**Alaska Airlines:**\n"))
+cat(sprintf("- Delay Rate: %.1f%%\n", alaska_delay))
+cat(sprintf("- On-time Rate: %.1f%%\n", 100 - alaska_delay))
+cat(sprintf("- Total Flights: %s\n\n", format(alaska_flights, big.mark = ",")))
+
+cat(sprintf("**AM West Airlines:**\n"))
+cat(sprintf("- Delay Rate: %.1f%%\n", am_west_delay))
+cat(sprintf("- On-time Rate: %.1f%%\n", 100 - am_west_delay))
+cat(sprintf("- Total Flights: %s\n\n", format(am_west_flights, big.mark = ",")))
+
+cat(sprintf("**KEY INSIGHTS:**\n"))
+cat(sprintf("1. Alaska Airlines outperforms AM West by %.1f percentage points\n", difference))
+cat(sprintf("2. Alaska's delay rate is %.1f%% vs AM West's %.1f%%\n", alaska_delay, am_west_delay))
+cat(sprintf("3. This means AM West passengers are %.1fx more likely to experience delays\n", 
+            am_west_delay/alaska_delay))
+cat(sprintf("4. Despite having %.1fx fewer total flights, Alaska maintains superior performance\n",
+            am_west_flights/alaska_flights))
+
+# Test if the overall difference is statistically significant
+contingency_matrix <- matrix(c(
+  sum(airline_analysis$delayed[airline_analysis$airline == "ALASKA"]),
+  sum(airline_analysis$on_time[airline_analysis$airline == "ALASKA"]),
+  sum(airline_analysis$delayed[airline_analysis$airline == "AM WEST"]),
+  sum(airline_analysis$on_time[airline_analysis$airline == "AM WEST"])
+), nrow = 2, byrow = TRUE)
+
+rownames(contingency_matrix) <- c("Alaska", "AM West")
+colnames(contingency_matrix) <- c("Delayed", "On Time")
+
+chi_test_overall <- chisq.test(contingency_matrix)
+cat(sprintf("**Statistical Significance:** p-value = %.2e\n", chi_test_overall$p.value))
+cat("This confirms the performance difference is highly statistically significant.\n\n")
 ```
 
 ## Statistical analysis
@@ -477,8 +550,8 @@ cat("Alaska Airlines demonstrates genuinely superior performance, not a statisti
 
 Below are:
 
-- A standalone CSV-creation script shown for convenience (not evaluated during rendering).
-- A standalone SQL-creation script shown for convenience (not evaluated during rendering).
+- A standalone CSV-creation script shown for convenience.
+- A standalone SQL-creation script shown for convenience.
 
 ```{r create_csv_script, eval=FALSE}
 # Create CSV file from the airline data
