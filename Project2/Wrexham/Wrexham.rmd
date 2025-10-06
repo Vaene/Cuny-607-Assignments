@@ -1,0 +1,619 @@
+---
+title: "Wrexham AFC: A Three-Season Journey Through English Football"
+subtitle: "Comprehensive Analysis of Performance and Competitive Positioning"
+author: "Randy Howk"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    theme: flatly
+    highlight: tango
+    code_folding: show
+    df_print: paged
+  pdf_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+    latex_engine: xelatex
+    keep_tex: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  fig.width = 10,
+  fig.height = 6,
+  fig.align = 'center'
+)
+```
+## Executive Summary
+This analysis examines Wrexham AFC's performance across three seasons spanning multiple divisions of English Football, from League Two (E3) through League One (E2) to the Championship (E1). The analysis focuses on identifying Wrexham's closest competitors in each season and evaluating their competitive positioning.
+
+## Data Loading and Database Connection
+```{r data-loading}
+# Load required libraries
+library(tidyverse)    # For data manipulation and visualization
+library(DBI)          # Database interface
+library(RPostgres)    # PostgreSQL driver
+library(lubridate)    # Date manipulation
+library(knitr)        # Table formatting
+library(kableExtra)   # Enhanced tables
+library(scales)       # Scale functions for ggplot2
+library(patchwork)    # Combine multiple plots
+
+# For PDF output, ensure tinytex is installed
+# tinytex::install_tinytex()
+ 
+# Establish PostgreSQL connection via DDEV
+con <- dbConnect(
+  RPostgres::Postgres(),
+  host = "ddev-wrexham-football-analysis-db",  # DDEV database service name
+  port = 5432,
+  dbname = "football_analysis",
+  user = "db",
+  password = "db"
+)
+
+# Verify connection
+cat("Database connection established successfully!\n")
+dbListTables(con)
+ 
+
+# Load the three CSV files
+e1_raw <- read_csv("E1.csv", show_col_types = FALSE)
+e2_raw <- read_csv("E2.csv", show_col_types = FALSE)
+e3_raw <- read_csv("E3.csv", show_col_types = FALSE)
+
+# Display dimensions
+cat("E1 (Championship) dimensions:", dim(e1_raw), "\n")
+cat("E2 (League One) dimensions:", dim(e2_raw), "\n")
+cat("E3 (League Two) dimensions:", dim(e3_raw), "\n")
+```
+## Data Tidying Process
+### Understanding the Wide Format
+The raw data is in a wide format with multiple characteristics:
+
+1. Multiple observations per row: Each row contains data for both home and away teams
+2. Betting odds spread across many columns: Different bookmakers have separate columns
+3. Redundant information: Home and away statistics are separate columns
+4. Date formatting issues: Dates may need parsing
+5. Missing season identifiers: Need to infer season from dates
+## Initial Data Inspection
+ 
+```{r initial-data-inspection}
+# Examine first few rows of each dataset
+cat("=== E1 Championship Sample ===\n")
+head(e1_raw[, 1:15], 3) %>% kable() %>% kable_styling()
+
+cat("\n=== E2 League One Sample ===\n")
+head(e2_raw[, 1:15], 3) %>% kable() %>% kable_styling()
+
+cat("\n=== E3 League Two Sample ===\n")
+head(e3_raw[, 1:15], 3) %>% kable() %>% kable_styling()
+
+# Check column names
+cat("\nTotal columns per dataset:\n")
+cat("E1:", ncol(e1_raw), "columns\n")
+cat("E2:", ncol(e2_raw), "columns\n")
+cat("E3:", ncol(e3_raw), "columns\n")
+```
+
+## Tidying Step 1: Select Core Match Variables
+Commentary: The original datasets contain 100+ columns including extensive betting odds from multiple bookmakers. For our analysis of team performance, we'll extract the essential match information and statistics while discarding the betting data which is not relevant for performance analysis.
+
+ 
+```{r core-match-variables}
+# Define core columns needed for analysis
+core_columns <- c(
+  "Div", "Date", "Time", 
+  "HomeTeam", "AwayTeam",
+  "FTHG", "FTAG", "FTR",          # Full-time results
+  "HTHG", "HTAG", "HTR",          # Half-time results
+  "Referee",
+  "HS", "AS",                      # Shots
+  "HST", "AST",                    # Shots on target
+  "HF", "AF",                      # Fouls
+  "HC", "AC",                      # Corners
+  "HY", "AY",                      # Yellow cards
+  "HR", "AR"                       # Red cards
+)
+
+# Extract core columns from each dataset
+e1_core <- e1_raw %>% select(any_of(core_columns))
+e2_core <- e2_raw %>% select(any_of(core_columns))
+e3_core <- e3_raw %>% select(any_of(core_columns))
+
+cat("Reduced E1 from", ncol(e1_raw), "to", ncol(e1_core), "columns\n")
+cat("Reduced E2 from", ncol(e2_raw), "to", ncol(e2_core), "columns\n")
+cat("Reduced E3 from", ncol(e3_raw), "to", ncol(e3_core), "columns\n")
+```
+## Tidying Step 2: Standardize Column Names and Data Types
+Commentary: Column names use inconsistent abbreviations (FTHG, HS, etc.). We'll create descriptive names following snake_case convention for clarity and consistency.
+
+ 
+```{r standardize-column-names-data-types}
+# Function to standardize column names and types
+standardize_match_data <- function(df) {
+  df %>%
+    rename(
+      division = Div,
+      match_date = Date,
+      match_time = Time,
+      home_team = HomeTeam,
+      away_team = AwayTeam,
+      full_time_home_goals = FTHG,
+      full_time_away_goals = FTAG,
+      full_time_result = FTR,
+      half_time_home_goals = HTHG,
+      half_time_away_goals = HTAG,
+      half_time_result = HTR,
+      referee = Referee,
+      home_shots = HS,
+      away_shots = AS,
+      home_shots_on_target = HST,
+      away_shots_on_target = AST,
+      home_fouls = HF,
+      away_fouls = AF,
+      home_corners = HC,
+      away_corners = AC,
+      home_yellow_cards = HY,
+      away_yellow_cards = AY,
+      home_red_cards = HR,
+      away_red_cards = AR
+    ) %>%
+    mutate(
+      # Parse dates properly
+      match_date = dmy(match_date),
+      # Convert time to proper format
+      match_time = hms::as_hms(match_time),
+      # Ensure numeric columns are numeric
+      across(c(full_time_home_goals:away_red_cards), as.numeric),
+      # Clean team names (trim whitespace)
+      across(c(home_team, away_team), str_trim)
+    )
+}
+
+# Apply standardization
+e1_std <- standardize_match_data(e1_core)
+e2_std <- standardize_match_data(e2_core)
+e3_std <- standardize_match_data(e3_core)
+
+cat("Standardization complete. Sample of cleaned data:\n")
+e1_std %>% select(1:8) %>% head(3) %>% kable() %>% kable_styling()
+```
+## Tidying Step 3: Add Season Identifiers
+Commentary: The season must be inferred from the match dates. English football seasons run from August to May, so we determine the season based on the year of the match date.
+
+```{r season-id}
+# Function to determine season from date
+get_season <- function(date) {
+  year <- year(date)
+  month <- month(date)
+  
+  # If month is Aug-Dec, season starts that year
+  # If month is Jan-Jul, season started previous year
+  if (month >= 8) {
+    paste0(year, "/", str_sub(year + 1, 3, 4))
+  } else {
+    paste0(year - 1, "/", str_sub(year, 3, 4))
+  }
+}
+
+# Add season to each dataset
+e1_std <- e1_std %>% mutate(season = map_chr(match_date, get_season))
+e2_std <- e2_std %>% mutate(season = map_chr(match_date, get_season))
+e3_std <- e3_std %>% mutate(season = map_chr(match_date, get_season))
+
+cat("Seasons identified:\n")
+cat("E1 seasons:", unique(e1_std$season), "\n")
+cat("E2 seasons:", unique(e2_std$season), "\n")
+cat("E3 seasons:", unique(e3_std$season), "\n")
+```
+## Tidying Step 4: Combine All Divisions
+Commentary: Since all three datasets now have identical structure, we can combine them into a single tidy dataset for unified analysis.
+
+```{r combine-divisions}
+# Combine all three divisions
+all_matches <- bind_rows(
+  e1_std,
+  e2_std,
+  e3_std
+) %>%
+  arrange(match_date) %>%
+  mutate(match_id = row_number())
+
+cat("Combined dataset dimensions:", dim(all_matches), "\n")
+cat("Date range:", min(all_matches$match_date), "to", max(all_matches$match_date), "\n")
+cat("Total matches:", nrow(all_matches), "\n")
+
+# Summary by division and season
+all_matches %>%
+  count(division, season) %>%
+  arrange(division, season) %>%
+  kable(caption = "Match Count by Division and Season") %>%
+  kable_styling()
+```
+## Tidying Step 5: Transform from Wide to Long Format
+Commentary: Currently, each match has separate columns for home and away statistics. This is a wide format that violates tidy data principles because:
+
+1. Each row contains two observations (one for each team)
+2. Team identity is spread across multiple columns (home_team vs away_team)
+3. We'll transform this into long format where each row represents one team's performance in one match.
+
+ 
+```{r transform-wide-to-long}
+# Create home team observations
+home_matches <- all_matches %>%
+  select(
+    match_id, division, season, match_date, match_time, referee,
+    team = home_team,
+    opponent = away_team,
+    goals_for = full_time_home_goals,
+    goals_against = full_time_away_goals,
+    half_time_goals_for = half_time_home_goals,
+    half_time_goals_against = half_time_away_goals,
+    shots = home_shots,
+    shots_on_target = home_shots_on_target,
+    fouls = home_fouls,
+    corners = home_corners,
+    yellow_cards = home_yellow_cards,
+    red_cards = home_red_cards,
+    opponent_shots = away_shots,
+    opponent_shots_on_target = away_shots_on_target,
+    opponent_fouls = away_fouls,
+    opponent_corners = away_corners,
+    opponent_yellow_cards = away_yellow_cards,
+    opponent_red_cards = away_red_cards,
+    result = full_time_result
+  ) %>%
+  mutate(
+    location = "Home",
+    # Convert result to team perspective
+    team_result = case_when(
+      result == "H" ~ "W",  # Home win
+      result == "A" ~ "L",  # Home loss
+      result == "D" ~ "D",  # Draw
+      TRUE ~ NA_character_
+    )
+  )
+
+# Create away team observations
+away_matches <- all_matches %>%
+  select(
+    match_id, division, season, match_date, match_time, referee,
+    team = away_team,
+    opponent = home_team,
+    goals_for = full_time_away_goals,
+    goals_against = full_time_home_goals,
+    half_time_goals_for = half_time_away_goals,
+    half_time_goals_against = half_time_home_goals,
+    shots = away_shots,
+    shots_on_target = home_shots_on_target,
+    fouls = away_fouls,
+    corners = away_corners,
+    yellow_cards = away_yellow_cards,
+    red_cards = away_red_cards,
+    opponent_shots = home_shots,
+    opponent_shots_on_target = home_shots_on_target,
+    opponent_fouls = home_fouls,
+    opponent_corners = home_corners,
+    opponent_yellow_cards = home_yellow_cards,
+    opponent_red_cards = home_red_cards,
+    result = full_time_result
+  ) %>%
+  mutate(
+    location = "Away",
+    # Convert result to team perspective
+    team_result = case_when(
+      result == "A" ~ "W",  # Away win
+      result == "H" ~ "L",  # Away loss
+      result == "D" ~ "D",  # Draw
+      TRUE ~ NA_character_
+    )
+  )
+
+# Combine into tidy long format
+matches_tidy <- bind_rows(home_matches, away_matches) %>%
+  arrange(match_date, match_id, desc(location)) %>%
+  mutate(
+    # Calculate additional metrics
+    goal_difference = goals_for - goals_against,
+    points = case_when(
+      team_result == "W" ~ 3,
+      team_result == "D" ~ 1,
+      team_result == "L" ~ 0,
+      TRUE ~ NA_real_
+    ),
+    shot_accuracy = if_else(shots > 0, 
+                            shots_on_target / shots * 100, 
+                            NA_real_)
+  )
+
+cat("Tidy dataset created!\n")
+cat("Original matches:", nrow(all_matches), "\n")
+cat("Tidy observations (2x matches):", nrow(matches_tidy), "\n")
+cat("\nSample of tidy data:\n")
+matches_tidy %>% 
+  filter(team == "Wrexham") %>%
+  select(season, match_date, team, opponent, location, 
+         goals_for, goals_against, team_result, points) %>%
+  head(5) %>%
+  kable() %>%
+  kable_styling()
+```
+## Tidying Step 6: Handle Missing Values
+Commentary: We need to check for and handle missing values appropriately.
+ 
+```{r handle-missing-values}
+# Check for missing values
+missing_summary <- matches_tidy %>%
+  summarise(across(everything(), ~sum(is.na(.)))) %>%
+  pivot_longer(everything(), names_to = "column", values_to = "missing_count") %>%
+  filter(missing_count > 0) %>%
+  arrange(desc(missing_count))
+
+if (nrow(missing_summary) > 0) {
+  cat("Columns with missing values:\n")
+  print(missing_summary %>% kable() %>% kable_styling())
+  
+  # Handle missing values
+  matches_tidy <- matches_tidy %>%
+    mutate(
+      # Replace NA in numeric stats with 0 (assuming not recorded = 0)
+      across(c(shots:red_cards, opponent_shots:opponent_red_cards), 
+             ~replace_na(., 0))
+    )
+  
+  cat("\nMissing values handled.\n")
+} else {
+  cat("No missing values found in key columns.\n")
+}
+```
+## Database Storage
+ 
+```{r database-storage}
+# Write tidy matches table to database
+dbWriteTable(
+  con, 
+  "matches", 
+  all_matches %>% select(-match_id), 
+  overwrite = TRUE
+)
+
+cat("✓ Matches table written to database\n")
+
+# Calculate and store season statistics
+team_season_stats <- matches_tidy %>%
+  group_by(team, season, division) %>%
+  summarise(
+    matches_played = n(),
+    wins = sum(team_result == "W", na.rm = TRUE),
+    draws = sum(team_result == "D", na.rm = TRUE),
+    losses = sum(team_result == "L", na.rm = TRUE),
+    goals_for = sum(goals_for, na.rm = TRUE),
+    goals_against = sum(goals_against, na.rm = TRUE),
+    goal_difference = goals_for - goals_against,
+    points = sum(points, na.rm = TRUE),
+    home_wins = sum(team_result == "W" & location == "Home", na.rm = TRUE),
+    away_wins = sum(team_result == "W" & location == "Away", na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  arrange(season, division, desc(points))
+
+# Write to database
+dbWriteTable(
+  con, 
+  "team_season_stats", 
+  team_season_stats, 
+  overwrite = TRUE
+)
+
+cat("✓ Team season statistics written to database\n")
+
+# Verify data in database
+cat("\nDatabase contents:\n")
+dbGetQuery(con, "SELECT COUNT(*) as match_count FROM matches")
+dbGetQuery(con, "SELECT COUNT(*) as team_season_count FROM team_season_stats")
+```
+## Wrexham Analysis
+### Identify Wrexham's Seasons
+ 
+```{r wrexham-analysis}
+# Find all Wrexham matches
+wrexham_data <- matches_tidy %>%
+  filter(team == "Wrexham")
+
+cat("Wrexham matches found:", nrow(wrexham_data), "\n")
+
+# Summarize by season
+wrexham_by_season <- wrexham_data %>%
+  group_by(season, division) %>%
+  summarise(
+    matches = n(),
+    wins = sum(team_result == "W"),
+    draws = sum(team_result == "D"),
+    losses = sum(team_result == "L"),
+    goals_for = sum(goals_for),
+    goals_against = sum(goals_against),
+    points = sum(points),
+    .groups = "drop"
+  ) %>%
+  arrange(season)
+
+wrexham_by_season %>%
+  kable(caption = "Wrexham Performance by Season") %>%
+  kable_styling()
+```
+## Identify Closest Competitors Each Season
+Commentary: The "closest competitor" is defined as the team with the most similar final points total to Wrexham in each season. This represents the team most competitive with Wrexham that season.
+
+ 
+```{r id-closest-competitors}
+# For each Wrexham season, find the closest competitor by points
+closest_competitors <- wrexham_by_season %>%
+  rowwise() %>%
+  mutate(
+    closest_competitor = {
+      # Get all teams in same division/season
+      season_teams <- team_season_stats %>%
+        filter(season == .data$season, 
+               division == .data$division,
+               team_name != "Wrexham")
+      
+      if (nrow(season_teams) > 0) {
+        # Find team with points closest to Wrexham
+        season_teams %>%
+          mutate(points_diff = abs(points - .data$points)) %>%
+          arrange(points_diff) %>%
+          slice(1) %>%
+          pull(team_name)
+      } else {
+        NA_character_
+      }
+    },
+    competitor_points = {
+      team_season_stats %>%
+        filter(season == .data$season, 
+               division == .data$division,
+               team_name == closest_competitor) %>%
+        pull(points)
+    }
+  ) %>%
+  ungroup()
+
+closest_competitors %>%
+  select(season, division, points, closest_competitor, competitor_points) %>%
+  kable(caption = "Wrexham vs Closest Competitor by Season") %>%
+  kable_styling()
+```
+## Comparative Analysis
+ 
+```{r comparitive-analysis}
+# Detailed comparison with closest competitors
+for (i in 1:nrow(closest_competitors)) {
+  season_info <- closest_competitors[i,]
+  competitor_name <- season_info$closest_competitor
+  
+  cat("\n## Season:", season_info$season, 
+      "- Division:", season_info$division, "\n")
+  cat("Closest Competitor:", competitor_name, "\n\n")
+  
+  # Get detailed stats for both teams
+  comparison <- team_season_stats %>%
+    filter(
+      season == season_info$season,
+      division == season_info$division,
+      team_name %in% c("Wrexham", competitor_name)
+    ) %>%
+    arrange(desc(points))
+  
+  print(comparison %>% kable() %>% kable_styling())
+  
+  # Head-to-head matches
+  h2h <- matches_tidy %>%
+    filter(
+      season == season_info$season,
+      team == "Wrexham",
+      opponent == competitor_name
+    ) %>%
+    select(match_date, location, goals_for, goals_against, 
+           team_result, points)
+  
+  if (nrow(h2h) > 0) {
+    cat("\nHead-to-head matches:\n")
+    print(h2h %>% kable() %>% kable_styling())
+  }
+}
+```
+## Visualizations
+ 
+```{r visualizations}
+# Performance timeline across seasons
+perf_plot <- wrexham_by_season %>%
+  ggplot(aes(x = season, y = points)) +
+  geom_col(fill = "#EE2737", alpha = 0.8) +
+  geom_text(aes(label = points), vjust = -0.5, size = 5, fontface = "bold") +
+  labs(
+    title = "Wrexham AFC: Points Per Season",
+    subtitle = "Journey Through English Football Divisions",
+    x = "Season",
+    y = "Total Points",
+    caption = "Data: English Football League Match Results"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", size = 18),
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+
+print(perf_plot)
+
+# Goals scored vs conceded
+goals_plot <- wrexham_data %>%
+  group_by(season) %>%
+  summarise(
+    `Goals Scored` = sum(goals_for),
+    `Goals Conceded` = sum(goals_against)
+  ) %>%
+  pivot_longer(-season, names_to = "metric", values_to = "goals") %>%
+  ggplot(aes(x = season, y = goals, fill = metric)) +
+  geom_col(position = "dodge", alpha = 0.8) +
+  scale_fill_manual(values = c("Goals Scored" = "#228B22", 
+                                 "Goals Conceded" = "#DC143C")) +
+  labs(
+    title = "Wrexham AFC: Goal Statistics by Season",
+    x = "Season",
+    y = "Goals",
+    fill = ""
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    legend.position = "top"
+  )
+
+print(goals_plot)
+```
+## Conclusions
+### Key Findings
+Progressive Journey: Wrexham has competed across multiple divisions, demonstrating their progression through English football
+
+Closest Competitors: [Competitors identified based on final points tallies]
+
+Performance Metrics:
+
+1. Win rate analysis
+2. Goal difference trends
+3. Home vs away performance
+4. Competitive Positioning: Wrexham's position relative to their closest competitors shows [specific insights]
+
+## Statistical Summary
+ 
+```{r statistical-summary}
+# Overall Wrexham statistics
+overall_stats <- wrexham_data %>%
+  summarise(
+    Total_Matches = n(),
+    Win_Rate = percent(mean(team_result == "W")),
+    Avg_Goals_Scored = round(mean(goals_for), 2),
+    Avg_Goals_Conceded = round(mean(goals_against), 2),
+    Home_Win_Rate = percent(mean(team_result == "W" & location == "Home")),
+    Away_Win_Rate = percent(mean(team_result == "W" & location == "Away"))
+  )
+
+overall_stats %>%
+  pivot_longer(everything(), names_to = "Metric", values_to = "Value") %>%
+  kable(caption = "Wrexham AFC: Overall Statistics") %>%
+  kable_styling()
+ 
+# Close database connection
+dbDisconnect(con)
+cat("Database connection closed.\n")
+```
+
+## Analysis completed: `r Sys.time()`
+
