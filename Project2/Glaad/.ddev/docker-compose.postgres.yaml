@@ -1,0 +1,16 @@
+version: '3.6'
+services:
+  ddev-postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: ddev
+      POSTGRES_PASSWORD: ddev
+      POSTGRES_DB: ddev
+    ports:
+      - "55432:5432" # host port 55432 forwarded to container 5432
+    volumes:
+      - pgdata_glaad:/var/lib/postgresql/data
+
+volumes:
+  pgdata_glaad:
+    driver: local

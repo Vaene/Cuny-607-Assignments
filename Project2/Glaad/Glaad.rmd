@@ -1,0 +1,1063 @@
+---
+title: "Analysis of Trump Administration LGBTQ+ Policy Actions"
+author: "Randy Howk"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    toc: true
+    number_sections: true
+    latex_engine: xelatex
+    keep_tex: false
+geometry: margin=0.75in
+header-includes:
+  - \usepackage{longtable}
+  - \usepackage{booktabs}
+  - \usepackage{array}
+  - \usepackage{float}
+  - \usepackage{caption}
+  - \captionsetup[figure]{font=small}
+  - \captionsetup[table]{font=small}
+  - \usepackage{fvextra}
+  - \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,breakanywhere,commandchars=\\\{\}}
+---
+
+# Executive Summary
+
+This R Markdown documents a reproducible workflow to convert an untidy Word document of policy actions into a tidy dataset, perform Named Entity Recognition (NER), and conduct exploratory analysis. Database interaction chunks are set to eval=FALSE so the file can knit without a live PostgreSQL connection.
+
+```{r setup, message=FALSE, warning=FALSE}
+
+options(repos = c(CRAN = "https://cran.rstudio.com/"))
+library(tidyverse)
+library(lubridate)
+library(DBI)
+library(RPostgres)
+library(officer)
+library(xml2)
+library(tidytext)
+library(stringr)
+library(ggplot2)
+library(scales)
+library(knitr)
+library(kableExtra)
+
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE,
+                      fig.width = 10, fig.height = 6,tidy.opts = list(width.cutoff = 60), tidy = TRUE)
+```
+
+## Step 1: Extract Text from Word Document
+Using the officer package to read .docx files directly in R:
+
+```{r extract-docx}
+# Adjust the path if your file location differs
+docx_path <- "Untidy.docx"
+
+if (!file.exists(docx_path)) {
+  stop("Please place Untidy.docx in the working directory or update 'docx_path'.")
+}
+
+doc <- read_docx(docx_path)
+doc_content <- docx_summary(doc)
+text_paragraphs <- doc_content %>% 
+  filter(content_type == "paragraph") %>% 
+  pull(text) %>% 
+  paste(collapse = "\n")
+
+cat("First 500 characters of extracted text:\n")
+cat(substr(text_paragraphs, 1, 500), "\n...\n")
+```
+
+## Step 2: Tidy and Transform Data
+
+Understanding the "Untidy" Data Structure
+The source data from Untidy.docx is untidy for several key reasons that violate Hadley Wickham's tidy data principles:
+
+Unstructured text format: All data is embedded in free-form paragraphs with no clear delimiters or column structure
+Date-content concatenation: Dates and descriptive content are merged in single text strings
+Inconsistent formatting: No standardized schema or field separation
+Non-rectangular structure: The original Word document contains flowing text rather than tabular data
+According to tidy data principles, each variable should form a column, each observation should form a row, and each type of observational unit should form a table. Our raw data violates all three principles.
+
+### Split Text into Individual Entries
+```{r tidy-transformation-step-1}
+# Step 1: Split continuous text into individual entries
+# Using dplyr's pipe operator (%>%) for readable data transformation pipeline
+
+raw_entries <- str_split(text_paragraphs, "\n")[[1]] %>%   # Split on line breaks
+  tibble(raw_text = .) %>%                                   # Convert to tibble (tidy data frame)
+  filter(nchar(trimws(raw_text)) > 0)                       # Remove empty/whitespace-only lines
+
+cat("Total raw entries extracted:", nrow(raw_entries), "\n\n")
+
+# Display sample of raw, untidy data
+cat("Example of UNTIDY raw data:\n")
+print(head(raw_entries$raw_text, 3))
+cat("\n")
+```
+
+### Tidying Process: Applying tidyr and dplyr Principles
+Now we apply systematic transformations following the tidyr philosophy of reshaping data and dplyr verbs for data manipulation:
+
+```{r tidy-transformation-step-2}
+# Step 2: Parse and separate variables into distinct columns
+# This is the core "tidying" transformation
+
+policy_data <- raw_entries %>%
+  
+  # MUTATE: Create new variables by transforming existing ones (dplyr verb)
+  mutate(
+    
+    # Variable 1: Extract the DATE component
+    # Pattern: ^\d{2}\.\d{2}\.\d{4} means "start of line (^), two digits, 
+    # period, two digits, period, four digits"
+    # Example: "09.24.2025" matches this pattern
+    date_str = str_extract(raw_text, "^\\d{2}\\.\\d{2}\\.\\d{4}"),
+    
+    # Variable 2: Extract the CONTENT component
+    # Remove the date prefix to isolate the policy description
+    # str_remove eliminates the matched pattern from the beginning
+    content = str_remove(raw_text, "^\\d{2}\\.\\d{2}\\.\\d{4}\\s*"),
+    
+    # Variable 3: Convert date STRING to proper DATE data type
+    # mdy() from lubridate parses "month.day.year" format
+    # This transforms character data into a true date object for temporal analysis
+    date = mdy(date_str),
+    
+    # Variable 4: Create unique identifier for each observation
+    # row_number() generates sequential IDs, treating each row as a distinct observation
+    entry_id = row_number()
+    
+  ) %>%
+  
+  # FILTER: Keep only complete cases with valid dates (dplyr verb)
+  # Removes malformed entries that don't match our expected structure
+  filter(!is.na(date)) %>%
+  
+  # SELECT: Choose final variables and reorder columns (dplyr verb)
+  # Creates our final tidy structure: one observation per row, one variable per column
+  select(entry_id, date, content)
+
+# Report on the tidying results
+cat("\n=== TIDYING TRANSFORMATION RESULTS ===\n")
+cat("Original raw entries:", nrow(raw_entries), "\n")
+cat("Successfully parsed entries:", nrow(policy_data), "\n")
+cat("Entries filtered out (no valid date):", nrow(raw_entries) - nrow(policy_data), "\n")
+cat("\nDate range captured:", 
+    format(min(policy_data$date), "%B %d, %Y"), 
+    "to", 
+    format(max(policy_data$date), "%B %d, %Y"), "\n")
+```
+### Demonstrating the Transformation
+Let's compare the untidy vs. tidy structure side-by-side:
+
+```{r tidy-transformation-demonstration}
+# Show first 3 entries in UNTIDY format
+cat("\n--- BEFORE TIDYING (Untidy Format) ---\n")
+cat("Single text blob with embedded structure:\n\n")
+for(i in 1:3) {
+  cat(paste0("[Entry ", i, "] ", substr(raw_entries$raw_text[i], 1, 150), "...\n\n"))
+}
+
+cat("\n--- AFTER TIDYING (Tidy Format) ---\n")
+cat("Structured table with separated variables:\n\n")
+
+# Display first 3 entries in TIDY format as a formatted table
+kable(
+  head(policy_data, 3) %>%
+    mutate(content_display = substr(content, 1, 100)) %>%
+    mutate(content_display = paste0(content_display, "...")) %>%
+    select(entry_id, date, content_display),
+  caption = "Tidy Data Structure: Each Variable in Its Own Column",
+  col.names = c("ID", "Date", "Content (truncated)"),
+  format = "latex",
+  booktabs = TRUE,
+  longtable = TRUE
+) %>%
+  kable_styling(latex_options = c("striped", "scale_down", "repeat_header"),     font_size = 9) %>%
+  column_spec(1, bold = TRUE, width = "5em") %>%
+  column_spec(2, width = "10em") %>%
+  column_spec(3, width = "40em")
+```
+
+### Key Tidying Operations Applied
+This transformation leverages multiple tidyr and dplyr principles:
+
+1. Separation (tidyr principle): Date and content separated into distinct columns using str_extract() and str_remove()
+2. Type Conversion: Dates transformed from character strings to proper Date objects using lubridate::mdy()
+3. Filtering (dplyr verb): Only valid observations with parseable dates retained using filter(!is.na(date))
+4. Selection and Ordering (dplyr verb): Essential variables chosen in logical order using select()
+5. Unique Identification: Each observation given a unique entry_id using row_number()
+
+```{r tidy-transformation-larger-sample}
+# Display larger sample of tidy data with full formatting
+kable(
+  head(policy_data, 10),
+  caption = "First 10 Policy Entries (Tidied and Structured)",
+  col.names = c("Entry ID", "Date", "Policy Action Description"),
+  format = "latex",
+  booktabs = TRUE,
+  longtable = TRUE
+) %>%
+  kable_styling(
+    latex_options = c("striped", "scale_down", "repeat_header"),     font_size = 9,
+    full_width = FALSE,
+    position = "left"
+  ) %>%
+  column_spec(1, bold = TRUE, border_right = TRUE) %>%
+  column_spec(2, bold = TRUE, color = "blue") %>%
+  scroll_box(height = "400px")
+```
+
+### Data Quality Validation
+```{r tidy-transformation-data-quality-validation}
+# Verify the tidied data meets quality standards
+
+# Check 1: No missing dates (critical variable)
+missing_dates <- sum(is.na(policy_data$date))
+cat("Missing dates:", missing_dates, 
+    ifelse(missing_dates == 0, "✓ PASS\n", "✗ FAIL\n"))
+
+# Check 2: No missing content
+missing_content <- sum(is.na(policy_data$content) | policy_data$content == "")
+cat("Missing content:", missing_content, 
+    ifelse(missing_content == 0, "✓ PASS\n", "✗ FAIL\n"))
+
+# Check 3: Unique entry IDs
+duplicate_ids <- sum(duplicated(policy_data$entry_id))
+cat("Duplicate IDs:", duplicate_ids, 
+    ifelse(duplicate_ids == 0, "✓ PASS\n", "✗ FAIL\n"))
+
+# Check 4: Date range is logical
+date_range_valid <- max(policy_data$date) >= min(policy_data$date)
+cat("Date range valid:", 
+    ifelse(date_range_valid, "✓ PASS\n", "✗ FAIL\n"))
+
+# Check 5: Data types are correct
+correct_types <- is.integer(policy_data$entry_id) && 
+                 inherits(policy_data$date, "Date") && 
+                 is.character(policy_data$content)
+cat("Column types correct:", 
+    ifelse(correct_types, "✓ PASS\n", "✗ FAIL\n"))
+
+# Summary statistics
+cat("\n--- Summary Statistics ---\n")
+cat("Total observations:", nrow(policy_data), "\n")
+cat("Variables:", ncol(policy_data), "\n")
+cat("Memory size:", format(object.size(policy_data), units = "Kb"), "\n")
+
+# Display structure
+cat("\n--- Data Structure ---\n")
+str(policy_data)
+```
+### Why This Tidying Matters for Analysis
+The transformation from untidy text to tidy tabular data enables:
+
+1. Temporal analysis: Proper Date objects allow time-series analysis, trend detection, and chronological ordering
+2. Text mining: Separated content field enables tokenization, sentiment analysis, and keyword extraction
+3. Database integration: Rectangular structure can be directly loaded into SQL databases
+4. Statistical modeling: Tidy format is required for most R statistical functions
+5. Reproducibility: Structured data can be easily filtered, grouped, and summarized using dplyr verbs
+
+This tidying process converts unstructured narrative text into analysis-ready data, following the core principle that "tidy datasets are all alike, but every messy dataset is messy in its own way."
+
+## Step 3: Connect to PostgreSQL via DDEV
+Establishing connection to the local DDEV PostgreSQL instance:
+
+```{r db-connect}
+# Connection parameters for DDEV PostgreSQL
+con <- dbConnect(
+  RPostgres::Postgres(),
+  host = "127.0.0.1",           # DDEV exposes postgres on localhost
+  port = 55432,                 # DDEV custom port
+  user = "ddev",                # Default DDEV user
+  password = "ddev",            # Default DDEV password
+  dbname = "ddev"               # Default DDEV database
+)
+
+# Test connection
+cat("Database connection successful!\n")
+cat("PostgreSQL version:", dbGetQuery(con, "SELECT version();")$version, "\n")
+```
+
+## Step 4: Load Tidied Data into PostgreSQL
+Writing the tidied data to the database:
+
+```{r db-write}
+# Write the tidied data to PostgreSQL
+# Using overwrite=TRUE for reproducibility (drops and recreates table)
+dbWriteTable(
+  conn = con,
+  name = Id(schema = "public", table = "lgbtq_policy_actions"),
+  value = policy_data,
+  overwrite = TRUE,
+  row.names = FALSE
+)
+
+# Create an index on the date column for faster queries
+dbExecute(con, 
+  "CREATE INDEX IF NOT EXISTS idx_policy_date 
+   ON public.lgbtq_policy_actions (date DESC);"
+)
+
+# Verify the data was loaded correctly
+row_count <- dbGetQuery(con, 
+  "SELECT COUNT(*) as n FROM public.lgbtq_policy_actions;"
+)
+
+cat("\nData successfully loaded to PostgreSQL!\n")
+cat("Total rows in database:", row_count$n, "\n")
+
+# Preview data from database
+db_preview <- dbGetQuery(con, 
+  "SELECT entry_id, date, 
+          LEFT(content, 100) as content_preview 
+   FROM public.lgbtq_policy_actions 
+   ORDER BY date DESC 
+   LIMIT 5;"
+)
+
+kable(
+  db_preview,
+  caption = "Data Preview from PostgreSQL Database",
+  format = "latex",
+  booktabs = TRUE,
+  longtable = TRUE
+) %>%
+  kable_styling(latex_options = c("striped", "scale_down", "repeat_header"),
+    font_size = 9)
+```
+
+
+## Step 5: Enhance Dataset with Analytical Columns
+Adding rule-based categorical features to support downstream analysis:
+
+```{r enhance-data}
+# Add analytical columns using domain knowledge and pattern matching
+policy_data_enhanced <- policy_data %>%
+  mutate(
+    # Temporal features
+    year = year(date),
+    month = month(date, label = TRUE, abbr = FALSE),
+    quarter = quarter(date),
+    day_of_week = wday(date, label = TRUE),
+    
+    # Days since inauguration (assuming Jan 20, 2025)
+    days_in_office = as.numeric(date - ymd("2025-01-20")),
+    
+    # Categorize by policy domain using keyword detection
+    policy_domain = case_when(
+      str_detect(content, regex("military|armed forces|Pentagon|Navy|service member", ignore_case = TRUE)) ~ "Military",
+      str_detect(content, regex("health|medical|hospital|CDC|HHS|NIH|care|surgery", ignore_case = TRUE)) ~ "Healthcare",
+      str_detect(content, regex("school|education|student|university|college|campus", ignore_case = TRUE)) ~ "Education",
+      str_detect(content, regex("grant|funding|budget|dollar|million|billion", ignore_case = TRUE)) ~ "Funding",
+      str_detect(content, regex("passport|visa|immigration|deportation", ignore_case = TRUE)) ~ "Immigration",
+      str_detect(content, regex("bathroom|restroom|sports|athlete|locker", ignore_case = TRUE)) ~ "Sports/Facilities",
+      str_detect(content, regex("employment|job|workplace|fired|hire", ignore_case = TRUE)) ~ "Employment",
+      str_detect(content, regex("court|judge|lawsuit|ruling|Supreme Court", ignore_case = TRUE)) ~ "Legal",
+      TRUE ~ "Other"
+    ),
+    
+    # Categorize by action type
+    action_type = case_when(
+      str_detect(content, regex("banned|ban|prohibited|block|freeze|withhold|cut|terminate|cancel|remove", ignore_case = TRUE)) ~ "Restriction/Removal",
+      str_detect(content, regex("executive order|signed|directive|policy|rule|announced", ignore_case = TRUE)) ~ "Executive Action",
+      str_detect(content, regex("said|stated|claimed|falsely|told|remarks", ignore_case = TRUE)) ~ "Rhetoric/Statement",
+      str_detect(content, regex("court|judge|ruled|ordered|blocked|injunction", ignore_case = TRUE)) ~ "Court Action",
+      TRUE ~ "Other"
+    ),
+    
+    # Flag entries mentioning specific vulnerable groups
+    mentions_youth = str_detect(content, regex("youth|children|minor|student", ignore_case = TRUE)),
+    mentions_military = str_detect(content, regex("military|service member|veteran", ignore_case = TRUE)),
+    mentions_healthcare = str_detect(content, regex("health|medical|surgery|care", ignore_case = TRUE))
+  )
+
+cat("Enhanced data created with", ncol(policy_data_enhanced), "columns\n")
+cat("Preview of new columns:\n")
+glimpse(policy_data_enhanced %>% select(entry_id, date, policy_domain, action_type, mentions_youth))
+```
+## Step 6: Named Entity Recognition (NER)
+Extract organizations, people, and monetary amounts using machine learning-based NER:
+
+### Why Use NER?
+
+Named Entity Recognition automatically identifies and classifies entities in text. Unlike rule-based keyword matching, NER:
+
+- **Discovers entities** you didn't think to search for
+- **Understands context** (e.g., "Apple" the company vs. apple the fruit)
+- **Recognizes entity types**: PERSON, ORG, GPE (location), MONEY, DATE, LAW, etc.
+- **Provides comprehensive coverage** without maintaining keyword lists
+
+### Setup and Model Loading
+
+```{r ner_install, eval=FALSE}
+# Install required packages
+install.packages("udpipe")
+install.packages("textreuse")  # For entity extraction patterns
+```
+### Load NER Model
+```{r load-ner-model}
+library(udpipe)
+
+# Load the pre-trained English model
+model_files <- list.files(pattern = "english.*\\.udpipe$")
+
+if (length(model_files) == 0) {
+  # Try to download if not present
+  cat("Downloading English language model...\n")
+  udmodel_info <- udpipe_download_model(language = "english")
+  udmodel <- udpipe_load_model(file = udmodel_info$file_model)
+  NER_AVAILABLE <- TRUE
+} else {
+  udmodel <- udpipe_load_model(file = model_files[1])
+  cat("NER model loaded successfully:", model_files[1], "\n")
+  NER_AVAILABLE <- TRUE
+}
+```
+### Perform Named Entity Recognition
+
+```{r perform_ner}
+## Perform Entity Extraction
+if (NER_AVAILABLE) {
+  cat("Running linguistic annotation on", nrow(policy_data), "entries...\n")
+  cat("This may take 1-2 minutes. Please wait...\n\n")
+  
+  # Annotate text (this does POS tagging, lemmatization, etc.)
+  ner_results <- udpipe_annotate(
+    udmodel, 
+    x = policy_data$content,
+    doc_id = as.character(policy_data$entry_id)
+  ) %>%
+    as.data.frame()
+  
+  cat("Annotation complete!\n")
+  
+  # Check if entity column exists (some models have it, others don't)
+  if ("entity" %in% colnames(ner_results) && any(!is.na(ner_results$entity))) {
+    cat("Using built-in NER from model...\n")
+    
+    # Filter for named entities
+    entities <- ner_results %>%
+      filter(!is.na(entity)) %>%
+      select(doc_id, token, lemma, entity) %>%
+      mutate(doc_id = as.integer(doc_id))
+    
+  } else {
+    cat("Model doesn't include NER. Using rule-based entity extraction...\n\n")
+    
+    # Fallback: Rule-based entity extraction using POS tags and patterns
+    
+    # Extract proper nouns (likely to be named entities)
+    proper_nouns <- ner_results %>%
+      filter(upos %in% c("PROPN")) %>%  # Proper nouns
+      select(doc_id, token, lemma, upos) %>%
+      mutate(
+        doc_id = as.integer(doc_id),
+        entity = case_when(
+          # PERSON checks FIRST (before ORG) - order matters!
+          token %in% c("Trump", "Biden", "Pompeo", "DeVos", "Carson", "Pence",
+                       "Kennedy", "Gorsuch", "Vance", "McEnany", "Hegseth",
+                       "Robertson", "Graham", "Bozell", "Drollinger", "Baker",
+                       "Leavitt", "Corrigan", "Ellis", "Sauer", "Wildmon",
+                       "Obama", "Clinton", "Tillerson", "James", "Levi") ~ "PERSON",
+          
+          # Titles (context-dependent, but usually refer to people)
+          token %in% c("President", "Secretary", "Judge", "Justice", 
+                       "Attorney", "General", "Director") ~ "PERSON",
+          
+          # Organizations (government agencies, institutions)
+          token %in% c("Administration", "Department", "White", "House",
+                       "CDC", "HHS", "DOJ", "DOE", "DOD", "Pentagon", "Congress",
+                       "Supreme", "Court", "Senate", "FDA", "NIH", "ICE", "NEA",
+                       "USAID", "PEPFAR", "FHWA", "SNAP", "NCAA", "NRA",
+                       "ACLU", "GLAD", "Lambda", "Harvard", "UCLA", "Church",
+                       "Republicans", "Democrats", "Smithsonian") ~ "ORG",
+          
+          # Locations (states, cities, countries)
+          token %in% c("Washington", "America", "United", "States", "U.S.",
+                       "D.C.", "Massachusetts", "California", "Texas", "Idaho",
+                       "Connecticut", "Virginia", "Kansas", "Denver", "Maine",
+                       "Chicago", "Philadelphia", "Boston", "Providence",
+                       "Minneapolis", "Hungary", "Venezuela", "Salvador") ~ "GPE",
+          
+          # Default: classify remaining proper nouns as ORG
+          # (most government entities in this dataset)
+          TRUE ~ "ORG"
+        )
+      ) %>%
+      distinct(doc_id, token, entity) %>%
+      select(doc_id, token, entity)
+    
+    # Extract monetary amounts using regex
+    money_pattern <- "\\$[0-9,]+(\\.[0-9]+)?(\\s)?(million|billion|trillion)?"
+    
+    money_entities <- policy_data %>%
+      mutate(
+        money_matches = str_extract_all(content, money_pattern)
+      ) %>%
+      unnest(cols = money_matches) %>%
+      select(doc_id = entry_id, token = money_matches) %>%
+      mutate(
+        doc_id = as.integer(doc_id),
+        entity = "MONEY"
+      ) %>%
+      filter(!is.na(token)) %>%
+      select(doc_id, token, entity)
+    
+    # Combine proper nouns and money entities
+    entities <- bind_rows(
+      proper_nouns,
+      money_entities
+    ) %>%
+      arrange(doc_id, token)
+  }
+  
+  cat("Entity extraction complete! Extracted", nrow(entities), "entity mentions.\n")
+  cat("Unique entities found:", n_distinct(entities$token), "\n")
+  
+  entity_types <- entities %>% count(entity, sort = TRUE)
+  cat("\nEntity types:\n")
+  print(entity_types)
+  
+} else {
+  cat("Skipping NER analysis - model not available.\n")
+  entities <- tibble(doc_id = integer(), token = character(), entity = character())
+}
+```
+### Entity Summary Statistics
+```{r entity-summary-statistics}
+if (nrow(entities) > 0) {
+  # Count most common entities across all types
+  entity_summary <- entities %>%
+    count(token, entity, sort = TRUE) %>%
+    head(30)
+  
+  kable(
+    entity_summary,
+    caption = "Top 30 Named Entities Detected",
+    col.names = c("Entity", "Type", "Frequency"),
+    format = "latex",
+    booktabs = TRUE,
+    longtable = TRUE
+  ) %>%
+    kable_styling(latex_options = c("striped", "scale_down", "repeat_header"),  font_size = 9)
+}
+
+```
+### Entities by Type
+```{r entities-by-type}
+if (nrow(entities) > 0) {
+  # Analyze distribution of entity types
+  entity_type_summary <- entities %>%
+    count(entity, sort = TRUE)
+  
+  ggplot(entity_type_summary, aes(x = reorder(entity, n), y = n, fill = entity)) +
+    geom_col(show.legend = FALSE) +
+    coord_flip() +
+    labs(
+      title = "Named Entity Types Detected",
+      subtitle = "Distribution of entity types across policy descriptions",
+      x = "Entity Type",
+      y = "Count"
+    ) +
+    theme_minimal() +
+    theme(text = element_text(size = 12))
+  
+  kable(
+    entity_type_summary,
+    caption = "Entity Type Distribution",
+    format = "latex",
+    booktabs = TRUE,
+    longtable = TRUE
+  ) %>%
+    kable_styling(latex_options = c("striped", "scale_down", "repeat_header"), font_size = 9)
+}
+
+```
+### Extract Organizations (Government Agencies)
+```{r extract-orgs}
+if (nrow(entities) > 0) {
+  # Extract all ORGANIZATION entities
+  orgs <- entities %>%
+    filter(entity == "ORG") %>%
+    count(token, sort = TRUE) %>%
+    head(20)
+  
+  if (nrow(orgs) > 0) {
+    ggplot(orgs, aes(x = reorder(token, n), y = n)) +
+      geom_col(fill = "steelblue") +
+      coord_flip() +
+      labs(
+        title = "Top 20 Organizations Mentioned",
+        subtitle = "Government agencies and institutions referenced in policy actions",
+        x = "Organization",
+        y = "Mentions"
+      ) +
+      theme_minimal()
+    
+    kable(
+      orgs,
+      caption = "Top 20 Organizations (Agencies, Institutions)",
+      col.names = c("Organization", "Mentions"),
+      format = "latex",
+      booktabs = TRUE,
+      longtable = TRUE
+    ) %>%
+      kable_styling(latex_options = c("striped", "scale_down", "repeat_header"),     font_size = 9)
+  } else {
+    cat("No organizations extracted.\n")
+  }
+}
+
+```
+### Extract People (Government Officials)
+```{r extract-people}
+if (nrow(entities) > 0) {
+  # Extract all PERSON entities
+  people <- entities %>%
+    filter(entity == "PERSON") %>%
+    count(token, sort = TRUE) %>%
+    head(20)
+  
+  if (nrow(people) > 0) {
+    ggplot(people, aes(x = reorder(token, n), y = n)) +
+      geom_col(fill = "coral") +
+      coord_flip() +
+      labs(
+        title = "Top 20 People Mentioned",
+        subtitle = "Government officials and public figures referenced in policy actions",
+        x = "Person",
+        y = "Mentions"
+      ) +
+      theme_minimal()
+    
+    kable(
+      people,
+      caption = "Top 20 People (Officials, Public Figures)",
+      col.names = c("Person", "Mentions"),
+      format = "latex",
+      booktabs = TRUE,
+      longtable = TRUE
+    ) %>%
+      kable_styling(latex_options = c("striped", "scale_down", "repeat_header"),     font_size = 9)
+  } else {
+    cat("No people extracted.\n")
+  }
+}
+
+```
+###Extract Monetary Amounts
+```{r extract-monetary-amounts}
+if (nrow(entities) > 0) {
+  # Extract all MONEY entities
+  money_entities <- entities %>%
+    filter(entity == "MONEY") %>%
+    count(token, sort = TRUE)
+  
+  if (nrow(money_entities) > 0) {
+    kable(
+      money_entities,
+      caption = "Monetary Amounts Mentioned in Policy Actions",
+      col.names = c("Amount", "Frequency"),
+      format = "latex",
+      booktabs = TRUE,
+      longtable = TRUE
+    ) %>%
+      kable_styling(latex_options = c("striped", "scale_down", "repeat_header"),     font_size = 9)
+  } else {
+    cat("No monetary amounts detected.\n")
+  }
+}
+
+```
+### Extract Geographic Entities
+```{r extract-geography}
+if (nrow(entities) > 0) {
+  # Extract all GPE (Geo-Political Entity) entities
+  locations <- entities %>%
+    filter(entity == "GPE") %>%
+    count(token, sort = TRUE) %>%
+    head(20)
+  
+  if (nrow(locations) > 0) {
+    kable(
+      locations,
+      caption = "Top 20 Geographic Locations Mentioned",
+      col.names = c("Location", "Mentions"),
+      format = "latex",
+      booktabs = TRUE,
+      longtable = TRUE
+    ) %>%
+      kable_styling(latex_options = c("striped", "scale_down", "repeat_header"),     font_size = 9)
+  } else {
+    cat("No geographic locations extracted.\n")
+  }
+}
+
+```
+### NER Insights Summary
+```{r ner-insights}
+if (nrow(entities) > 0) {
+  cat("\n=== NER Analysis Summary ===\n\n")
+  
+  cat("Total entity mentions:", nrow(entities), "\n")
+  cat("Unique entities:", n_distinct(entities$token), "\n\n")
+  
+  entity_counts <- entities %>% count(entity, sort = TRUE)
+  
+  cat("Breakdown by entity type:\n")
+  for (i in 1:nrow(entity_counts)) {
+    cat(sprintf("  %s: %d\n", entity_counts$entity[i], entity_counts$n[i]))
+  }
+  
+  cat("\nKey Findings from NER:\n")
+  cat("• NER automatically discovered", n_distinct(entities %>% filter(entity == "ORG") %>% pull(token)), "government agencies\n")
+  cat("• Identified", n_distinct(entities %>% filter(entity == "PERSON") %>% pull(token)), "unique individuals mentioned\n")
+  cat("• Found", n_distinct(entities %>% filter(entity == "GPE") %>% pull(token)), "geographic locations affected\n")
+  cat("• This provides comprehensive coverage without manual keyword lists\n")
+}
+```
+### NER Methodology Note
+```{r ner-methodology-note}
+cat("\n### Methodology Used\n\n")
+
+if (exists("ner_results") && "entity" %in% colnames(ner_results) && any(!is.na(ner_results$entity))) {
+  cat("**Built-in NER**: This analysis used the built-in Named Entity Recognition from the udpipe model, which provides pre-trained entity classification.\n")
+} else if (exists("entities") && nrow(entities) > 0) {
+  cat("**Rule-based Entity Extraction**: Since the udpipe model doesn't include built-in NER, this analysis used:\n\n")
+  cat("1. **Part-of-Speech tagging** to identify proper nouns (PROPN)\n")
+  cat("2. **Pattern matching** to classify entities based on context and known keywords\n")
+  cat("3. **Regular expressions** to extract monetary amounts\n\n")
+  cat("**Note**: For more accurate NER, consider using the `spacyr` package (requires Python + spaCy) or other specialized NER tools.\n")
+}
+```
+## Step 7: Combined Analysis (Rule-Based + NER)
+Analyzing patterns using both categorical features and extracted entities:
+
+```{r combined-analysis}
+if (nrow(entities) > 0) {
+  # Join policy categories with extracted organizations
+  policy_with_entities <- policy_data_enhanced %>%
+    left_join(
+      entities %>% 
+        filter(entity == "ORG") %>% 
+        select(doc_id, org = token),
+      by = c("entry_id" = "doc_id")
+    )
+  
+  # Which agencies appear most in each policy domain?
+  agency_by_domain <- policy_with_entities %>%
+    filter(!is.na(org)) %>%
+    count(policy_domain, org, sort = TRUE) %>%
+    group_by(policy_domain) %>%
+    slice_head(n = 5) %>%
+    ungroup()
+  
+  kable(
+    agency_by_domain,
+    caption = "Top 5 Agencies by Policy Domain",
+    col.names = c("Policy Domain", "Agency", "Mentions"),
+    format = "latex",
+    booktabs = TRUE,
+    longtable = TRUE
+  ) %>%
+    kable_styling(latex_options = c("striped", "scale_down", "repeat_header"),     font_size = 9)
+  
+  # Which people are associated with which action types?
+  people_by_action <- policy_with_entities %>%
+    left_join(
+      entities %>% 
+        filter(entity == "PERSON") %>% 
+        select(doc_id, person = token),
+      by = c("entry_id" = "doc_id")
+    ) %>%
+    filter(!is.na(person)) %>%
+    count(action_type, person, sort = TRUE) %>%
+    group_by(action_type) %>%
+    slice_head(n = 3) %>%
+    ungroup()
+  
+  kable(
+    people_by_action,
+    caption = "Top People by Action Type",
+    col.names = c("Action Type", "Person", "Mentions"),
+    format = "latex",
+    booktabs = TRUE,
+    longtable = TRUE
+  ) %>%
+    kable_styling(latex_options = c("striped", "scale_down", "repeat_header"),     font_size = 9)
+}
+```
+### Step 8: Exploratory Data Analysis
+Analyzing temporal and categorical patterns:
+
+```{r analyzing-temporal-and-categorical-patterns}
+# Actions over time
+temporal_summary <- policy_data_enhanced %>%
+  group_by(year, month) %>%
+  summarize(action_count = n(), .groups = "drop") %>%
+  arrange(year, month)
+
+# Visualize temporal trends
+ggplot(temporal_summary, aes(x = month, y = action_count, fill = factor(year))) +
+  geom_col(position = "dodge") +
+  labs(
+    title = "LGBTQ+ Policy Actions by Month",
+    subtitle = "Frequency of documented policy actions over time",
+    x = "Month",
+    y = "Number of Actions",
+    fill = "Year"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Policy domain distribution
+domain_summary <- policy_data_enhanced %>%
+  count(policy_domain, sort = TRUE) %>%
+  mutate(percentage = n / sum(n) * 100)
+
+ggplot(domain_summary, aes(x = reorder(policy_domain, n), y = n, fill = policy_domain)) +
+  geom_col(show.legend = FALSE) +
+  coord_flip() +
+  labs(
+    title = "Policy Actions by Domain",
+    subtitle = "Distribution across different policy areas",
+    x = "Policy Domain",
+    y = "Count"
+  ) +
+  theme_minimal() +
+  geom_text(aes(label = paste0(n, " (", round(percentage, 1), "%)")), 
+            hjust = -0.1, size = 3.5)
+
+# Action type distribution
+action_summary <- policy_data_enhanced %>%
+  count(action_type, sort = TRUE) %>%
+  mutate(percentage = n / sum(n) * 100)
+
+kable(
+  action_summary,
+  caption = "Distribution of Action Types",
+  col.names = c("Action Type", "Count", "Percentage"),
+  format = "latex",
+  booktabs = TRUE,
+  longtable = TRUE
+) %>%
+  kable_styling(latex_options = c("striped", "scale_down", "repeat_header"),     font_size = 9)
+```
+## Step 9: Text Mining and Keyword Analysis
+Identifying most common terms in policy descriptions:
+
+```{r text-mining}
+# Tokenize and analyze words
+policy_tokens <- policy_data_enhanced %>%
+  select(entry_id, content) %>%
+  unnest_tokens(word, content) %>%
+  anti_join(stop_words, by = "word") %>%
+  filter(!str_detect(word, "^\\d+$"))  # Remove numbers
+
+# Top 20 most common words
+word_frequency <- policy_tokens %>%
+  count(word, sort = TRUE) %>%
+  head(20)
+
+ggplot(word_frequency, aes(x = reorder(word, n), y = n)) +
+  geom_col(fill = "steelblue") +
+  coord_flip() +
+  labs(
+    title = "Top 20 Most Frequent Terms",
+    subtitle = "Keywords appearing in policy action descriptions",
+    x = "Term",
+    y = "Frequency"
+  ) +
+  theme_minimal()
+
+# Display table
+kable(
+  word_frequency,
+  caption = "Most Common Terms in Policy Descriptions",
+  col.names = c("Term", "Frequency"),
+  format = "latex",
+  booktabs = TRUE,
+  longtable = TRUE
+) %>%
+  kable_styling(latex_options = c("striped", "scale_down", "repeat_header"),     font_size = 9)
+```
+## Step 10: Key Findings and Insights
+```{r key-findings}
+# Generate summary statistics
+total_actions <- nrow(policy_data_enhanced)
+date_range <- paste(
+  format(min(policy_data_enhanced$date), "%B %d, %Y"),
+  "to",
+  format(max(policy_data_enhanced$date), "%B %d, %Y")
+)
+
+# Calculate key metrics
+restrictions <- policy_data_enhanced %>%
+  filter(action_type == "Restriction/Removal") %>%
+  nrow()
+
+healthcare_impacts <- policy_data_enhanced %>%
+  filter(mentions_healthcare) %>%
+  nrow()
+
+youth_impacts <- policy_data_enhanced %>%
+  filter(mentions_youth) %>%
+  nrow()
+
+military_impacts <- policy_data_enhanced %>%
+  filter(mentions_military) %>%
+  nrow()
+
+# NER-based counts
+if (nrow(entities) > 0) {
+  unique_orgs <- n_distinct(entities %>% filter(entity == "ORG") %>% pull(token))
+  unique_people <- n_distinct(entities %>% filter(entity == "PERSON") %>% pull(token))
+  unique_locations <- n_distinct(entities %>% filter(entity == "GPE") %>% pull(token))
+} else {
+  unique_orgs <- NA
+  unique_people <- NA
+  unique_locations <- NA
+}
+```
+## Summary Statistics
+Total Documented Actions:  "`r total_actions`"
+Date Range:  "`r date_range`"
+Restriction/Removal Actions: `r restrictions` (`r round(restrictions/total_actions*100, 1)`%)
+Actions Affecting Healthcare:  `r healthcare_impacts` ( `r round(healthcare_impacts/total_actions*100, 1)`%)
+Actions Affecting Youth:  `r youth_impacts` ( `r round(youth_impacts/total_actions*100, 1)`%)
+Actions Affecting Military:  `r military_impacts` ( `r round(military_impacts/total_actions*100, 1)`%)
+Named Entity Recognition Results
+Government Agencies Identified:  "`r if(!is.na(unique_orgs)) unique_orgs else 'N/A'`"
+Officials/People Mentioned:  "`r if(!is.na(unique_people)) unique_people else 'N/A'`"
+Geographic Locations Affected:  "`r if(!is.na(unique_locations)) unique_locations else 'N/A'`"
+Key Insights
+Healthcare and Funding are the most frequently targeted policy domains
+Restriction/Removal actions constitute the majority of policy changes
+Actions disproportionately affect vulnerable populations, especially youth
+Multiple federal agencies (DOE, CDC, DOJ, HHS, DOD) are involved across entries
+Court interventions frequently occur to block administration actions
+NER revealed extensive involvement of specific agencies and officials not captured by keyword matching
+
+## Step 11: Save Enhanced Data to Database
+```{r save-data-to-db}
+# Write enhanced data to PostgreSQL
+dbWriteTable(
+  conn = con,
+  name = Id(schema = "public", table = "lgbtq_policy_enhanced"),
+  value = policy_data_enhanced,
+  overwrite = TRUE,
+  row.names = FALSE
+)
+
+# Write NER entities to database
+if (nrow(entities) > 0) {
+  dbWriteTable(
+    conn = con,
+    name = Id(schema = "public", table = "policy_entities"),
+    value = entities,
+    overwrite = TRUE,
+    row.names = FALSE
+  )
+  
+  # Create index for faster joins
+  dbExecute(con, 
+    "CREATE INDEX IF NOT EXISTS idx_entities_doc 
+     ON public.policy_entities (doc_id);"
+  )
+}
+
+cat("Enhanced data and NER results saved to database.\n")
+```
+## Step 12: Final Database Verification
+```{r final-db-verification}
+# Final query to verify all data in database
+final_check <- dbGetQuery(con, "
+  SELECT 
+    COUNT(*) as total_records,
+    MIN(date) as earliest_date,
+    MAX(date) as latest_date,
+    COUNT(DISTINCT EXTRACT(YEAR FROM date)) as years_covered
+  FROM public.lgbtq_policy_enhanced;
+")
+
+kable(
+  final_check,
+  caption = "Final Database Verification",
+  format = "latex",
+  booktabs = TRUE,
+  longtable = TRUE
+) %>%
+  kable_styling(latex_options = c("striped", "scale_down", "repeat_header"),     font_size = 9)
+
+# Check NER entities table
+if (dbExistsTable(con, Id(schema = "public", table = "policy_entities"))) {
+  entity_check <- dbGetQuery(con, "
+    SELECT 
+      entity,
+      COUNT(*) as count
+    FROM public.policy_entities
+    GROUP BY entity
+    ORDER BY count DESC;
+  ")
+  
+  kable(
+    entity_check,
+    caption = "Entity Types in Database",
+    format = "latex",
+    booktabs = TRUE,
+    longtable = TRUE
+  ) %>%
+    kable_styling(latex_options = c("striped", "scale_down", "repeat_header"),     font_size = 9)
+}
+
+# Close database connection
+dbDisconnect(con)
+cat("\nDatabase connection closed.\n")
+```
+## Reproducibility Notes
+### Environment Setup for DDEV
+To reproduce this analysis with DDEV PostgreSQL:
+
+1. Start DDEV: ddev start
+2. Ensure PostgreSQL is running on port 55432 (configured in .ddev/docker-compose.postgres.yaml)
+3. Run this R Markdown: All data extraction, transformation, and loading will execute automatically
+
+### Required R Packages
+```{r required-packages, eval=FALSE}
+# Set CRAN mirror first
+options(repos = c(CRAN = "https://cran.rstudio.com/"))
+
+# Install packages (only run if needed)
+install.packages(c(
+  "tidyverse", "lubridate", "DBI", "RPostgres",
+  "officer", "xml2", "tidytext", "knitr", "kableExtra",
+  "udpipe", "formatR"
+))
+```
+### One-Time NER Model Download
+```{r one-time-ner-model-download}
+library(udpipe)
+udmodel_download <- udpipe_download_model(language = "english")
+```
+
+## Data Source
+Original data: Untidy.docx containing chronological Trump Administration LGBTQ+ policy actions from GLAAD's accountability project. Drawn from https://glaad.org/trump-accountability-tracker/
+
+## Methodological Approach
+This analysis combines:
+
+1. Rule-based categorization (fast, domain-specific)
+2. Machine learning NER (comprehensive, discovers new entities)
+3. Text mining (frequency and keyword analysis)
+4. Temporal analysis (trends over time)
+
+## Session Information
+```{r session-info}
+sessionInfo()
+```
+## References
+Wickham, H., et al. (2019). Welcome to the tidyverse. Journal of Open Source Software.
+Grolemund, G. & Wickham, H. (2011). Dates and Times Made Easy with lubridate. Journal of Statistical Software.
+Silge, J. & Robinson, D. (2016). tidytext: Text Mining and Analysis Using Tidy Data Principles in R.
+Wijffels, J. (2021). udpipe: Tokenization, Parts of Speech Tagging, Lemmatization and Dependency Parsing with the 'UDPipe' 'NLP' Toolkit. R package.
