@@ -51,9 +51,9 @@ library(patchwork)    # Combine multiple plots
 # Establish PostgreSQL connection via DDEV
 con <- dbConnect(
   RPostgres::Postgres(),
-  host = "ddev-wrexham-football-analysis-db",  # DDEV database service name
-  port = 5432,
-  dbname = "football_analysis",
+  host = "127.0.0.1",
+  port = 56386,
+  dbname = "football_analysis",    # or "football_analysis" if you've created that DB inside the container
   user = "db",
   password = "db"
 )
@@ -462,7 +462,7 @@ closest_competitors <- wrexham_by_season %>%
       season_teams <- team_season_stats %>%
         filter(season == .data$season, 
                division == .data$division,
-               team_name != "Wrexham")
+               team != "Wrexham")  # CHANGED: team_name -> team
       
       if (nrow(season_teams) > 0) {
         # Find team with points closest to Wrexham
@@ -470,7 +470,7 @@ closest_competitors <- wrexham_by_season %>%
           mutate(points_diff = abs(points - .data$points)) %>%
           arrange(points_diff) %>%
           slice(1) %>%
-          pull(team_name)
+          pull(team)  # CHANGED: team_name -> team
       } else {
         NA_character_
       }
@@ -479,16 +479,12 @@ closest_competitors <- wrexham_by_season %>%
       team_season_stats %>%
         filter(season == .data$season, 
                division == .data$division,
-               team_name == closest_competitor) %>%
+               team == closest_competitor) %>%  # CHANGED: team_name -> team
         pull(points)
     }
   ) %>%
   ungroup()
 
-closest_competitors %>%
-  select(season, division, points, closest_competitor, competitor_points) %>%
-  kable(caption = "Wrexham vs Closest Competitor by Season") %>%
-  kable_styling()
 ```
 ## Comparative Analysis
  
@@ -507,7 +503,7 @@ for (i in 1:nrow(closest_competitors)) {
     filter(
       season == season_info$season,
       division == season_info$division,
-      team_name %in% c("Wrexham", competitor_name)
+      team %in% c("Wrexham", competitor_name)
     ) %>%
     arrange(desc(points))
   
@@ -606,6 +602,7 @@ overall_stats <- wrexham_data %>%
   )
 
 overall_stats %>%
+  mutate(across(everything(), as.character)) %>%
   pivot_longer(everything(), names_to = "Metric", values_to = "Value") %>%
   kable(caption = "Wrexham AFC: Overall Statistics") %>%
   kable_styling()
