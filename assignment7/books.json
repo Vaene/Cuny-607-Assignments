@@ -1,0 +1,25 @@
+{
+  "books": [
+    {
+      "title": "Gödel, Escher, Bach: An Eternal Golden Braid",
+      "authors": ["Douglas Hofstadter"],
+      "year": 1979,
+      "pages": 777,
+      "award": "Pulitzer Prize"
+    },
+    {
+      "title": "The Mind's I",
+      "authors": ["Douglas Hofstadter", "Daniel Dennett"],
+      "year": 1981,
+      "pages": 501,
+      "award": "None"
+    },
+    {
+      "title": "The Black Swan",
+      "authors": ["Nassim Nicholas Taleb"],
+      "year": 2007,
+      "pages": 366,
+      "award": "None"
+    }
+  ]
+}

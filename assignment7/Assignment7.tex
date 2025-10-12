@@ -1,0 +1,702 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Books Data - XML, JSON, and HTML},
+  pdfauthor={Your Name},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Books Data - XML, JSON, and HTML}
+\author{Your Name}
+\date{2025-10-08}
+
+\begin{document}
+\maketitle
+
+\subsection{Introduction}\label{introduction}
+
+This assignment loads book information from three different file formats
+(HTML, XML, and JSON) into R data frames and compares them.
+
+\subsection{Load Required Libraries}\label{load-required-libraries}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{options}\NormalTok{(}\AttributeTok{encoding =} \StringTok{"UTF{-}8"}\NormalTok{)}
+\FunctionTok{Sys.setlocale}\NormalTok{(}\StringTok{"LC\_ALL"}\NormalTok{, }\StringTok{"en\_US.UTF{-}8"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(XML)}
+\FunctionTok{library}\NormalTok{(jsonlite)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Book Information}\label{book-information}
+
+Three books on interdisciplinary thinking and consciousness:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Gödel, Escher, Bach: An Eternal Golden Braid - Douglas Hofstadter
+  (1979)
+\item
+  The Mind's I - Douglas Hofstadter \& Daniel Dennett (1981)
+\item
+  The Black Swan - Nassim Nicholas Taleb (2007) \#\# Load Data from HTML
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Parse HTML file}
+\NormalTok{html\_doc }\OtherTok{\textless{}{-}} \FunctionTok{htmlParse}\NormalTok{(}\StringTok{"books.html"}\NormalTok{, }\AttributeTok{encoding =} \StringTok{"UTF{-}8"}\NormalTok{)}
+
+\CommentTok{\# Extract table}
+\NormalTok{html\_df }\OtherTok{\textless{}{-}} \FunctionTok{readHTMLTable}\NormalTok{(html\_doc, }\AttributeTok{stringsAsFactors =} \ConstantTok{FALSE}\NormalTok{)[[}\DecValTok{1}\NormalTok{]]}
+
+\CommentTok{\# Set column names}
+\FunctionTok{colnames}\NormalTok{(html\_df) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Title"}\NormalTok{, }\StringTok{"Authors"}\NormalTok{, }\StringTok{"Year"}\NormalTok{, }\StringTok{"Pages"}\NormalTok{, }\StringTok{"Award"}\NormalTok{)}
+
+\CommentTok{\# Convert data types}
+\NormalTok{html\_df}\SpecialCharTok{$}\NormalTok{Year }\OtherTok{\textless{}{-}} \FunctionTok{as.integer}\NormalTok{(html\_df}\SpecialCharTok{$}\NormalTok{Year)}
+\NormalTok{html\_df}\SpecialCharTok{$}\NormalTok{Pages }\OtherTok{\textless{}{-}} \FunctionTok{as.integer}\NormalTok{(html\_df}\SpecialCharTok{$}\NormalTok{Pages)}
+
+\FunctionTok{print}\NormalTok{(}\StringTok{"HTML Data Frame:"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "HTML Data Frame:"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(html\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                                          Title
+## 1 Gödel, Escher, Bach: An Eternal Golden Braid
+## 2                                 The Mind's I
+## 3                               The Black Swan
+##                              Authors Year Pages          Award
+## 1                 Douglas Hofstadter 1979   777 Pulitzer Prize
+## 2 Douglas Hofstadter, Daniel Dennett 1981   501           None
+## 3              Nassim Nicholas Taleb 2007   366           None
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(html\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    3 obs. of  5 variables:
+##  $ Title  : chr  "Gödel, Escher, Bach: An Eternal Golden Braid" "The Mind's I" "The Black Swan"
+##  $ Authors: chr  "Douglas Hofstadter" "Douglas Hofstadter, Daniel Dennett" "Nassim Nicholas Taleb"
+##  $ Year   : int  1979 1981 2007
+##  $ Pages  : int  777 501 366
+##  $ Award  : chr  "Pulitzer Prize" "None" "None"
+\end{verbatim}
+
+\subsection{Load Data from XML}\label{load-data-from-xml}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Parse XML file}
+\NormalTok{xml\_doc }\OtherTok{\textless{}{-}} \FunctionTok{xmlParse}\NormalTok{(}\StringTok{"books.xml"}\NormalTok{, }\AttributeTok{encoding =} \StringTok{"UTF{-}8"}\NormalTok{)}
+
+\CommentTok{\# Extract individual fields}
+\NormalTok{titles }\OtherTok{\textless{}{-}} \FunctionTok{xpathSApply}\NormalTok{(xml\_doc, }\StringTok{"//book/title"}\NormalTok{, xmlValue)}
+\NormalTok{years }\OtherTok{\textless{}{-}} \FunctionTok{as.integer}\NormalTok{(}\FunctionTok{xpathSApply}\NormalTok{(xml\_doc, }\StringTok{"//book/year"}\NormalTok{, xmlValue))}
+\NormalTok{pages }\OtherTok{\textless{}{-}} \FunctionTok{as.integer}\NormalTok{(}\FunctionTok{xpathSApply}\NormalTok{(xml\_doc, }\StringTok{"//book/pages"}\NormalTok{, xmlValue))}
+\NormalTok{awards }\OtherTok{\textless{}{-}} \FunctionTok{xpathSApply}\NormalTok{(xml\_doc, }\StringTok{"//book/award"}\NormalTok{, xmlValue)}
+
+\CommentTok{\# Handle multiple authors {-} collapse into single string}
+\NormalTok{authors }\OtherTok{\textless{}{-}} \FunctionTok{sapply}\NormalTok{(}\FunctionTok{getNodeSet}\NormalTok{(xml\_doc, }\StringTok{"//book"}\NormalTok{), }\ControlFlowTok{function}\NormalTok{(book) \{}
+\NormalTok{  author\_nodes }\OtherTok{\textless{}{-}} \FunctionTok{getNodeSet}\NormalTok{(book, }\StringTok{".//author"}\NormalTok{)}
+  \FunctionTok{paste}\NormalTok{(}\FunctionTok{sapply}\NormalTok{(author\_nodes, xmlValue), }\AttributeTok{collapse=}\StringTok{", "}\NormalTok{)}
+\NormalTok{\})}
+
+\CommentTok{\# Create data frame}
+\NormalTok{xml\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{Title =}\NormalTok{ titles,}
+  \AttributeTok{Authors =}\NormalTok{ authors,}
+  \AttributeTok{Year =}\NormalTok{ years,}
+  \AttributeTok{Pages =}\NormalTok{ pages,}
+  \AttributeTok{Award =}\NormalTok{ awards,}
+  \AttributeTok{stringsAsFactors =} \ConstantTok{FALSE}
+\NormalTok{)}
+
+\FunctionTok{print}\NormalTok{(}\StringTok{"XML Data Frame:"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "XML Data Frame:"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(xml\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                                          Title
+## 1 Gödel, Escher, Bach: An Eternal Golden Braid
+## 2                                 The Mind's I
+## 3                               The Black Swan
+##                              Authors Year Pages          Award
+## 1                 Douglas Hofstadter 1979   777 Pulitzer Prize
+## 2 Douglas Hofstadter, Daniel Dennett 1981   501           None
+## 3              Nassim Nicholas Taleb 2007   366           None
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(xml\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    3 obs. of  5 variables:
+##  $ Title  : chr  "Gödel, Escher, Bach: An Eternal Golden Braid" "The Mind's I" "The Black Swan"
+##  $ Authors: chr  "Douglas Hofstadter" "Douglas Hofstadter, Daniel Dennett" "Nassim Nicholas Taleb"
+##  $ Year   : int  1979 1981 2007
+##  $ Pages  : int  777 501 366
+##  $ Award  : chr  "Pulitzer Prize" "None" "None"
+\end{verbatim}
+
+\subsection{Load Data from JSON}\label{load-data-from-json}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Read JSON file}
+\NormalTok{json\_data }\OtherTok{\textless{}{-}} \FunctionTok{fromJSON}\NormalTok{(}\StringTok{"books.json"}\NormalTok{)}
+
+\CommentTok{\# Extract books array}
+\NormalTok{json\_df }\OtherTok{\textless{}{-}}\NormalTok{ json\_data}\SpecialCharTok{$}\NormalTok{books}
+
+\CommentTok{\# Handle authors array {-} collapse to single string}
+\NormalTok{json\_df}\SpecialCharTok{$}\NormalTok{Authors }\OtherTok{\textless{}{-}} \FunctionTok{sapply}\NormalTok{(json\_df}\SpecialCharTok{$}\NormalTok{authors, paste, }\AttributeTok{collapse=}\StringTok{", "}\NormalTok{)}
+
+\CommentTok{\# Select and reorder columns}
+\NormalTok{json\_df }\OtherTok{\textless{}{-}}\NormalTok{ json\_df[, }\FunctionTok{c}\NormalTok{(}\StringTok{"title"}\NormalTok{, }\StringTok{"Authors"}\NormalTok{, }\StringTok{"year"}\NormalTok{, }\StringTok{"pages"}\NormalTok{, }\StringTok{"award"}\NormalTok{)]}
+
+\CommentTok{\# Rename columns to match other data frames}
+\FunctionTok{colnames}\NormalTok{(json\_df) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Title"}\NormalTok{, }\StringTok{"Authors"}\NormalTok{, }\StringTok{"Year"}\NormalTok{, }\StringTok{"Pages"}\NormalTok{, }\StringTok{"Award"}\NormalTok{)}
+
+\FunctionTok{print}\NormalTok{(}\StringTok{"JSON Data Frame:"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "JSON Data Frame:"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(json\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                                          Title
+## 1 Gödel, Escher, Bach: An Eternal Golden Braid
+## 2                                 The Mind's I
+## 3                               The Black Swan
+##                              Authors Year Pages          Award
+## 1                 Douglas Hofstadter 1979   777 Pulitzer Prize
+## 2 Douglas Hofstadter, Daniel Dennett 1981   501           None
+## 3              Nassim Nicholas Taleb 2007   366           None
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(json\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    3 obs. of  5 variables:
+##  $ Title  : chr  "Gödel, Escher, Bach: An Eternal Golden Braid" "The Mind's I" "The Black Swan"
+##  $ Authors: chr  "Douglas Hofstadter" "Douglas Hofstadter, Daniel Dennett" "Nassim Nicholas Taleb"
+##  $ Year   : int  1979 1981 2007
+##  $ Pages  : int  777 501 366
+##  $ Award  : chr  "Pulitzer Prize" "None" "None"
+\end{verbatim}
+
+\subsection{Compare Data Frames}\label{compare-data-frames}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Test for identical data frames}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Are HTML and XML data frames identical?}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Are HTML and XML data frames identical?
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{identical}\NormalTok{(html\_df, xml\_df))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Are HTML and JSON data frames identical?}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Are HTML and JSON data frames identical?
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{identical}\NormalTok{(html\_df, json\_df))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Are XML and JSON data frames identical?}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Are XML and JSON data frames identical?
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{identical}\NormalTok{(xml\_df, json\_df))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# More flexible comparison}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{{-}{-}{-} More Flexible Comparison with all.equal() {-}{-}{-}}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## --- More Flexible Comparison with all.equal() ---
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{HTML vs XML:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## HTML vs XML:
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{all.equal}\NormalTok{(html\_df, xml\_df))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{HTML vs JSON:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## HTML vs JSON:
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{all.equal}\NormalTok{(html\_df, json\_df))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{XML vs JSON:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## XML vs JSON:
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{all.equal}\NormalTok{(xml\_df, json\_df))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\subsection{Display All Three Data Frames Side by
+Side}\label{display-all-three-data-frames-side-by-side}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(knitr)}
+
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{\#\#\# HTML Data Frame}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ### HTML Data Frame
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{kable}\NormalTok{(html\_df, }\AttributeTok{caption =} \StringTok{"Data loaded from HTML"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.4245}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.3302}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.0472}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.0566}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1415}}@{}}
+\caption{Data loaded from HTML}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Title
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Authors
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Year
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Pages
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Award
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Title
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Authors
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Year
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Pages
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Award
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Gödel, Escher, Bach: An Eternal Golden Braid & Douglas Hofstadter & 1979
+& 777 & Pulitzer Prize \\
+The Mind's I & Douglas Hofstadter, Daniel Dennett & 1981 & 501 & None \\
+The Black Swan & Nassim Nicholas Taleb & 2007 & 366 & None \\
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{\#\#\# XML Data Frame}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ### XML Data Frame
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{kable}\NormalTok{(xml\_df, }\AttributeTok{caption =} \StringTok{"Data loaded from XML"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.4245}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.3302}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.0472}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.0566}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1415}}@{}}
+\caption{Data loaded from XML}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Title
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Authors
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Year
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Pages
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Award
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Title
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Authors
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Year
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Pages
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Award
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Gödel, Escher, Bach: An Eternal Golden Braid & Douglas Hofstadter & 1979
+& 777 & Pulitzer Prize \\
+The Mind's I & Douglas Hofstadter, Daniel Dennett & 1981 & 501 & None \\
+The Black Swan & Nassim Nicholas Taleb & 2007 & 366 & None \\
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{\#\#\# JSON Data Frame}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ### JSON Data Frame
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{kable}\NormalTok{(json\_df, }\AttributeTok{caption =} \StringTok{"Data loaded from JSON"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.4245}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.3302}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.0472}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.0566}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1415}}@{}}
+\caption{Data loaded from JSON}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Title
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Authors
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Year
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Pages
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Award
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Title
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Authors
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Year
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Pages
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Award
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Gödel, Escher, Bach: An Eternal Golden Braid & Douglas Hofstadter & 1979
+& 777 & Pulitzer Prize \\
+The Mind's I & Douglas Hofstadter, Daniel Dennett & 1981 & 501 & None \\
+The Black Swan & Nassim Nicholas Taleb & 2007 & 366 & None \\
+\end{longtable}
+
+\subsubsection{Conclusion}\label{conclusion}
+
+Are the three data frames identical?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ (}\FunctionTok{identical}\NormalTok{(html\_df, xml\_df) }\SpecialCharTok{\&\&} \FunctionTok{identical}\NormalTok{(html\_df, json\_df)) \{}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"YES {-} All three data frames are completely identical.}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"NO {-} The three data frames are NOT identical.}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"However, they contain the same information. Differences may be due to:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"{-} Different internal data structure representations}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"{-} Row names or attributes varying by parsing method}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"{-} Minor differences in how R stores the data internally}\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}\NormalTok{)}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"Using all.equal() shows they are functionally equivalent.}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## YES - All three data frames are completely identical.
+\end{verbatim}
+
+The three data frames contain the same information but may not be
+strictly identical due to differences in how each parsing method stores
+data internally. The all.equal() function provides a more flexible
+comparison that shows they are functionally equivalent.
+
+\end{document}

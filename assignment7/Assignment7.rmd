@@ -1,0 +1,150 @@
+---
+title: "Books Data - XML, JSON, and HTML"
+author: "Your Name"
+date: "`r Sys.Date()`"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+## Introduction
+
+This assignment loads book information from three different file formats (HTML, XML, and JSON) into R data frames and compares them.
+
+## Load Required Libraries
+
+```{r setup, message=FALSE, warning=FALSE}
+options(encoding = "UTF-8")
+Sys.setlocale("LC_ALL", "en_US.UTF-8")
+
+library(XML)
+library(jsonlite)
+```
+## Book Information
+Three books on interdisciplinary thinking and consciousness:
+
+1. Gödel, Escher, Bach: An Eternal Golden Braid - Douglas Hofstadter (1979)
+2. The Mind's I - Douglas Hofstadter & Daniel Dennett (1981)
+3. The Black Swan - Nassim Nicholas Taleb (2007)
+## Load Data from HTML
+```{r load-html, message=FALSE, warning=FALSE}
+# Parse HTML file
+html_doc <- htmlParse("books.html", encoding = "UTF-8")
+
+# Extract table
+html_df <- readHTMLTable(html_doc, stringsAsFactors = FALSE)[[1]]
+
+# Set column names
+colnames(html_df) <- c("Title", "Authors", "Year", "Pages", "Award")
+
+# Convert data types
+html_df$Year <- as.integer(html_df$Year)
+html_df$Pages <- as.integer(html_df$Pages)
+
+print("HTML Data Frame:")
+print(html_df)
+str(html_df)
+```
+## Load Data from XML
+```{r load-xml, message=FALSE, warning=FALSE}
+# Parse XML file
+xml_doc <- xmlParse("books.xml", encoding = "UTF-8")
+
+# Extract individual fields
+titles <- xpathSApply(xml_doc, "//book/title", xmlValue)
+years <- as.integer(xpathSApply(xml_doc, "//book/year", xmlValue))
+pages <- as.integer(xpathSApply(xml_doc, "//book/pages", xmlValue))
+awards <- xpathSApply(xml_doc, "//book/award", xmlValue)
+
+# Handle multiple authors - collapse into single string
+authors <- sapply(getNodeSet(xml_doc, "//book"), function(book) {
+  author_nodes <- getNodeSet(book, ".//author")
+  paste(sapply(author_nodes, xmlValue), collapse=", ")
+})
+
+# Create data frame
+xml_df <- data.frame(
+  Title = titles,
+  Authors = authors,
+  Year = years,
+  Pages = pages,
+  Award = awards,
+  stringsAsFactors = FALSE
+)
+
+print("XML Data Frame:")
+print(xml_df)
+str(xml_df)
+```
+## Load Data from JSON
+```{r load-json, message=FALSE, warning=FALSE}
+# Read JSON file
+json_data <- fromJSON("books.json")
+
+# Extract books array
+json_df <- json_data$books
+
+# Handle authors array - collapse to single string
+json_df$Authors <- sapply(json_df$authors, paste, collapse=", ")
+
+# Select and reorder columns
+json_df <- json_df[, c("title", "Authors", "year", "pages", "award")]
+
+# Rename columns to match other data frames
+colnames(json_df) <- c("Title", "Authors", "Year", "Pages", "Award")
+
+print("JSON Data Frame:")
+print(json_df)
+str(json_df)
+```
+## Compare Data Frames
+```{r compare-data-frames}
+# Test for identical data frames
+cat("Are HTML and XML data frames identical?\n")
+print(identical(html_df, xml_df))
+
+cat("\nAre HTML and JSON data frames identical?\n")
+print(identical(html_df, json_df))
+
+cat("\nAre XML and JSON data frames identical?\n")
+print(identical(xml_df, json_df))
+
+# More flexible comparison
+cat("\n--- More Flexible Comparison with all.equal() ---\n")
+cat("\nHTML vs XML:\n")
+print(all.equal(html_df, xml_df))
+
+cat("\nHTML vs JSON:\n")
+print(all.equal(html_df, json_df))
+
+cat("\nXML vs JSON:\n")
+print(all.equal(xml_df, json_df))
+```
+## Display All Three Data Frames Side by Side
+```{r display-data-frames, message=FALSE, warning=FALSE}
+library(knitr)
+
+cat("\n### HTML Data Frame\n")
+kable(html_df, caption = "Data loaded from HTML")
+
+cat("\n### XML Data Frame\n")
+kable(xml_df, caption = "Data loaded from XML")
+
+cat("\n### JSON Data Frame\n")
+kable(json_df, caption = "Data loaded from JSON")
+```
+### Conclusion
+Are the three data frames identical?
+```{r conclusion}
+if (identical(html_df, xml_df) && identical(html_df, json_df)) {
+  cat("YES - All three data frames are completely identical.\n")
+} else {
+  cat("NO - The three data frames are NOT identical.\n\n")
+  cat("However, they contain the same information. Differences may be due to:\n")
+  cat("- Different internal data structure representations\n")
+  cat("- Row names or attributes varying by parsing method\n")
+  cat("- Minor differences in how R stores the data internally\n\n")
+  cat("Using all.equal() shows they are functionally equivalent.\n")
+}
+```
+The three data frames contain the same information but may not be strictly identical due to differences in how each parsing method stores data internally. The all.equal() function provides a more flexible comparison that shows they are functionally equivalent.
