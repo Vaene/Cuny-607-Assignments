@@ -3,8 +3,13 @@ title: "Books Data - XML, JSON, and HTML"
 author: "Your Name"
 date: "`r Sys.Date()`"
 output:
+<<<<<<< HEAD
   html_document: default
   pdf_document: default
+=======
+  pdf_document: default
+  html_document: default
+>>>>>>> 8b906c8f12081d74ae4cc5b6e3fe49c539b05af5
 ---
 
 ## Introduction
