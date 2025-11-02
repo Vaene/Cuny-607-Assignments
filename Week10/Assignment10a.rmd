@@ -1,0 +1,135 @@
+---
+title: "Assignment10a-Sentiment Analysis with Tidy Data"
+author: "Randy Howk"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: united
+    highlight: tango
+---
+
+# Introduction
+
+This document demonstrates sentiment analysis using tidy data principles. The primary example code is based on Chapter 2 of "Text Mining with R: A Tidy Approach" by Julia Silge and David Robinson【N:cmhhademz01cwoe0fwgxngx3b】.
+
+# Setup
+
+First, we load the necessary libraries and get the sentiment lexicons.
+
+```{r setup, include=FALSE}
+library(dplyr)
+library(tidytext)
+library(ggplot2)
+library(stringr)
+library(janeaustenr)
+library(tidyr)
+library(tm)
+library(sentimentr)
+```
+# Example Code
+Here we work with Jane Austen's novels and perform sentiment analysis using the bing lexicon.
+
+```{r bing-lexicon, include=FALSE}
+tidy_books <- austen_books() %>%
+  group_by(book) %>%
+  mutate(
+    linenumber = row_number(),
+    chapter = cumsum(str_detect(text, regex("^chapter [\\divxlc]", ignore_case = TRUE)))
+  ) %>%
+  ungroup() %>%
+  unnest_tokens(word, text)
+
+nrc_joy <- get_sentiments("nrc") %>% 
+  filter(sentiment == "joy")
+
+joy_words <- tidy_books %>%
+  filter(book == "Emma") %>%
+  inner_join(nrc_joy) %>%
+  count(word, sort = TRUE)
+
+joy_words
+```
+# Extending the Example
+## Different Corpus
+Next, we work with a different corpus. Replacing Gödel, Escher, Bach extracted separately from PDF.
+```{r godel-escher-bach-processing}
+# Assumed text extraction from PDF—process similar to plain text if already extracted.
+godel_escher_bach <- readLines("GEB_extracted.txt")
+
+# Check and remove any invalid UTF-8 characters
+godel_escher_bach <- iconv(godel_escher_bach, from = "UTF-8", to = "UTF-8", sub = "")
+
+# Create a tibble
+godel_escher_bach_df <- tibble(line = 1:length(godel_escher_bach), text = godel_escher_bach)
+
+# Unnest tokens
+tidy_godel_escher_bach <- godel_escher_bach_df %>%
+  unnest_tokens(word, text)
+
+# Print a sample of the processed data
+print(head(tidy_godel_escher_bach))
+
+
+geb_sentiment <- tidy_godel_escher_bach %>%
+  inner_join(get_sentiments("bing")) %>%
+  count(word, sentiment, sort = TRUE)
+
+geb_sentiment
+```
+# Additional Sentiment Lexicon
+## Incorporate an additional sentiment lexicon from another R package, such as sentimentr.
+
+```{r sentence-extraction}
+library(sentimentr)
+
+# Load and clean the text data
+godel_escher_bach <- readLines("GEB_extracted.txt", encoding = "UTF-8")
+godel_escher_bach <- iconv(godel_escher_bach, from = "UTF-8", to = "UTF-8", sub = "")
+godel_escher_bach <- trimws(godel_escher_bach)
+godel_escher_bach <- godel_escher_bach[godel_escher_bach != ""] 
+
+# Create tibble/Dataframe from cleaned text
+godel_escher_bach_df <- tibble(line = 1:length(godel_escher_bach), text = godel_escher_bach)
+
+# Segment the text into sentences
+sentence_list <- get_sentences(godel_escher_bach_df$text)
+
+# Flatten and ensure consistency with sentiment analysis
+flattened_sentences <- unlist(sentence_list, recursive = FALSE)
+
+# Perform sentiment analysis
+sentences_data <- sentiment_by(flattened_sentences)
+
+# Sample 10 random sentences
+sample_ids <- sample(sentences_data$element_id, 10)
+
+# Map and extract the sentences corresponding to the sampled element_ids
+sample_sentences <- sentences_data[sentences_data$element_id %in% sample_ids, ]
+samples_with_text <- cbind(sample_sentences, text = flattened_sentences[sample_ids])
+
+# Print each sentence individually
+cat("## Sample Sentences from Gödel, Escher, Bach\n\n")
+for(i in 1:nrow(samples_with_text)) {
+  cat(sprintf("**Sentence %d (ID: %d):**\n", i, samples_with_text$element_id[i]))
+  cat(samples_with_text$text[i], "\n\n")
+}
+
+# Display the statistics table at the end
+cat("## Sentiment Analysis Statistics Table\n\n")
+knitr::kable(samples_with_text[, c("element_id", "word_count", "sd", "ave_sentiment")], 
+             col.names = c("Element ID", "Word Count", "SD", "Average Sentiment"),
+             caption = "Sentiment Statistics for Sample Sentences")
+
+```
+# Conclusion
+This assignment extended the analysis by applying sentiment analysis to a different corpus, GEB, and incorporating an additional sentiment lexicon beyond those discussed in Chapter 2 of the source text.
+
+# References
+
+Hofstadter, D. R. (1979). *Gödel, Escher, Bach: An Eternal Golden Braid*. Basic Books.
+
+Electronic version retrieved from https://welib.org/slow_download/06372a47c23884e660e534a0cc872f9b/0/0 (Accessed: `r format(Sys.Date(), "%B %d, %Y")`)
+
+: Silge, J., & Robinson, D. (2025). Text Mining with R: A Tidy Approach.
