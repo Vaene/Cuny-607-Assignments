@@ -1,0 +1,1386 @@
+2025/10/24 15:46:07 [error] 9#9: *7491 access forbidden by rule, client: 10.1.8.149, server: , request: "GET /.git/config HTTP/1.1", host: "arizona-prod.adl.org"
+2025/10/24 16:08:52 [error] 9#9: *8394 access forbidden by rule, client: 10.1.65.114, server: , request: "GET /.git/config HTTP/1.1", host: "mountainstates-prod.adl.org"
+2025/10/24 17:43:00 [error] 9#9: *32 directory index of "/code/web/modules/" is forbidden, client: 10.1.66.101, server: , request: "GET /modules/ HTTP/1.1", host: "sanfrancisco.adl.org"
+2025/10/24 17:51:11 [error] 11#11: *394 access forbidden by rule, client: 10.1.65.113, server: , request: "GET /.git/config HTTP/1.1", host: "southwest-prod.adl.org"
+2025/10/24 18:18:47 [error] 9#9: *1423 access forbidden by rule, client: 10.1.65.115, server: , request: "GET /.git/config HTTP/1.1", host: "chicago-prod.adl.org"
+2025/10/24 19:11:02 [error] 8#8: *3335 access forbidden by rule, client: 10.1.66.102, server: , request: "GET /.git/config HTTP/1.1", host: "neworleans-prod.adl.org"
+2025/10/24 19:43:46 [error] 11#11: *4718 access forbidden by rule, client: 10.1.64.111, server: , request: "GET /.git/config HTTP/1.1", host: "dc-prod.adl.org"
+2025/10/24 23:22:18 [error] 9#9: *12596 access forbidden by rule, client: 10.1.65.117, server: , request: "GET /.git/config HTTP/1.1", host: "heartland-prod.adl.org"
+2025/10/25 16:39:24 [alert] 8#8: 128 worker_connections are not enough
+2025/10/25 16:39:26 [alert] 8#8: 128 worker_connections are not enough
+2025/10/25 16:39:26 [alert] 8#8: 128 worker_connections are not enough
+2025/10/25 16:39:26 [alert] 8#8: 128 worker_connections are not enough
+2025/10/25 16:39:27 [alert] 8#8: 128 worker_connections are not enough
+2025/10/25 16:39:27 [alert] 8#8: 128 worker_connections are not enough
+2025/10/25 16:39:32 [alert] 8#8: 128 worker_connections are not enough
+2025/10/25 16:39:32 [alert] 8#8: 128 worker_connections are not enough
+2025/10/25 16:39:33 [alert] 8#8: 128 worker_connections are not enough
+2025/10/25 16:39:56 [alert] 11#11: 128 worker_connections are not enough
+2025/10/25 16:39:56 [alert] 11#11: 128 worker_connections are not enough
+2025/10/25 16:39:59 [alert] 11#11: 128 worker_connections are not enough
+2025/10/25 16:40:01 [alert] 11#11: 128 worker_connections are not enough
+2025/10/25 16:40:02 [alert] 11#11: 128 worker_connections are not enough
+2025/10/25 16:40:02 [alert] 11#11: 128 worker_connections are not enough
+2025/10/25 16:40:04 [alert] 11#11: 128 worker_connections are not enough
+2025/10/25 16:40:05 [alert] 11#11: 128 worker_connections are not enough
+2025/10/25 16:40:07 [alert] 11#11: 128 worker_connections are not enough
+2025/10/25 16:40:08 [alert] 11#11: 128 worker_connections are not enough
+2025/10/25 16:40:08 [alert] 11#11: 128 worker_connections are not enough
+2025/10/25 16:40:11 [alert] 11#11: 128 worker_connections are not enough
+2025/10/25 16:40:14 [alert] 11#11: 128 worker_connections are not enough
+2025/10/25 18:12:42 [error] 11#11: *110026 access forbidden by rule, client: 10.1.65.115, server: , request: "GET /.git-credentials HTTP/1.1", host: "centralpacific.adl.org", referrer: "http://centralpacific.adl.org/.git-credentials"
+2025/10/25 18:12:56 [error] 11#11: *110043 access forbidden by rule, client: 10.1.2.220, server: , request: "GET /.git-credentials HTTP/1.1", host: "desert.adl.org", referrer: "http://desert.adl.org/.git-credentials"
+2025/10/25 18:13:21 [error] 11#11: *110077 access forbidden by rule, client: 10.1.66.101, server: , request: "GET /.git-credentials HTTP/1.1", host: "southcentral.adl.org", referrer: "http://southcentral.adl.org/.git-credentials"
+2025/10/25 18:13:22 [error] 11#11: *109869 access forbidden by rule, client: 10.1.6.101, server: , request: "GET /.git-credentials HTTP/1.1", host: "texoma.adl.org", referrer: "http://texoma.adl.org/.git-credentials"
+2025/10/25 18:17:33 [error] 9#9: *110304 access forbidden by rule, client: 10.1.65.114, server: , request: "GET /.github/workflows/deploy.yml HTTP/1.1", host: "texoma.adl.org", referrer: "http://texoma.adl.org/.github/workflows/deploy.yml"
+2025/10/25 18:17:37 [error] 11#11: *110853 access forbidden by rule, client: 10.1.65.114, server: , request: "GET /.gitlab-ci.yml HTTP/1.1", host: "austin-prod.adl.org", referrer: "http://austin-prod.adl.org/.gitlab-ci.yml"
+2025/10/25 18:18:10 [error] 11#11: *110956 access forbidden by rule, client: 10.1.1.72, server: , request: "GET /.gitlab-ci.yml HTTP/1.1", host: "arizona-prod.adl.org", referrer: "http://arizona-prod.adl.org/.gitlab-ci.yml"
+2025/10/25 18:18:13 [error] 10#10: *111000 access forbidden by rule, client: 10.1.66.99, server: , request: "GET /.gitlab-ci.yml HTTP/1.1", host: "chicago-prod.adl.org", referrer: "http://chicago-prod.adl.org/.gitlab-ci.yml"
+2025/10/25 18:18:21 [error] 11#11: *110975 access forbidden by rule, client: 10.1.6.101, server: , request: "GET /.github/workflows/main.yml HTTP/1.1", host: "newengland-prod.adl.org", referrer: "http://newengland-prod.adl.org/.github/workflows/main.yml"
+2025/10/25 18:18:23 [error] 10#10: *110688 access forbidden by rule, client: 10.1.4.124, server: , request: "GET /.github/workflows/deploy.yml HTTP/1.1", host: "connecticut-prod.adl.org", referrer: "http://connecticut-prod.adl.org/.github/workflows/deploy.yml"
+2025/10/25 18:18:27 [error] 11#11: *109869 access forbidden by rule, client: 10.1.6.101, server: , request: "GET /.github/workflows/deploy.yml HTTP/1.1", host: "heartland-prod.adl.org", referrer: "http://heartland-prod.adl.org/.github/workflows/deploy.yml"
+2025/10/25 18:18:40 [error] 10#10: *110728 access forbidden by rule, client: 10.1.1.72, server: , request: "GET /.github/workflows/ci.yml HTTP/1.1", host: "nynj-prod.adl.org", referrer: "http://nynj-prod.adl.org/.github/workflows/ci.yml"
+2025/10/26 00:38:56 [error] 11#11: *164389 access forbidden by rule, client: 10.1.65.115, server: , request: "GET /.git/config HTTP/1.1", host: "lasvegas-prod.adl.org"
+2025/10/26 00:38:58 [error] 10#10: *164506 access forbidden by rule, client: 10.1.0.75, server: , request: "GET /.git/config HTTP/1.1", host: "arizona-prod.adl.org"
+2025/10/26 00:40:25 [error] 11#11: *164377 access forbidden by rule, client: 10.1.4.125, server: , request: "GET /.gitignore HTTP/1.1", host: "lasvegas-prod.adl.org"
+2025/10/26 00:40:25 [error] 11#11: *164377 access forbidden by rule, client: 10.1.4.125, server: , request: "GET /.gitignore HTTP/1.1", host: "dc-prod.adl.org"
+2025/10/26 00:40:25 [error] 8#8: *164341 access forbidden by rule, client: 10.1.65.117, server: , request: "GET /.gitignore HTTP/1.1", host: "neworleans-prod.adl.org"
+2025/10/26 02:54:55 [error] 10#10: *178082 directory index of "/code/web/sites/default/files/styles/hate_symbol_main_image/" is forbidden, client: 10.1.2.220, server: , request: "GET /sites/default/files/styles/hate_symbol_main_image/ HTTP/1.1", host: "www.adl.org"
+2025/10/26 17:25:47 [error] 9#9: *305802 access forbidden by rule, client: 10.1.66.99, server: , request: "GET /.github/workflows/main.yml HTTP/1.1", host: "heartland-prod.adl.org", referrer: "http://heartland-prod.adl.org/.github/workflows/main.yml"
+2025/10/26 18:54:59 [error] 10#10: *309441 access forbidden by rule, client: 10.1.65.115, server: , request: "GET /.github/workflows/ci.yml HTTP/1.1", host: "denver-prod.adl.org", referrer: "http://denver-prod.adl.org/.github/workflows/ci.yml"
+2025/10/27 02:28:04 [error] 11#11: *334378 access forbidden by rule, client: 10.1.5.21, server: , request: "GET /.git/config HTTP/1.1", host: "southeast.adl.org"
+2025/10/27 04:44:14 [error] 8#8: *339086 access forbidden by rule, client: 10.1.7.41, server: , request: "GET /.gitlab-ci.yml HTTP/1.1", host: "nynj.adl.org"
+2025/10/27 05:13:47 [error] 10#10: *340093 access forbidden by rule, client: 10.1.5.21, server: , request: "GET /.git/config HTTP/1.1", host: "lasvegas-prod.adl.org"
+2025/10/27 06:12:24 [error] 11#11: *341805 access forbidden by rule, client: 10.1.66.99, server: , request: "GET /.git/config HTTP/1.1", host: "philadelphia-prod.adl.org"
+2025/10/27 15:48:45 [error] 8#8: *361498 access forbidden by rule, client: 10.1.64.110, server: , request: "GET /.git/config HTTP/1.1", host: "philadelphia-prod.adl.org"
+2025/10/27 18:40:14 [error] 11#11: *368743 directory index of "/code/web/sites/default/files/adl-essentials-for-new-hires/" is forbidden, client: 10.1.4.125, server: , request: "GET /sites/default/files/adl-essentials-for-new-hires/ HTTP/1.1", host: "www.adl.org"
+2025/10/28 03:40:20 [error] 12#12: *14362 directory index of "/code/web/core/" is forbidden, client: 10.1.5.21, server: , request: "GET /core/ HTTP/1.1", host: "notoleranceforantisemitism.adl.org"
+2025/10/28 04:15:14 [error] 11#11: *15698 access forbidden by rule, client: 10.1.5.21, server: , request: "GET /.git/config HTTP/1.1", host: "philadelphia-prod.adl.org"
+2025/10/28 04:36:50 [error] 12#12: *16323 access forbidden by rule, client: 10.1.9.25, server: , request: "GET /.git/config HTTP/1.1", host: "education.adl.org"
+2025/10/28 05:48:27 [error] 10#10: *18852 directory index of "/code/web/core/" is forbidden, client: 10.1.0.75, server: , request: "GET /core/ HTTP/1.1", host: "newengland-prod.adl.org"
+2025/10/28 06:33:25 [error] 9#9: *20389 access forbidden by rule, client: 10.1.2.220, server: , request: "GET /.git/config HTTP/1.1", host: "nevada.adl.org"
+2025/10/28 22:07:08 [error] 11#11: *52632 access forbidden by rule, client: 10.1.4.125, server: , request: "GET /.git/HEAD HTTP/1.1", host: "sanfrancisco.adl.org"
+2025/10/28 22:07:08 [error] 11#11: *52623 access forbidden by rule, client: 10.1.6.101, server: , request: "GET /.git/HEAD HTTP/1.1", host: "sanfrancisco.adl.org"
+2025/10/28 22:07:09 [error] 11#11: *52643 access forbidden by rule, client: 10.1.1.72, server: , request: "GET /.git/INDEX HTTP/1.1", host: "sanfrancisco.adl.org"
+2025/10/28 22:16:19 [error] 9#9: *253 access forbidden by rule, client: 10.1.65.114, server: , request: "GET /.git/config HTTP/1.1", host: "la-prod.adl.org"
+2025/10/28 22:24:00 [error] 9#9: *380 access forbidden by rule, client: 10.1.4.124, server: , request: "GET /.git/config HTTP/1.1", host: "orangecounty-prod.adl.org"
+2025/10/28 22:26:36 [error] 9#9: *380 access forbidden by rule, client: 10.1.4.124, server: , request: "GET /.git/config HTTP/1.1", host: "sanfrancisco.adl.org"
+2025/10/28 22:26:44 [error] 11#11: *481 access forbidden by rule, client: 10.1.65.115, server: , request: "GET /.git/config HTTP/1.1", host: "seattle-prod.adl.org"
+2025/10/28 22:50:17 [error] 9#9: *1645 access forbidden by rule, client: 10.1.64.111, server: , request: "GET /.gitignore HTTP/1.1", host: "sandiego.adl.org"
+2025/10/29 02:49:31 [error] 10#10: *9884 access forbidden by rule, client: 10.1.4.125, server: , request: "GET /.git/config HTTP/1.1", host: "atlanta-prod.adl.org"
+2025/10/29 02:53:56 [error] 9#9: *9856 access forbidden by rule, client: 10.1.8.149, server: , request: "GET /.git/config HTTP/1.1", host: "orangecounty-prod.adl.org"
+2025/10/29 03:11:43 [error] 11#11: *10717 access forbidden by rule, client: 10.1.7.41, server: , request: "GET /.git/config HTTP/1.1", host: "desert-prod.adl.org"
+2025/10/29 03:13:03 [error] 9#9: *10663 access forbidden by rule, client: 10.1.64.111, server: , request: "GET /.git/config HTTP/1.1", host: "chicago-prod.adl.org"
+2025/10/29 03:16:08 [error] 10#10: *10798 access forbidden by rule, client: 10.1.9.25, server: , request: "GET /.git/config HTTP/1.1", host: "santabarbara-prod.adl.org"
+2025/10/29 03:43:51 [error] 10#10: *11635 access forbidden by rule, client: 10.1.9.25, server: , request: "GET /.git/config HTTP/1.1", host: "heartland-prod.adl.org"
+2025/10/29 03:47:25 [error] 10#10: *11677 access forbidden by rule, client: 10.1.64.110, server: , request: "GET /.git/config HTTP/1.1", host: "sandiego-prod.adl.org"
+2025/10/29 08:01:58 [error] 11#11: *19303 access forbidden by rule, client: 10.1.5.21, server: , request: "GET /.git/config HTTP/1.1", host: "omaha-prod.adl.org"
+2025/10/29 08:25:01 [error] 9#9: *19961 access forbidden by rule, client: 10.1.64.110, server: , request: "GET /.git/config HTTP/1.1", host: "heartland-prod.adl.org"
+2025/10/29 08:45:53 [error] 11#11: *20577 access forbidden by rule, client: 10.1.5.21, server: , request: "GET /.git/config HTTP/1.1", host: "education.adl.org"
+2025/10/29 11:23:05 [error] 9#9: *25112 access forbidden by rule, client: 10.1.66.102, server: , request: "GET /.git/config HTTP/1.1", host: "centralpacific.adl.org"
+2025/10/29 11:32:34 [error] 9#9: *25643 access forbidden by rule, client: 10.1.64.112, server: , request: "GET /.gitlab-ci/.env HTTP/1.1", host: "dc-prod.adl.org"
+2025/10/29 11:32:40 [error] 11#11: *25797 access forbidden by rule, client: 10.1.0.75, server: , request: "GET /private/env.json HTTP/1.1", host: "dallas-prod.adl.org"
+2025/10/29 11:32:41 [alert] 9#9: 128 worker_connections are not enough
+2025/10/29 11:32:41 [alert] 9#9: 128 worker_connections are not enough
+2025/10/29 11:32:41 [alert] 9#9: 128 worker_connections are not enough
+2025/10/29 11:32:41 [alert] 9#9: 128 worker_connections are not enough
+2025/10/29 11:32:41 [alert] 9#9: 128 worker_connections are not enough
+2025/10/29 11:32:41 [alert] 9#9: 128 worker_connections are not enough
+2025/10/29 11:32:41 [alert] 9#9: 128 worker_connections are not enough
+2025/10/29 11:32:41 [alert] 9#9: 128 worker_connections are not enough
+2025/10/29 11:32:41 [alert] 9#9: 128 worker_connections are not enough
+2025/10/29 11:32:41 [alert] 9#9: 128 worker_connections are not enough
+2025/10/29 11:32:41 [alert] 9#9: 128 worker_connections are not enough
+2025/10/29 11:32:41 [alert] 9#9: 128 worker_connections are not enough
+2025/10/29 11:32:41 [alert] 9#9: 128 worker_connections are not enough
+2025/10/29 11:32:41 [alert] 9#9: 128 worker_connections are not enough
+2025/10/29 11:32:41 [alert] 9#9: 128 worker_connections are not enough
+2025/10/29 11:32:41 [alert] 9#9: 128 worker_connections are not enough
+2025/10/29 11:32:41 [alert] 9#9: 128 worker_connections are not enough
+2025/10/29 11:32:41 [alert] 9#9: 128 worker_connections are not enough
+2025/10/29 11:32:41 [alert] 9#9: 128 worker_connections are not enough
+2025/10/29 11:32:41 [alert] 9#9: 128 worker_connections are not enough
+2025/10/29 11:32:41 [alert] 9#9: 128 worker_connections are not enough
+2025/10/29 11:32:41 [alert] 9#9: 128 worker_connections are not enough
+2025/10/29 11:32:41 [alert] 9#9: 128 worker_connections are not enough
+2025/10/29 11:32:41 [alert] 9#9: 128 worker_connections are not enough
+2025/10/29 11:32:41 [alert] 9#9: 128 worker_connections are not enough
+2025/10/29 11:32:41 [alert] 9#9: 128 worker_connections are not enough
+2025/10/29 11:32:41 [alert] 9#9: 128 worker_connections are not enough
+2025/10/29 11:32:41 [alert] 9#9: 128 worker_connections are not enough
+2025/10/29 11:33:51 [error] 9#9: *25825 access forbidden by rule, client: 10.1.65.117, server: , request: "GET /.git/config HTTP/1.1", host: "desert.adl.org"
+2025/10/29 12:14:38 [error] 11#11: *27203 access forbidden by rule, client: 10.1.64.110, server: , request: "GET /.git/config HTTP/1.1", host: "newengland-prod.adl.org"
+2025/10/29 12:16:07 [error] 11#11: *27176 access forbidden by rule, client: 10.1.65.117, server: , request: "GET /.git/config HTTP/1.1", host: "notoleranceforantisemitism.org"
+2025/10/29 17:16:22 [error] 11#11: *37618 access forbidden by rule, client: 10.1.65.115, server: , request: "GET /.git/config HTTP/1.1", host: "centralpacific.adl.org"
+2025/10/29 20:04:48 [error] 11#11: *1277 access forbidden by rule, client: 10.1.6.101, server: , request: "GET /.git/config HTTP/1.1", host: "sandiego-prod.adl.org"
+2025/10/29 21:30:16 [error] 8#8: *4328 access forbidden by rule, client: 10.1.64.112, server: , request: "GET /.git/config HTTP/1.1", host: "notoleranceforantisemitism.org"
+2025/10/29 21:30:48 [error] 11#11: *4280 access forbidden by rule, client: 10.1.65.117, server: , request: "GET /.git/config HTTP/1.1", host: "nynj-prod.adl.org"
+2025/10/30 02:23:24 [error] 9#9: *13597 access forbidden by rule, client: 10.1.65.114, server: , request: "GET /.git/config HTTP/1.1", host: "lasvegas-prod.adl.org"
+2025/10/30 03:50:15 [error] 8#8: *16207 access forbidden by rule, client: 10.1.66.99, server: , request: "GET /.git/config HTTP/1.1", host: "la-prod.adl.org", referrer: "https://www.google.com/"
+2025/10/30 04:19:12 [error] 11#11: *17064 access forbidden by rule, client: 10.1.65.117, server: , request: "GET /.git/config HTTP/1.1", host: "connecticut-prod.adl.org"
+2025/10/30 04:35:39 [error] 9#9: *17371 access forbidden by rule, client: 10.1.65.115, server: , request: "GET /.git/config HTTP/1.1", host: "atlanta-prod.adl.org", referrer: "https://www.google.com/"
+2025/10/30 06:42:48 [error] 11#11: *21185 access forbidden by rule, client: 10.1.9.25, server: , request: "GET /.git/config HTTP/1.1", host: "education.adl.org"
+2025/10/30 07:38:22 [error] 8#8: *22733 access forbidden by rule, client: 10.1.4.124, server: , request: "GET /.git/config HTTP/1.1", host: "austin-prod.adl.org"
+2025/10/30 07:40:46 [error] 11#11: *22790 access forbidden by rule, client: 10.1.9.25, server: , request: "GET /.git/config HTTP/1.1", host: "heartland-prod.adl.org"
+2025/10/30 07:58:33 [error] 9#9: *23207 access forbidden by rule, client: 10.1.64.112, server: , request: "GET /.git/config HTTP/1.1", host: "sandiego-prod.adl.org"
+2025/10/30 08:22:59 [error] 9#9: *23794 access forbidden by rule, client: 10.1.66.101, server: , request: "GET /.git/config HTTP/1.1", host: "chicago-prod.adl.org"
+2025/10/30 10:13:59 [error] 11#11: *27289 access forbidden by rule, client: 10.1.64.112, server: , request: "GET /.git/config HTTP/1.1", host: "nynj-prod.adl.org"
+2025/10/30 13:49:23 [error] 10#10: *37445 access forbidden by rule, client: 10.1.4.125, server: , request: "GET /.git/config HTTP/1.1", host: "austin-prod.adl.org"
+2025/10/30 14:04:38 [error] 10#10: *39252 access forbidden by rule, client: 10.1.66.102, server: , request: "GET /.git/config HTTP/1.1", host: "philadelphia-prod.adl.org", referrer: "https://www.google.com/"
+2025/10/30 14:07:44 [error] 9#9: *39808 access forbidden by rule, client: 10.1.65.117, server: , request: "GET /.git/config HTTP/1.1", host: "notoleranceforantisemitism.org", referrer: "https://www.google.com/"
+2025/10/30 14:37:40 [error] 8#8: *43663 access forbidden by rule, client: 10.1.6.101, server: , request: "GET /.git/config HTTP/1.1", host: "dallas-prod.adl.org"
+2025/10/30 15:15:41 [error] 10#10: *47444 access forbidden by rule, client: 10.1.5.21, server: , request: "GET /.git/config HTTP/1.1", host: "dc-prod.adl.org"
+2025/10/30 15:17:48 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 15:17:49 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 15:17:49 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 15:17:51 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 15:17:51 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 15:17:52 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 15:17:53 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 15:17:56 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 15:17:57 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 15:17:57 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 15:17:58 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 15:18:00 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 15:18:00 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 15:18:04 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 15:29:57 [error] 9#9: *49856 access forbidden by rule, client: 10.1.65.117, server: , request: "GET /.git/config HTTP/1.1", host: "omaha-prod.adl.org"
+2025/10/30 17:04:58 [error] 9#9: *62433 access forbidden by rule, client: 10.1.64.110, server: , request: "GET /.git/config HTTP/1.1", host: "denver-prod.adl.org"
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [error] 9#9: *69263 access forbidden by rule, client: 10.1.6.101, server: , request: "GET /private/config.json HTTP/1.1", host: "centralpacific.adl.org"
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:58 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 10#10: *69305 128 worker_connections are not enough while connecting to upstream, client: 10.1.8.149, server: , request: "GET /config/cache.php HTTP/1.1", upstream: "fastcgi://unix:/shared-run/php-fpm.sock:", host: "cleveland-prod.adl.org"
+2025/10/30 18:06:59 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:06:59 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:00 [error] 10#10: *69360 access forbidden by rule, client: 10.1.1.72, server: , request: "GET /private/config.json HTTP/1.1", host: "tweettest.adl.org"
+2025/10/30 18:07:00 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 10#10: *69385 128 worker_connections are not enough while connecting to upstream, client: 10.1.8.149, server: , request: "GET /application/config/constants.php HTTP/1.1", upstream: "fastcgi://unix:/shared-run/php-fpm.sock:", host: "sandiego-prod.adl.org"
+2025/10/30 18:07:00 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 10#10: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:00 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:01 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:01 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:01 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:01 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:01 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:03 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:03 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:03 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:03 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:04 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:04 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:04 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:04 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:04 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:04 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:04 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:04 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:04 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:04 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:04 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:04 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:04 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:04 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:05 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:05 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:05 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:05 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:05 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:05 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:05 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:05 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:05 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:06 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:07 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:07 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:07 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:07 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:07 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:07 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:07 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:07 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:07 [alert] 9#9: *69501 128 worker_connections are not enough while connecting to upstream, client: 10.1.4.124, server: , request: "GET /config/mail.php HTTP/1.1", upstream: "fastcgi://unix:/shared-run/php-fpm.sock:", host: "newengland-prod.adl.org"
+2025/10/30 18:07:07 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:07 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:07 [alert] 9#9: *69513 128 worker_connections are not enough while connecting to upstream, client: 10.1.4.124, server: , request: "GET /config/cli_bootstrap.php HTTP/1.1", upstream: "fastcgi://unix:/shared-run/php-fpm.sock:", host: "newengland-prod.adl.org"
+2025/10/30 18:07:07 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:07 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:07 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:07 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:07 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:07 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:07 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:07 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:07 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:07 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:07 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:07 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:07 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:07 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:07 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:07 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:07 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:07 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 18:07:07 [alert] 8#8: 128 worker_connections are not enough
+2025/10/30 18:07:07 [alert] 9#9: 128 worker_connections are not enough
+2025/10/30 21:15:18 [error] 9#9: *75626 access forbidden by rule, client: 10.1.4.125, server: , request: "GET /.git/config HTTP/1.1", host: "southwest-prod.adl.org", referrer: "https://www.google.com/"
+2025/10/30 21:20:42 [error] 11#11: *76557 access forbidden by rule, client: 10.1.8.149, server: , request: "GET /.git/config HTTP/1.1", host: "denver-prod.adl.org"
+2025/10/30 21:38:57 [error] 9#9: *77332 access forbidden by rule, client: 10.1.4.124, server: , request: "GET /.git/config HTTP/1.1", host: "santabarbara-prod.adl.org"
+2025/10/30 22:50:52 [error] 10#10: *79635 access forbidden by rule, client: 10.1.65.113, server: , request: "GET /.gitconfig HTTP/1.1", host: "mountainstates.adl.org", referrer: "http://mountainstates.adl.org/.gitconfig"
+2025/10/31 05:05:03 [error] 9#9: *90257 access forbidden by rule, client: 10.1.6.101, server: , request: "GET /.git/config HTTP/1.1", host: "education.adl.org"
+2025/10/31 07:47:04 [error] 11#11: *95412 access forbidden by rule, client: 10.1.66.101, server: , request: "GET /.git/config HTTP/1.1", host: "connecticut-prod.adl.org"
+2025/10/31 12:06:12 [error] 8#8: *102991 access forbidden by rule, client: 10.1.6.101, server: , request: "GET /.git/objects/info/packs HTTP/1.1", host: "austin-prod.adl.org"
+2025/10/31 12:06:15 [error] 8#8: *102825 access forbidden by rule, client: 10.1.2.220, server: , request: "GET /.git/packed-refs HTTP/1.1", host: "austin-prod.adl.org"
+2025/10/31 12:06:20 [error] 9#9: *102968 access forbidden by rule, client: 10.1.4.124, server: , request: "GET /.git/refs/heads/main HTTP/1.1", host: "austin-prod.adl.org"
+2025/10/31 13:58:49 [error] 10#10: *106817 access forbidden by rule, client: 10.1.64.112, server: , request: "GET /.git/packed-refs HTTP/1.1", host: "cleveland-prod.adl.org"
+2025/10/31 13:59:00 [error] 10#10: *106885 access forbidden by rule, client: 10.1.1.72, server: , request: "GET /.git/config HTTP/1.1", host: "cleveland-prod.adl.org", referrer: "http://cleveland-prod.adl.org/.git/config"
+2025/10/31 14:12:23 [error] 10#10: *107511 access forbidden by rule, client: 10.1.1.72, server: , request: "GET /.git/objects/info/packs HTTP/1.1", host: "connecticut-prod.adl.org"
+2025/10/31 14:12:42 [error] 10#10: *107569 access forbidden by rule, client: 10.1.64.112, server: , request: "GET /.git/refs/remotes/origin/HEAD HTTP/1.1", host: "connecticut-prod.adl.org"
+2025/10/31 14:12:56 [error] 10#10: *107516 access forbidden by rule, client: 10.1.4.124, server: , request: "GET /.git/logs/HEAD HTTP/1.1", host: "connecticut-prod.adl.org", referrer: "http://connecticut-prod.adl.org/.git/logs/HEAD"
+2025/10/31 15:10:02 [error] 10#10: *109772 access forbidden by rule, client: 10.1.65.113, server: , request: "GET /.git/refs/heads/main HTTP/1.1", host: "dallas-prod.adl.org"
+2025/10/31 15:16:54 [error] 11#11: *110023 access forbidden by rule, client: 10.1.65.115, server: , request: "GET /.git/objects/info/packs HTTP/1.1", host: "dc-prod.adl.org"
+2025/10/31 15:16:54 [error] 11#11: *110024 access forbidden by rule, client: 10.1.64.112, server: , request: "GET /.git/index HTTP/1.1", host: "dc-prod.adl.org"
+2025/10/31 15:24:03 [error] 11#11: *110304 access forbidden by rule, client: 10.1.64.111, server: , request: "GET /.git/HEAD HTTP/1.1", host: "denver-prod.adl.org"
+2025/10/31 15:24:04 [error] 8#8: *110227 access forbidden by rule, client: 10.1.66.102, server: , request: "GET /.git/ORIG_HEAD HTTP/1.1", host: "denver-prod.adl.org"
+2025/10/31 15:24:05 [error] 10#10: *110144 access forbidden by rule, client: 10.1.2.220, server: , request: "GET /.git/logs/HEAD HTTP/1.1", host: "denver-prod.adl.org"
+2025/10/31 15:24:53 [error] 9#9: *110386 access forbidden by rule, client: 10.1.8.149, server: , request: "GET /.git/refs/heads/master HTTP/1.1", host: "desert-prod.adl.org"
+2025/10/31 15:25:10 [error] 10#10: *110447 access forbidden by rule, client: 10.1.0.75, server: , request: "GET /.git/FETCH_HEAD HTTP/1.1", host: "desert-prod.adl.org", referrer: "http://desert-prod.adl.org/.git/FETCH_HEAD"
+2025/10/31 17:41:39 [error] 10#10: *116973 access forbidden by rule, client: 10.1.65.135, server: , request: "GET /.git/config HTTP/1.1", host: "michigan-prod.adl.org"
+2025/10/31 18:06:01 [error] 10#10: *117855 access forbidden by rule, client: 10.1.64.129, server: , request: "GET /.git/objects/info/packs HTTP/1.1", host: "heartland-prod.adl.org"
+2025/10/31 18:06:18 [error] 10#10: *117945 access forbidden by rule, client: 10.1.6.158, server: , request: "GET /.git/HEAD HTTP/1.1", host: "heartland-prod.adl.org", referrer: "http://heartland-prod.adl.org/.git/HEAD"
+2025/10/31 18:06:20 [error] 10#10: *117855 access forbidden by rule, client: 10.1.64.129, server: , request: "GET /.git/ORIG_HEAD HTTP/1.1", host: "heartland-prod.adl.org", referrer: "http://heartland-prod.adl.org/.git/ORIG_HEAD"
+2025/10/31 19:52:31 [error] 10#10: *404 access forbidden by rule, client: 10.1.7.247, server: , request: "GET /.git/FETCH_HEAD HTTP/1.1", host: "lasvegas-prod.adl.org"
+2025/10/31 19:52:38 [error] 11#11: *556 access forbidden by rule, client: 10.1.9.71, server: , request: "GET /.git/HEAD HTTP/1.1", host: "lasvegas-prod.adl.org", referrer: "http://lasvegas-prod.adl.org/.git/HEAD"
+2025/10/31 21:21:49 [error] 10#10: *4122 access forbidden by rule, client: 10.1.66.121, server: , request: "GET /.git/logs/HEAD HTTP/1.1", host: "michigan-prod.adl.org"
+2025/10/31 21:22:49 [error] 12#12: *4354 access forbidden by rule, client: 10.1.9.71, server: , request: "GET /.git/packed-refs HTTP/1.1", host: "midwest.adl.org"
+2025/10/31 21:22:51 [error] 10#10: *4364 access forbidden by rule, client: 10.1.64.129, server: , request: "GET /.git/refs/heads/master HTTP/1.1", host: "midwest.adl.org"
+2025/10/31 22:17:37 [error] 9#9: *6685 access forbidden by rule, client: 10.1.64.128, server: , request: "GET /.git/info/exclude HTTP/1.1", host: "newengland-prod.adl.org"
+2025/10/31 22:18:21 [error] 11#11: *6592 access forbidden by rule, client: 10.1.6.158, server: , request: "GET /.git/refs/remotes/origin/HEAD HTTP/1.1", host: "newengland-prod.adl.org", referrer: "http://newengland-prod.adl.org/.git/refs/remotes/origin/HEAD"
+2025/10/31 22:18:57 [error] 10#10: *6769 access forbidden by rule, client: 10.1.8.130, server: , request: "GET /.git/refs/heads/master HTTP/1.1", host: "neworleans-prod.adl.org"
+2025/10/31 22:19:04 [error] 11#11: *6699 access forbidden by rule, client: 10.1.1.149, server: , request: "GET /.git/refs/remotes/origin/HEAD HTTP/1.1", host: "neworleans-prod.adl.org"
+2025/10/31 22:33:45 [error] 11#11: *7512 access forbidden by rule, client: 10.1.66.113, server: , request: "GET /.git/objects/info/packs HTTP/1.1", host: "notoleranceforantisemitism.org"
+2025/10/31 22:39:19 [error] 12#12: *7694 access forbidden by rule, client: 10.1.4.187, server: , request: "GET /.git/refs/heads/master HTTP/1.1", host: "nynj-prod.adl.org"
+2025/10/31 22:47:44 [error] 12#12: *7857 access forbidden by rule, client: 10.1.66.122, server: , request: "GET /.git/refs/heads/master HTTP/1.1", host: "omaha-prod.adl.org"
+2025/10/31 22:47:51 [error] 9#9: *7956 access forbidden by rule, client: 10.1.1.149, server: , request: "GET /.git/HEAD HTTP/1.1", host: "omaha-prod.adl.org", referrer: "http://omaha-prod.adl.org/.git/HEAD"
+2025/10/31 22:53:09 [error] 9#9: *8180 access forbidden by rule, client: 10.1.6.158, server: , request: "GET /.git/ORIG_HEAD HTTP/1.1", host: "orangecounty-prod.adl.org"
+2025/10/31 22:53:18 [error] 11#11: *8280 access forbidden by rule, client: 10.1.65.137, server: , request: "GET /.git/info/exclude HTTP/1.1", host: "orangecounty-prod.adl.org"
+2025/10/31 22:53:36 [error] 11#11: *8296 access forbidden by rule, client: 10.1.9.71, server: , request: "GET /.git/index HTTP/1.1", host: "orangecounty-prod.adl.org", referrer: "http://orangecounty-prod.adl.org/.git/index"
+2025/10/31 23:23:24 [error] 9#9: *9450 access forbidden by rule, client: 10.1.65.137, server: , request: "GET /.git/objects/info/packs HTTP/1.1", host: "philadelphia-prod.adl.org"
+2025/10/31 23:23:24 [error] 9#9: *9461 access forbidden by rule, client: 10.1.9.71, server: , request: "GET /.git/logs/HEAD HTTP/1.1", host: "philadelphia-prod.adl.org"
+2025/11/01 00:54:11 [error] 12#12: *13498 access forbidden by rule, client: 10.1.0.143, server: , request: "GET /.git/refs/remotes/origin/HEAD HTTP/1.1", host: "sandiego-prod.adl.org"
+2025/11/01 01:15:06 [error] 10#10: *14390 access forbidden by rule, client: 10.1.66.113, server: , request: "GET /.git/HEAD HTTP/1.1", host: "seattle-prod.adl.org"
+2025/11/01 01:15:10 [error] 10#10: *14392 access forbidden by rule, client: 10.1.66.123, server: , request: "GET /.git/objects/info/packs HTTP/1.1", host: "seattle-prod.adl.org"
+2025/11/01 03:22:17 [error] 12#12: *19532 access forbidden by rule, client: 10.1.65.136, server: , request: "GET /.git/FETCH_HEAD HTTP/1.1", host: "tweettest.adl.org"
+2025/11/01 05:03:23 [error] 10#10: *23740 access forbidden by rule, client: 10.1.66.123, server: , request: "GET /.git/config HTTP/1.1", host: "connecticut-prod.adl.org"
+2025/11/01 05:15:26 [error] 12#12: *24355 access forbidden by rule, client: 10.1.1.149, server: , request: "GET /.git/config HTTP/1.1", host: "heartland-prod.adl.org"
+2025/11/01 05:52:37 [error] 9#9: *25686 access forbidden by rule, client: 10.1.66.113, server: , request: "GET /.git/config HTTP/1.1", host: "notoleranceforantisemitism.org"
+2025/11/01 11:26:34 [error] 10#10: *38720 access forbidden by rule, client: 10.1.65.135, server: , request: "GET /.git/config HTTP/1.1", host: "chicago-prod.adl.org"
+2025/11/01 11:45:48 [error] 12#12: *39576 access forbidden by rule, client: 10.1.65.135, server: , request: "GET /.git/config HTTP/1.1", host: "dc-prod.adl.org"
+2025/11/01 12:08:13 [error] 11#11: *40516 access forbidden by rule, client: 10.1.66.121, server: , request: "GET /.git/config HTTP/1.1", host: "nynj-prod.adl.org"
+2025/11/01 12:32:41 [error] 9#9: *41570 access forbidden by rule, client: 10.1.64.128, server: , request: "GET /.git/config HTTP/1.1", host: "cleveland-prod.adl.org"
+2025/11/01 12:40:57 [error] 10#10: *42043 access forbidden by rule, client: 10.1.65.137, server: , request: "GET /.git/config HTTP/1.1", host: "austin-prod.adl.org"
+2025/11/02 01:08:45 [error] 12#12: *79009 access forbidden by rule, client: 10.1.4.189, server: , request: "GET /.git/config HTTP/1.1", host: "lasvegas-prod.adl.org"
+2025/11/02 03:21:40 [error] 10#10: *85204 access forbidden by rule, client: 10.1.65.27, server: , request: "GET /.git/config HTTP/1.1", host: "denver-prod.adl.org"
+2025/11/02 04:06:14 [error] 10#10: *86946 access forbidden by rule, client: 10.1.4.187, server: , request: "GET /.git/config HTTP/1.1", host: "neworleans-prod.adl.org"
+2025/11/02 04:13:08 [error] 12#12: *87230 access forbidden by rule, client: 10.1.6.158, server: , request: "GET /.git/config HTTP/1.1", host: "orangecounty-prod.adl.org"
+2025/11/02 04:14:50 [error] 12#12: *87263 access forbidden by rule, client: 10.1.9.71, server: , request: "GET /.git/config HTTP/1.1", host: "southeast.adl.org"
+2025/11/02 04:34:48 [error] 12#12: *88118 access forbidden by rule, client: 10.1.65.27, server: , request: "GET /.git/config HTTP/1.1", host: "santabarbara-prod.adl.org"
+2025/11/02 05:19:26 [error] 9#9: *89735 access forbidden by rule, client: 10.1.4.187, server: , request: "GET /.git/config HTTP/1.1", host: "sanfrancisco.adl.org", referrer: "http://sanfrancisco.adl.org/.git/config"
+2025/11/02 08:07:31 [error] 12#12: *96461 access forbidden by rule, client: 10.1.64.28, server: , request: "GET /.gitignore HTTP/1.1", host: "tweettest.adl.org"
+2025/11/02 08:07:31 [error] 12#12: *96465 access forbidden by rule, client: 10.1.4.187, server: , request: "GET /.gitignore HTTP/1.1", host: "notoleranceforantisemitism.adl.org"
+2025/11/02 08:07:31 [error] 12#12: *96461 access forbidden by rule, client: 10.1.64.28, server: , request: "GET /.gitignore HTTP/1.1", host: "arizona-prod.adl.org"
+2025/11/02 08:07:31 [error] 12#12: *96466 access forbidden by rule, client: 10.1.9.71, server: , request: "GET /.gitignore HTTP/1.1", host: "dc-prod.adl.org"
+2025/11/02 08:37:30 [error] 9#9: *97516 access forbidden by rule, client: 10.1.67.35, server: , request: "GET /.git/config HTTP/1.1", host: "mountainstates-prod.adl.org"
+2025/11/02 09:19:50 [error] 9#9: *99061 access forbidden by rule, client: 10.1.64.27, server: , request: "GET /.git/config HTTP/1.1", host: "michigan-prod.adl.org"
+2025/11/02 09:31:06 [error] 9#9: *99427 access forbidden by rule, client: 10.1.67.36, server: , request: "GET /.git/config HTTP/1.1", host: "chicago-prod.adl.org"
+2025/11/02 18:20:29 [error] 11#11: *125378 directory index of "/code/web/themes/custom/adl/assets/js/" is forbidden, client: 10.1.4.189, server: , request: "GET /themes/custom/adl/assets/js/ HTTP/1.1", host: "nevada.adl.org"
+2025/11/02 18:20:41 [error] 10#10: *125298 directory index of "/code/web/core/assets/vendor/jquery/" is forbidden, client: 10.1.65.24, server: , request: "GET /core/assets/vendor/jquery/ HTTP/1.1", host: "centralpacific.adl.org"
+2025/11/02 18:21:33 [error] 10#10: *125244 directory index of "/code/web/sites/default/files/css/" is forbidden, client: 10.1.65.26, server: , request: "GET /sites/default/files/css/ HTTP/1.1", host: "santabarbara-prod.adl.org"
+2025/11/02 18:21:38 [error] 10#10: *125292 directory index of "/code/web/sites/default/files/css/" is forbidden, client: 10.1.67.36, server: , request: "GET /sites/default/files/css/ HTTP/1.1", host: "michigan-prod.adl.org"
+2025/11/02 18:21:39 [error] 11#11: *125370 directory index of "/code/web/themes/custom/adl/assets/js/" is forbidden, client: 10.1.7.247, server: , request: "GET /themes/custom/adl/assets/js/ HTTP/1.1", host: "dc-prod.adl.org"
+2025/11/02 18:21:48 [error] 11#11: *124963 directory index of "/code/web/themes/custom/adl/" is forbidden, client: 10.1.64.27, server: , request: "GET /themes/custom/adl/ HTTP/1.1", host: "dallas-prod.adl.org"
+2025/11/02 18:21:53 [error] 11#11: *125370 directory index of "/code/web/sites/default/files/css/" is forbidden, client: 10.1.7.247, server: , request: "GET /sites/default/files/css/ HTTP/1.1", host: "denver-prod.adl.org"
+2025/11/02 18:21:57 [error] 12#12: *125463 directory index of "/code/web/sites/default/files/js/" is forbidden, client: 10.1.2.42, server: , request: "GET /sites/default/files/js/ HTTP/1.1", host: "austin-prod.adl.org"
+2025/11/02 18:22:13 [error] 12#12: *124946 directory index of "/code/web/modules/composer/google_tag/js/" is forbidden, client: 10.1.64.24, server: , request: "GET /modules/composer/google_tag/js/ HTTP/1.1", host: "neworleans-prod.adl.org"
+2025/11/02 18:23:54 [error] 12#12: *124909 directory index of "/code/web/themes/custom/adl/assets/js/" is forbidden, client: 10.1.65.27, server: , request: "GET /themes/custom/adl/assets/js/ HTTP/1.1", host: "southeast.adl.org"
+2025/11/02 18:24:08 [error] 12#12: *125483 directory index of "/code/web/sites/default/files/css/" is forbidden, client: 10.1.67.36, server: , request: "GET /sites/default/files/css/ HTTP/1.1", host: "midwest.adl.org"
+2025/11/02 18:24:14 [error] 12#12: *124911 directory index of "/code/web/modules/composer/google_tag/js/" is forbidden, client: 10.1.0.143, server: , request: "GET /modules/composer/google_tag/js/ HTTP/1.1", host: "midwest.adl.org"
+2025/11/02 19:02:44 [error] 10#10: *127627 access forbidden by rule, client: 10.1.1.149, server: , request: "GET /.git/config HTTP/1.1", host: "denver-prod.adl.org"
+2025/11/03 05:18:18 [error] 11#11: *153055 access forbidden by rule, client: 10.1.1.149, server: , request: "GET /.git/config HTTP/1.1", host: "southwest-prod.adl.org"
+2025/11/03 05:42:55 [error] 12#12: *153933 access forbidden by rule, client: 10.1.7.247, server: , request: "GET /.git/config HTTP/1.1", host: "arizona-prod.adl.org"
+2025/11/03 06:01:34 [error] 12#12: *154769 access forbidden by rule, client: 10.1.0.143, server: , request: "GET /.git/config HTTP/1.1", host: "centralpacific.adl.org"
+2025/11/03 06:23:37 [error] 9#9: *155675 access forbidden by rule, client: 10.1.5.79, server: , request: "GET /.git/config HTTP/1.1", host: "notoleranceforantisemitism.org"
+2025/11/03 06:46:27 [error] 11#11: *156847 access forbidden by rule, client: 10.1.0.143, server: , request: "GET /.git/config HTTP/1.1", host: "mountainstates-prod.adl.org"
+2025/11/03 07:32:39 [error] 12#12: *159483 access forbidden by rule, client: 10.1.67.36, server: , request: "GET /.git/config HTTP/1.1", host: "nynj-prod.adl.org", referrer: "http://nynj-prod.adl.org/.git/config"
+2025/11/03 08:23:18 [error] 11#11: *162174 access forbidden by rule, client: 10.1.64.27, server: , request: "GET /.git/config HTTP/1.1", host: "omaha-prod.adl.org"
+2025/11/03 08:29:45 [error] 10#10: *162289 access forbidden by rule, client: 10.1.1.149, server: , request: "GET /.gitconfig HTTP/1.1", host: "newengland-prod.adl.org", referrer: "http://newengland-prod.adl.org/.gitconfig"
+2025/11/03 08:50:51 [error] 10#10: *163467 access forbidden by rule, client: 10.1.1.149, server: , request: "GET /.git/config HTTP/1.1", host: "nevada.adl.org"
+2025/11/03 09:25:52 [error] 11#11: *164691 access forbidden by rule, client: 10.1.4.187, server: , request: "GET /.gitignore HTTP/1.1", host: "www.adl.org"
+2025/11/03 11:41:41 [error] 10#10: *169829 directory index of "/code/web/sites/default/" is forbidden, client: 10.1.5.79, server: , request: "GET /sites/default/ HTTP/1.1", host: "notoleranceforantisemitism.org", referrer: "https://search.yahoo.com/"
+2025/11/03 12:49:19 [error] 11#11: *172514 access forbidden by rule, client: 10.1.4.189, server: , request: "GET /.gitignore HTTP/1.1", host: "southwest-prod.adl.org"
+2025/11/03 15:18:52 [error] 11#11: *177775 directory index of "/code/web/core/config/" is forbidden, client: 10.1.64.24, server: , request: "GET /core/config/ HTTP/1.1", host: "notoleranceforantisemitism.org", referrer: "https://www.google.com/"
+2025/11/03 16:35:35 [error] 9#9: *180479 access forbidden by rule, client: 10.1.65.26, server: , request: "GET /.git/HEAD HTTP/1.1", host: "arizona-prod.adl.org", referrer: "http://arizona-prod.adl.org/.git/HEAD"
+2025/11/03 16:41:37 [error] 9#9: *180625 access forbidden by rule, client: 10.1.0.143, server: , request: "GET /.git/config HTTP/1.1", host: "atlanta-prod.adl.org"
+2025/11/03 16:41:47 [error] 9#9: *180627 access forbidden by rule, client: 10.1.1.149, server: , request: "GET /.git/packed-refs HTTP/1.1", host: "atlanta-prod.adl.org"
+2025/11/03 16:42:06 [error] 12#12: *180650 access forbidden by rule, client: 10.1.8.130, server: , request: "GET /.git/refs/heads/master HTTP/1.1", host: "atlanta-prod.adl.org", referrer: "http://atlanta-prod.adl.org/.git/refs/heads/master"
+2025/11/03 17:13:09 [error] 9#9: *181774 access forbidden by rule, client: 10.1.67.35, server: , request: "GET /.git/config HTTP/1.1", host: "atlanta-prod.adl.org"
+2025/11/03 18:23:21 [error] 10#10: *184102 access forbidden by rule, client: 10.1.2.42, server: , request: "GET /.git/refs/heads/main HTTP/1.1", host: "centralpacific.adl.org"
+2025/11/03 18:29:38 [error] 10#10: *184294 access forbidden by rule, client: 10.1.65.25, server: , request: "GET /.git/logs/HEAD HTTP/1.1", host: "chicago-prod.adl.org"
+2025/11/03 18:29:41 [error] 10#10: *184223 access forbidden by rule, client: 10.1.6.158, server: , request: "GET /.git/refs/remotes/origin/HEAD HTTP/1.1", host: "chicago-prod.adl.org"
+2025/11/03 18:29:56 [error] 10#10: *184270 access forbidden by rule, client: 10.1.65.26, server: , request: "GET /.git/refs/heads/main HTTP/1.1", host: "chicago-prod.adl.org", referrer: "http://chicago-prod.adl.org/.git/refs/heads/main"
+2025/11/03 18:35:56 [error] 11#11: *184468 access forbidden by rule, client: 10.1.65.25, server: , request: "GET /.git/HEAD HTTP/1.1", host: "cleveland-prod.adl.org"
+2025/11/03 18:36:02 [error] 11#11: *184449 access forbidden by rule, client: 10.1.0.143, server: , request: "GET /.git/logs/HEAD HTTP/1.1", host: "cleveland-prod.adl.org"
+2025/11/03 18:36:04 [error] 12#12: *184370 access forbidden by rule, client: 10.1.65.27, server: , request: "GET /.git/FETCH_HEAD HTTP/1.1", host: "cleveland-prod.adl.org"
+2025/11/03 18:51:03 [error] 9#9: *184928 access forbidden by rule, client: 10.1.7.247, server: , request: "GET /.git/HEAD HTTP/1.1", host: "connecticut-prod.adl.org"
+2025/11/03 18:51:20 [error] 10#10: *184959 access forbidden by rule, client: 10.1.67.36, server: , request: "GET /.git/refs/remotes/origin/HEAD HTTP/1.1", host: "connecticut-prod.adl.org"
+2025/11/03 19:46:29 [error] 11#11: *186908 access forbidden by rule, client: 10.1.65.25, server: , request: "GET /.git/HEAD HTTP/1.1", host: "dallas-prod.adl.org"
+2025/11/03 19:46:31 [error] 9#9: *186699 access forbidden by rule, client: 10.1.65.27, server: , request: "GET /.git/logs/HEAD HTTP/1.1", host: "dallas-prod.adl.org"
+2025/11/03 19:54:07 [error] 12#12: *187271 access forbidden by rule, client: 10.1.64.24, server: , request: "GET /.git/config HTTP/1.1", host: "dc-prod.adl.org", referrer: "http://dc-prod.adl.org/.git/config"
+2025/11/03 19:54:08 [error] 12#12: *187247 access forbidden by rule, client: 10.1.4.189, server: , request: "GET /.git/HEAD HTTP/1.1", host: "dc-prod.adl.org", referrer: "http://dc-prod.adl.org/.git/HEAD"
+2025/11/03 20:02:09 [error] 11#11: *187412 access forbidden by rule, client: 10.1.1.149, server: , request: "GET /.git/refs/heads/main HTTP/1.1", host: "denver-prod.adl.org"
+2025/11/03 20:02:27 [error] 12#12: *187555 access forbidden by rule, client: 10.1.65.26, server: , request: "GET /.git/FETCH_HEAD HTTP/1.1", host: "denver-prod.adl.org", referrer: "http://denver-prod.adl.org/.git/FETCH_HEAD"
+2025/11/03 20:02:31 [error] 10#10: *187499 access forbidden by rule, client: 10.1.67.35, server: , request: "GET /.git/refs/remotes/origin/HEAD HTTP/1.1", host: "denver-prod.adl.org", referrer: "http://denver-prod.adl.org/.git/refs/remotes/origin/HEAD"
+2025/11/03 20:02:56 [error] 12#12: *187560 access forbidden by rule, client: 10.1.9.71, server: , request: "GET /.git/FETCH_HEAD HTTP/1.1", host: "desert.adl.org", referrer: "http://desert.adl.org/.git/FETCH_HEAD"
+2025/11/03 20:02:59 [error] 12#12: *187541 access forbidden by rule, client: 10.1.6.158, server: , request: "GET /.git/refs/heads/main HTTP/1.1", host: "desert.adl.org", referrer: "http://desert.adl.org/.git/refs/heads/main"
+2025/11/03 20:54:24 [error] 10#10: *189324 access forbidden by rule, client: 10.1.67.36, server: , request: "GET /.git/index HTTP/1.1", host: "education.adl.org"
+2025/11/03 20:54:30 [error] 11#11: *189397 access forbidden by rule, client: 10.1.8.130, server: , request: "GET /.git/packed-refs HTTP/1.1", host: "education.adl.org"
+2025/11/03 22:36:17 [error] 9#9: *192599 access forbidden by rule, client: 10.1.65.27, server: , request: "GET /.gitignore HTTP/1.1", host: "austin-prod.adl.org"
+2025/11/03 22:36:17 [error] 10#10: *192355 access forbidden by rule, client: 10.1.7.247, server: , request: "GET /.gitignore HTTP/1.1", host: "orangecounty-prod.adl.org"
+2025/11/03 22:36:17 [error] 10#10: *192582 access forbidden by rule, client: 10.1.67.28, server: , request: "GET /.gitignore HTTP/1.1", host: "santabarbara-prod.adl.org"
+2025/11/03 22:36:17 [error] 10#10: *192547 access forbidden by rule, client: 10.1.8.130, server: , request: "GET /.gitignore HTTP/1.1", host: "michigan-prod.adl.org"
+2025/11/03 22:39:22 [error] 9#9: *192716 access forbidden by rule, client: 10.1.65.26, server: , request: "GET /.gitignore HTTP/1.1", host: "connecticut-prod.adl.org"
+2025/11/03 22:39:22 [error] 9#9: *192618 access forbidden by rule, client: 10.1.67.35, server: , request: "GET /.gitignore HTTP/1.1", host: "dc-prod.adl.org"
+2025/11/03 22:39:22 [error] 10#10: *192547 access forbidden by rule, client: 10.1.8.130, server: , request: "GET /.gitignore HTTP/1.1", host: "extremismterms.adl.org"
+2025/11/03 22:55:05 [error] 10#10: *193411 access forbidden by rule, client: 10.1.64.28, server: , request: "GET /.git/ORIG_HEAD HTTP/1.1", host: "heartland-prod.adl.org"
+2025/11/03 22:55:25 [error] 10#10: *193407 access forbidden by rule, client: 10.1.65.24, server: , request: "GET /.git/objects/info/packs HTTP/1.1", host: "heartland-prod.adl.org", referrer: "http://heartland-prod.adl.org/.git/objects/info/packs"
+2025/11/03 22:55:28 [error] 10#10: *193443 access forbidden by rule, client: 10.1.67.36, server: , request: "GET /.git/index HTTP/1.1", host: "heartland-prod.adl.org", referrer: "http://heartland-prod.adl.org/.git/index"
+2025/11/03 22:55:29 [error] 10#10: *193411 access forbidden by rule, client: 10.1.64.28, server: , request: "GET /.git/logs/HEAD HTTP/1.1", host: "heartland-prod.adl.org", referrer: "http://heartland-prod.adl.org/.git/logs/HEAD"
+2025/11/03 23:01:11 [error] 9#9: *193613 access forbidden by rule, client: 10.1.6.158, server: , request: "GET /.git/config HTTP/1.1", host: "dallas-prod.adl.org", referrer: "http://dallas-prod.adl.org/.git/config"
+2025/11/04 00:43:06 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:43:06 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:43:07 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:43:09 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:43:14 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:43:15 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:43:15 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:43:16 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:43:19 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:43:19 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:43:19 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:43:19 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:43:19 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:43:19 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:43:20 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:43:21 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:43:21 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:43:21 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:43:26 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:43:26 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:43:27 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:43:27 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:43:27 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:43:27 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:43:27 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:43:27 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:44:09 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:44:10 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:44:17 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:44:17 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:44:19 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:47:26 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:47:26 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:47:26 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:47:26 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:47:27 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:47:27 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:47:27 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:47:27 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:47:27 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:47:28 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:47:32 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:47:32 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:47:33 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:47:34 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:47:53 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:47:56 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:47:56 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:47:56 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:47:56 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:47:56 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:47:57 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:47:57 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:47:57 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:47:57 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:47:57 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:47:58 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:47:58 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:47:58 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:47:59 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:47:59 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:47:59 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:02 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:02 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:02 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:02 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:03 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:03 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:03 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:03 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:07 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:08 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:08 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:08 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:08 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:08 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:08 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:08 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:08 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:08 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:08 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:08 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:08 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:08 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:08 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:09 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:09 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:09 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:09 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:09 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:09 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:09 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:09 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:09 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:09 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:09 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:10 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:10 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:10 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:10 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:11 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:14 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:15 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:11 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:17 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:17 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:17 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:17 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:17 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:17 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:17 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:17 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:17 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:18 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:17 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:18 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:18 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:18 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:18 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:18 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:18 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:18 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:19 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:19 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:19 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:19 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:19 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:19 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:19 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:21 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:21 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:21 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:22 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:23 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:23 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:23 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:23 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:23 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:23 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:23 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:23 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:23 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:23 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:23 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:23 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:23 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:23 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:23 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:23 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:23 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:23 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:23 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:24 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:24 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:24 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:24 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:23 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:24 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:24 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:24 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:24 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:24 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:25 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:24 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:25 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:25 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:24 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:25 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:25 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:26 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:26 [alert] 9#9: *199365 128 worker_connections are not enough while connecting to upstream, client: 10.1.7.247, server: , request: "GET /es/global-search?f%5B0%5D=topic%3A28&f%5B1%5D=topic%3A55&f%5B2%5D=topic%3A1581&f%5B3%5D=topic%3A1705&sort_by=search_api_relevance HTTP/1.1", upstream: "fastcgi://unix:/shared-run/php-fpm.sock:", host: "mountainstates.adl.org"
+2025/11/04 00:48:26 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:27 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:27 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:28 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:28 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:29 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:29 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:29 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:29 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:29 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:29 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:29 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:29 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:29 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:29 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:29 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:29 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:29 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:29 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:29 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:29 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:29 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:29 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:29 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:29 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:29 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:29 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:29 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:30 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:30 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:30 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:30 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:30 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:30 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:30 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:31 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:31 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:31 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:32 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:31 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:31 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:32 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:34 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:34 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:34 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:35 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:35 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:35 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:35 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:35 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:35 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:35 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:35 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:35 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:35 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:35 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:35 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:35 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:36 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:35 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:36 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:36 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:36 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:36 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:36 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:36 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:35 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:36 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:37 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:37 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:37 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:38 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:40 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:41 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:41 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:41 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:41 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:42 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:42 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:42 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:42 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:42 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:44 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:42 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:45 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:48 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:48 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:48 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:48 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:48 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:49 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:49 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:49 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:49 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:50 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:52 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:53 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:53 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:54 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:51 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:54 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:54 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:54 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:54 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:55 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:55 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:55 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:55 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:55 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:55 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:48:55 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:55 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:56 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:56 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:56 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:48:57 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:48:56 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:48:59 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:49:02 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:49:52 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:49:53 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:49:53 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:49:53 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:49:53 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:49:56 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:49:59 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:49:59 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:49:59 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:49:59 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:49:59 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:50:00 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:50:00 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:50:00 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:50:01 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:50:03 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:50:04 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:50:04 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:50:04 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:50:04 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:50:04 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:50:05 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:50:05 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:50:06 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:50:06 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:50:08 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:50:09 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:50:12 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:50:14 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:50:14 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:50:14 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:50:13 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:50:15 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:50:15 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:50:15 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:50:15 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:50:15 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:50:16 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:50:15 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:50:16 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:50:16 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:50:17 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:50:17 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:50:16 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:50:18 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:50:20 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:50:20 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:50:24 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:50:25 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:50:24 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:50:25 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:50:25 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:50:25 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:50:27 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:50:27 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:50:28 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:50:29 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:50:30 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:50:32 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:50:33 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:50:34 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:50:36 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:50:39 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:50:39 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:50:39 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:50:39 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:50:40 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:51:06 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:06 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:07 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:07 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:08 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:08 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:11 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:11 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:11 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:11 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:12 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:12 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:12 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:12 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:13 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:13 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:13 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:15 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:16 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:16 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:17 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:17 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:17 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:18 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:23 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:23 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:24 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:24 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:26 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:26 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:29 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:30 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:31 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:51:36 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:51:55 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:51:55 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:52:04 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:52:22 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:23 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:23 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:23 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:23 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:25 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:25 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:29 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:29 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:35 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:35 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:35 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:35 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:36 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:36 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:36 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:37 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:38 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:39 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:41 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:44 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:44 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:44 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:44 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:44 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:44 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:44 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:44 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:44 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:52:45 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:45 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:52:45 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:52:45 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:52:45 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:45 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:52:46 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:46 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:52:46 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:52:46 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:46 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:46 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:52:46 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:47 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:47 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:47 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:52:47 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:48 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:50 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:49 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:52:50 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:50 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:50 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:51 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:52:51 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:52:51 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:51 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:52:52 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:52:55 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:52:55 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:52:55 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:52:56 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:52:57 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:14 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:14 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:14 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:14 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:14 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:14 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:14 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:14 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:15 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:15 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:15 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:16 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:16 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:16 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:19 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:19 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:20 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:20 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:20 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:20 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:20 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:20 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:20 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:20 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:20 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:20 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:20 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:20 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:21 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:21 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:21 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:21 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:21 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:21 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:21 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:21 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:21 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:22 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:22 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:23 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:23 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:24 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:24 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:24 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:24 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:24 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:24 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:24 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:25 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:25 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:25 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:26 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:26 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:26 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:26 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:27 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:27 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:27 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:27 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:27 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:27 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:27 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:27 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:27 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:27 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:27 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:27 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:27 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:28 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:28 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:28 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:28 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:28 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:28 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:28 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:28 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:29 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:29 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:29 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:30 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:31 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:30 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:32 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:32 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:32 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:32 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:32 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:32 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:32 [alert] 9#9: *200916 128 worker_connections are not enough while connecting to upstream, client: 10.1.65.24, server: , request: "GET /es/resources/search/research-analysis?f%5B0%5D=topic%3A7236&f%5B1%5D=type%3A65&f%5B2%5D=type%3A84 HTTP/1.1", upstream: "fastcgi://unix:/shared-run/php-fpm.sock:", host: "mountainstates.adl.org"
+2025/11/04 00:53:32 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:32 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:32 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:32 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:32 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:32 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:32 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:32 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:32 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:32 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:33 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:33 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:33 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:33 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:33 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:33 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:33 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:33 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:33 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:33 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:33 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:33 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:34 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:34 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:34 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:33 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:33 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:34 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:34 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:34 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:34 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:34 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:35 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:35 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:35 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:35 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:35 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:35 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:34 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:36 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:36 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:35 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:36 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:36 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:36 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:36 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:36 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:36 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:36 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:36 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:37 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:37 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:37 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:38 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:38 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:38 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:38 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:38 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:38 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:38 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:38 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:38 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:38 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:38 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:38 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:38 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:38 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:38 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:38 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:38 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:38 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:38 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:38 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:38 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:38 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:38 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:39 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:39 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:39 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:39 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:39 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:39 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:39 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:39 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:39 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:39 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:39 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:39 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:39 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:39 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:40 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:40 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:40 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:40 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:40 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:40 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:41 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:41 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:40 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:41 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:42 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:42 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:43 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:44 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:44 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:44 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:44 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:44 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:44 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:44 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:44 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:44 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:44 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:45 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:45 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:45 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:46 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:46 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:46 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:47 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:49 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:50 [alert] 10#10: *201012 128 worker_connections are not enough while connecting to upstream, client: 10.1.65.26, server: , request: "GET /es/global-search?f%5B0%5D=topic%3A48&f%5B1%5D=topic%3A55&f%5B2%5D=topic%3A1580&f%5B3%5D=topic%3A1581&sort_by=search_api_relevance HTTP/1.1", upstream: "fastcgi://unix:/shared-run/php-fpm.sock:", host: "mountainstates.adl.org"
+2025/11/04 00:53:50 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:50 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:50 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:50 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:49 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:50 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:50 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:51 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:51 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:51 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:51 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:52 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:52 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:52 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:50 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:52 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:53 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:53 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:54 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:56 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:55 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:57 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:57 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:57 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:58 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:58 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:59 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:53:57 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:59 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:59 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:59 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:59 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:59 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:53:59 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:59 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:53:59 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:53:59 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:54:00 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:54:00 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:54:00 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:54:00 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:54:00 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:54:00 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:54:00 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:54:00 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:54:00 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:54:00 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:54:00 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:54:00 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:54:02 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:54:00 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:54:00 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 00:54:00 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:54:02 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:54:05 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:54:06 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:54:06 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:54:07 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:54:08 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:54:08 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:54:08 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:54:12 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:54:57 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:54:57 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:54:58 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:54:59 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:54:59 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:54:59 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:54:59 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:54:59 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:55:00 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:55:01 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:55:02 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:55:04 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:55:09 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:55:09 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:55:10 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:55:16 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:55:20 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:55:21 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:55:22 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:55:26 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:55:31 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:58:09 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:58:10 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:58:10 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:58:12 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:58:14 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:58:14 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:58:14 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:58:15 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:58:15 [alert] 10#10: 128 worker_connections are not enough
+2025/11/04 00:58:48 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:58:48 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:58:49 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:58:51 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:58:54 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:58:54 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:58:55 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 00:59:38 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:59:38 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:59:38 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:59:40 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:59:40 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:59:42 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:59:50 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:59:53 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:59:55 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:59:57 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 00:59:59 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 01:00:00 [alert] 12#12: 128 worker_connections are not enough
+2025/11/04 01:00:13 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 01:00:13 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 01:00:20 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 01:00:20 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 01:00:20 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 01:00:21 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 01:00:22 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 01:00:23 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 01:00:23 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 01:00:25 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 01:00:25 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 01:00:26 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 01:00:26 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 01:00:27 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 01:00:27 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 01:00:27 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 01:00:27 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 01:00:27 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 01:00:27 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 01:00:28 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 01:00:29 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 01:00:30 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 01:00:31 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 01:00:32 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 01:00:32 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 01:00:32 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 01:00:33 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 01:00:34 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 01:00:35 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 01:00:35 [alert] 9#9: 128 worker_connections are not enough
+2025/11/04 01:19:12 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 01:19:13 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 01:19:13 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 01:19:13 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 01:19:14 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 01:19:15 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 01:19:19 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 01:19:21 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 01:19:25 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 01:19:26 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 01:19:27 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 01:19:34 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 01:19:35 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 01:19:35 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 01:19:38 [alert] 11#11: 128 worker_connections are not enough
+2025/11/04 01:58:52 [error] 12#12: *211110 access forbidden by rule, client: 10.1.2.42, server: , request: "GET /.gitignore HTTP/1.1", host: "extremismterms.adl.org"
+2025/11/04 02:06:49 [error] 9#9: *211454 access forbidden by rule, client: 10.1.67.35, server: , request: "GET /.gitignore HTTP/1.1", host: "sanfrancisco.adl.org"
+2025/11/04 02:09:27 [error] 10#10: *211525 access forbidden by rule, client: 10.1.64.27, server: , request: "GET /.git/index HTTP/1.1", host: "michigan-prod.adl.org"
+2025/11/04 02:10:15 [error] 10#10: *211554 access forbidden by rule, client: 10.1.2.42, server: , request: "GET /.git/index HTTP/1.1", host: "midwest.adl.org"
+2025/11/04 02:10:15 [error] 10#10: *211519 access forbidden by rule, client: 10.1.64.28, server: , request: "GET /.git/logs/HEAD HTTP/1.1", host: "midwest.adl.org"
+2025/11/04 02:10:15 [error] 10#10: *211555 access forbidden by rule, client: 10.1.64.27, server: , request: "GET /.git/info/exclude HTTP/1.1", host: "midwest.adl.org"
+2025/11/04 02:26:51 [error] 12#12: *211775 access forbidden by rule, client: 10.1.67.28, server: , request: "GET /.git/objects/info/packs HTTP/1.1", host: "mountainstates-prod.adl.org"
+2025/11/04 02:26:58 [error] 9#9: *212142 access forbidden by rule, client: 10.1.7.247, server: , request: "GET /.git/refs/heads/master HTTP/1.1", host: "mountainstates-prod.adl.org"
+2025/11/04 02:27:05 [error] 9#9: *212148 access forbidden by rule, client: 10.1.4.189, server: , request: "GET /.git/ORIG_HEAD HTTP/1.1", host: "mountainstates-prod.adl.org", referrer: "http://mountainstates-prod.adl.org/.git/ORIG_HEAD"
+2025/11/04 02:27:18 [error] 9#9: *212209 access forbidden by rule, client: 10.1.0.143, server: , request: "GET /.git/FETCH_HEAD HTTP/1.1", host: "mountainstates-prod.adl.org", referrer: "http://mountainstates-prod.adl.org/.git/FETCH_HEAD"
+2025/11/04 02:27:20 [error] 12#12: *212097 access forbidden by rule, client: 10.1.2.42, server: , request: "GET /.git/refs/heads/main HTTP/1.1", host: "mountainstates-prod.adl.org", referrer: "http://mountainstates-prod.adl.org/.git/refs/heads/main"
+2025/11/04 02:58:44 [error] 11#11: *213185 access forbidden by rule, client: 10.1.4.187, server: , request: "GET /.git/config HTTP/1.1", host: "newengland-prod.adl.org"
+2025/11/04 03:13:37 [error] 9#9: *213569 access forbidden by rule, client: 10.1.64.28, server: , request: "GET /.git/ORIG_HEAD HTTP/1.1", host: "notoleranceforantisemitism.org"
+2025/11/04 03:13:50 [error] 9#9: *213603 access forbidden by rule, client: 10.1.1.149, server: , request: "GET /.git/refs/heads/main HTTP/1.1", host: "notoleranceforantisemitism.org"
+2025/11/04 03:14:16 [error] 9#9: *213576 access forbidden by rule, client: 10.1.67.28, server: , request: "GET /.git/refs/heads/main HTTP/1.1", host: "notoleranceforantisemitism.org", referrer: "http://notoleranceforantisemitism.org/.git/refs/heads/main"
+2025/11/04 03:28:07 [error] 9#9: *214028 access forbidden by rule, client: 10.1.65.25, server: , request: "GET /.git/refs/heads/main HTTP/1.1", host: "omaha-prod.adl.org"
+2025/11/04 03:28:22 [error] 11#11: *213796 access forbidden by rule, client: 10.1.65.24, server: , request: "GET /.git/packed-refs HTTP/1.1", host: "omaha-prod.adl.org", referrer: "http://omaha-prod.adl.org/.git/packed-refs"
+2025/11/04 03:33:45 [error] 9#9: *214133 access forbidden by rule, client: 10.1.64.28, server: , request: "GET /.git/ORIG_HEAD HTTP/1.1", host: "orangecounty-prod.adl.org"
+2025/11/04 03:33:45 [error] 9#9: *214139 access forbidden by rule, client: 10.1.64.27, server: , request: "GET /.git/objects/info/packs HTTP/1.1", host: "orangecounty-prod.adl.org"
+2025/11/04 03:33:55 [error] 9#9: *214111 access forbidden by rule, client: 10.1.7.247, server: , request: "GET /.git/packed-refs HTTP/1.1", host: "orangecounty-prod.adl.org"
